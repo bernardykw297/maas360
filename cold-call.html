@@ -1,864 +1,304 @@
 <!DOCTYPE html>
+<!--
+  Cold Call cheat sheet.
+  Original content preserved verbatim; page restyled from its standalone light-blue theme
+  into the MaaS360 Sales Guide dark design system for a consistent look across the site.
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MaaS360 Cold Call Cheat Sheet</title>
+  <title>Cold Call — MaaS360 Sales Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
-    :root {
-      --primary: #1e5a9e;
-      --primary-light: #2874c7;
-      --accent: #4a9eff;
-      --bg-light: #e8f2ff;
-      --bg-lighter: #f5f9ff;
-      --border: #b8d4f1;
-      --text: #1a2332;
-      --text-secondary: #4a5568;
-      --text-tertiary: #718096;
-      --success: #1d9e75;
-      --success-bg: #e1f5ee;
-      --warning: #f59e0b;
-      --warning-bg: #fef3c7;
-      --danger: #dc2626;
-      --white: #ffffff;
-      --shadow: 0 2px 8px rgba(30, 90, 158, 0.12);
-      --shadow-lg: 0 10px 30px rgba(30, 90, 158, 0.2);
-      --glow: 0 0 20px rgba(74, 158, 255, 0.4);
-      --glow-strong: 0 0 30px rgba(74, 158, 255, 0.6);
+    :root{
+      --ink:#11151A;
+      --panel:#1A2026;
+      --panel-2:#0E1216;
+      --line:#2B333B;
+      --line-soft:#222931;
+      --text:#E9ECEC;
+      --text-dim:#AEB7BE;
+      --mist:#7C8893;
+      --amber:#FF9248;
+      --amber-dim:#3A2A1C;
+      --red:#FF6259;
+      --red-dim:#34201D;
+      --blue:#5AA7FF;
+      --blue-dim:#1C2A3B;
+      --teal:#3FD0A8;
+      --teal-dim:#16302A;
+      --grey-tag:#8B96A1;
+      --grey-dim:#262C32;
+      /* semantic aliases used throughout this page */
+      --primary:var(--blue);
+      --accent:var(--blue);
+      --success:var(--teal);
+      --warning:var(--amber);
+      --danger:var(--red);
+      --nav-accent:var(--blue);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:
+        radial-gradient(circle at 14% 0%, rgba(90,167,255,0.05), transparent 40%),
+        radial-gradient(circle at 86% 12%, rgba(63,208,168,0.04), transparent 42%),
+        var(--ink);
+      color:var(--text);
+      font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      min-height:100vh;
     }
+    a{color:var(--blue);text-decoration:none;}
+    a:hover{text-decoration:underline;}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #f5f9ff 0%, #e8f2ff 100%);
-      color: var(--text);
-      line-height: 1.5;
-      padding: 1.5rem;
-      scroll-behavior: smooth;
+    /* ===== shared site nav ===== */
+    .site-nav{position:sticky;top:0;z-index:200;background:rgba(14,18,22,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+    .site-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:18px;min-height:54px;flex-wrap:wrap;}
+    .site-nav-brand{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:8px;}
+    .site-nav-brand:hover{text-decoration:none;}
+    .site-nav-brand .sq{width:9px;height:9px;border-radius:2px;background:var(--nav-accent);}
+    .site-nav-links{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-family:'IBM Plex Mono',monospace;}
+    .site-nav-links a{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);padding:7px 11px;border-radius:8px;transition:color .15s ease,background .15s ease;}
+    .site-nav-links a:hover{color:var(--text);background:var(--panel);text-decoration:none;}
+    .site-nav-links a.active{color:var(--ink);background:var(--nav-accent);}
+    @media(max-width:720px){.site-nav-links{width:100%;margin-left:0;padding-bottom:8px;}}
+
+    .hero{max-width:1040px;margin:0 auto;padding:52px 24px 26px;border-bottom:1px solid var(--line-soft);}
+    .home-link{
+      font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);
+      display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;
+      border:1px solid var(--line);border-radius:20px;padding:6px 12px 6px 10px;
+      transition:border-color .15s ease,color .15s ease;
     }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
+    .home-link:hover{color:var(--blue);border-color:var(--blue);text-decoration:none;}
+    .eyebrow{
+      font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:18px;
     }
-
-    .header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: var(--white);
-      padding: 1.5rem 2rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      animation: slideDown 0.6s ease-out;
-      position: relative;
-      overflow: hidden;
+    .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);}
+    h1{
+      font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;
+      font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 16px;letter-spacing:-.01em;
+      display:flex;align-items:center;gap:14px;
     }
+    .hero p.lede{font-size:17px;color:var(--text-dim);max-width:640px;margin:0;}
+    .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);margin-top:18px;}
 
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      animation: shimmer 3s infinite;
+    /* sticky section TOC */
+    .toc{
+      max-width:1040px;margin:0 auto;padding:22px 24px 12px;
+      position:sticky;top:54px;background:linear-gradient(var(--ink) 78%, transparent);z-index:30;
     }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    .toc-inner{
+      display:flex;gap:6px;flex-wrap:wrap;
+      background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:6px;
     }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .toc a{
+      font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600;
+      color:var(--text-dim);padding:8px 12px;border-radius:10px;text-decoration:none;
     }
+    .toc a:hover{background:var(--panel);color:var(--text);}
+    .toc a.here{background:var(--blue-dim);color:var(--blue);}
 
-    .header h1 {
-      font-size: 24px;
-      font-weight: 600;
-      position: relative;
-      z-index: 1;
+    .container{max-width:1040px;margin:0 auto;padding:6px 24px 90px;}
+
+    .section{
+      background:var(--panel);border:1px solid var(--line);border-radius:16px;
+      padding:24px;margin-top:18px;scroll-margin-top:120px;
+      transition:border-color .2s ease,box-shadow .2s ease;
     }
-
-    .badge {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      position: relative;
-      z-index: 1;
-      animation: pulse 2s ease-in-out infinite;
+    .section:hover{box-shadow:0 14px 34px rgba(0,0,0,.28);}
+    .section-title{
+      font-family:'IBM Plex Sans Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.01em;
+      color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:10px;
+      padding-bottom:12px;border-bottom:1px solid var(--line-soft);
     }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .section {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
-      animation: fadeInUp 0.5s ease-out backwards;
-    }
-
-    .section:nth-child(2) { animation-delay: 0.1s; }
-    .section:nth-child(3) { animation-delay: 0.2s; }
-    .section:nth-child(4) { animation-delay: 0.3s; }
-    .section:nth-child(5) { animation-delay: 0.4s; }
-    .section:nth-child(6) { animation-delay: 0.5s; }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .section:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .section-title i {
-      font-size: 22px;
-    }
+    .section-title i{font-size:22px;color:var(--blue);}
 
     /* Pro Tips */
-    .tip-box {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border: 2px solid var(--warning);
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      display: flex;
-      gap: 10px;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    .tip-box{
+      background:var(--amber-dim);border:1px solid rgba(255,146,72,.35);border-radius:12px;
+      padding:16px;margin-bottom:14px;display:flex;gap:12px;font-size:14px;
     }
-
-    .tip-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .tip-box:hover::before {
-      left: 100%;
-    }
-
-    .tip-box:hover {
-      transform: translateX(5px);
-      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
-      border-color: #d97706;
-    }
-
-    .tip-box i {
-      font-size: 20px;
-      color: var(--warning);
-      flex-shrink: 0;
-      margin-top: 2px;
-      animation: bounce 2s ease-in-out infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    .tip-box strong {
-      display: block;
-      color: #92400e;
-      margin-bottom: 4px;
-    }
-
-    .tip-box p {
-      color: #78350f;
-      line-height: 1.6;
-    }
+    .tip-box i{font-size:20px;color:var(--amber);flex-shrink:0;margin-top:2px;}
+    .tip-box strong{display:block;color:var(--amber);margin-bottom:4px;}
+    .tip-box p{color:var(--text-dim);line-height:1.6;}
 
     /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
+    .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .tab{
+      padding:9px 16px;border-radius:20px;border:1px solid var(--line);
+      background:var(--panel-2);color:var(--text-dim);font-size:13px;font-weight:600;
+      cursor:pointer;transition:all .18s ease;font-family:'IBM Plex Sans',sans-serif;
+    }
+    .tab:hover{border-color:var(--blue);color:var(--text);}
+    .tab.active{background:var(--blue);color:var(--ink);border-color:var(--blue);}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+
+    /* Script cards */
+    .script-card{
+      background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--blue);
+      border-radius:12px;padding:18px 20px;margin-bottom:14px;font-size:15px;color:var(--text-dim);line-height:1.7;
+    }
+    .script-card strong{color:var(--text);}
+    .script-card.green{border-left-color:var(--teal);}
+    .script-card em{
+      font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--blue);
+      background:var(--blue-dim);padding:2px 7px;border-radius:5px;
+    }
+    .script-note{
+      font-size:13px;color:var(--text-dim);margin-top:12px;padding:10px 12px;
+      background:var(--blue-dim);border-radius:8px;border-left:3px solid var(--blue);
     }
 
-    .tab {
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: 2px solid var(--border);
-      background: var(--white);
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    /* Objections */
+    .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;}
+    .obj-item{
+      background:var(--panel-2);border:1px solid var(--line);border-radius:12px;
+      padding:16px;cursor:pointer;transition:border-color .18s ease,transform .18s ease;
+    }
+    .obj-item:hover{border-color:var(--blue);transform:translateY(-2px);}
+    .obj-item.open{border-color:var(--blue);background:var(--blue-dim);}
+    .obj-header{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+    .obj-trigger{font-size:14px;font-weight:600;color:var(--blue);flex:1;}
+    .obj-chevron{
+      font-size:18px;color:var(--blue);flex-shrink:0;width:26px;height:26px;
+      display:flex;align-items:center;justify-content:center;background:var(--grey-dim);
+      border-radius:50%;transition:transform .3s ease,background .2s ease;
+    }
+    .obj-item.open .obj-chevron{transform:rotate(180deg);background:var(--blue);color:var(--ink);}
+    .obj-response{
+      display:none;font-size:14px;color:var(--text-dim);line-height:1.7;
+      margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
+    }
+    .obj-response.visible{display:block;}
+    .obj-then{
+      display:inline-block;margin-top:10px;font-size:12px;font-weight:600;
+      font-family:'IBM Plex Mono',monospace;color:var(--blue);background:var(--panel);
+      padding:5px 11px;border-radius:6px;border:1px solid var(--line);
     }
 
-    .tab::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(74, 158, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
+    /* Close box */
+    .close-box{
+      background:var(--teal-dim);border:1px solid rgba(63,208,168,.4);border-radius:12px;
+      padding:18px 20px;margin:6px 0 14px;
     }
-
-    .tab:hover::before {
-      width: 200px;
-      height: 200px;
+    .close-box .label{
+      font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--teal);
+      text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;
     }
-
-    .tab:hover {
-      background: var(--bg-lighter);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
-    }
-
-    .tab.active {
-      background: var(--primary);
-      color: var(--white);
-      border-color: var(--primary);
-      box-shadow: var(--glow);
-      animation: tabGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes tabGlow {
-      0%, 100% { box-shadow: 0 0 10px rgba(74, 158, 255, 0.4); }
-      50% { box-shadow: 0 0 20px rgba(74, 158, 255, 0.6); }
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.3s, slideInRight 0.4s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Script Cards */
-    .script-card {
-      background: var(--bg-lighter);
-      border: 2px solid var(--border);
-      border-left: 5px solid var(--primary);
-      border-radius: 10px;
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-      font-size: 15px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .script-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100px;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(30, 90, 158, 0.05));
-      transform: translateX(100%);
-      transition: transform 0.5s ease;
-    }
-
-    .script-card:hover::after {
-      transform: translateX(0);
-    }
-
-    .script-card:hover {
-      border-left-width: 8px;
-      transform: translateX(3px);
-      box-shadow: 0 8px 20px rgba(30, 90, 158, 0.15);
-      line-height: 1.8;
-      font-weight: 500;
-    }
-
-    .script-card.green {
-      border-left-color: var(--success);
-    }
-
-    .script-card em {
-      font-style: normal;
-      font-size: 11px;
-      color: var(--text-tertiary);
-      background: rgba(30, 90, 158, 0.1);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    .script-note {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 10px;
-      padding: 8px 10px;
-      background: rgba(74, 158, 255, 0.1);
-      border-radius: 6px;
-      border-left: 3px solid var(--accent);
-    }
-
-    /* Objections - Collapsible */
-    .obj-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 12px;
-    }
-
-    .obj-item {
-      background: var(--white);
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .obj-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(74, 158, 255, 0.05) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .obj-item:hover::before {
-      opacity: 1;
-    }
-
-    .obj-item:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 25px rgba(74, 158, 255, 0.25);
-      transform: translateY(-3px) scale(1.02);
-    }
-
-    .obj-item.open {
-      border-color: var(--primary);
-      background: var(--bg-lighter);
-      box-shadow: var(--glow);
-      animation: objPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes objPulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(74, 158, 255, 0.3); }
-      50% { box-shadow: 0 0 25px rgba(74, 158, 255, 0.5); }
-    }
-
-    .obj-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .obj-trigger {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary);
-      flex: 1;
-      transition: color 0.3s ease;
-    }
-
-    .obj-item:hover .obj-trigger {
-      color: var(--primary-light);
-    }
-
-    .obj-chevron {
-      font-size: 20px;
-      color: var(--primary);
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-light);
-      border-radius: 50%;
-    }
-
-    .obj-item:hover .obj-chevron {
-      background: var(--primary);
-      color: var(--white);
-      transform: scale(1.15);
-      box-shadow: 0 4px 12px rgba(30, 90, 158, 0.3);
-    }
-
-    .obj-item.open .obj-chevron {
-      transform: rotate(180deg) scale(1.1);
-      background: var(--primary);
-      color: var(--white);
-      box-shadow: 0 0 15px rgba(74, 158, 255, 0.5);
-    }
-
-    .obj-response {
-      display: none;
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.7;
-      font-weight: 500;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 2px solid var(--border);
-    }
-
-    .obj-response.visible {
-      display: block;
-      animation: fadeIn 0.3s, slideDown 0.4s ease-out;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .obj-then {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--primary);
-      background: var(--bg-light);
-      padding: 4px 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .obj-then:hover {
-      background: var(--primary);
-      color: var(--white);
-      transform: scale(1.05);
-    }
-
-    /* Close Box */
-    .close-box {
-      background: var(--success-bg);
-      border: 3px solid var(--success);
-      border-radius: 10px;
-      padding: 1.25rem;
-      margin: 1rem 0;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      animation: successPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes successPulse {
-      0%, 100% {
-        box-shadow: 0 0 0 rgba(29, 158, 117, 0);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 20px rgba(29, 158, 117, 0.4);
-        transform: scale(1.01);
-      }
-    }
-
-    .close-box::before {
-      content: '✨';
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-      animation: sparkle 2s ease-in-out infinite;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { opacity: 0.3; transform: rotate(0deg) scale(1); }
-      50% { opacity: 1; transform: rotate(180deg) scale(1.2); }
-    }
-
-    .close-box:hover {
-      transform: scale(1.02);
-      box-shadow: 0 10px 30px rgba(29, 158, 117, 0.3);
-    }
-
-    .close-box .label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #0f6e56;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-
-    .close-box p {
-      font-size: 17px;
-      color: #085041;
-      font-weight: 700;
-    }
+    .close-box p{font-size:17px;color:var(--text);font-weight:600;}
 
     /* Rules */
-    .rules {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
+    .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;}
+    .rule{
+      background:var(--panel-2);border-radius:10px;padding:11px 13px;font-size:13.5px;color:var(--text-dim);
+      display:flex;gap:9px;align-items:flex-start;border-left:4px solid transparent;transition:transform .15s ease;
     }
-
-    .rule {
-      background: var(--bg-lighter);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 13px;
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      border-left: 4px solid transparent;
-      transition: all 0.3s ease;
-      cursor: default;
-    }
-
-    .rule:hover {
-      transform: translateX(5px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .rule i {
-      font-size: 18px;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .rule:hover i {
-      transform: scale(1.2) rotate(5deg);
-    }
-
-    .rule.yes {
-      border-left-color: #3b6d11;
-    }
-
-    .rule.yes:hover {
-      background: rgba(59, 109, 17, 0.05);
-    }
-
-    .rule.yes i {
-      color: #3b6d11;
-    }
-
-    .rule.no {
-      border-left-color: #a32d2d;
-    }
-
-    .rule.no:hover {
-      background: rgba(163, 45, 45, 0.05);
-    }
-
-    .rule.no i {
-      color: #a32d2d;
-    }
+    .rule:hover{transform:translateX(4px);}
+    .rule i{font-size:18px;flex-shrink:0;}
+    .rule.yes{border-left-color:var(--teal);}
+    .rule.yes i{color:var(--teal);}
+    .rule.no{border-left-color:var(--red);}
+    .rule.no i{color:var(--red);}
 
     /* Pills */
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .pills{display:flex;flex-wrap:wrap;gap:8px;}
+    .pill{
+      font-size:13px;padding:8px 14px;border-radius:20px;background:var(--grey-dim);
+      color:var(--text-dim);border:1px solid var(--line);font-weight:600;transition:all .18s ease;
+    }
+    .pill:hover{background:var(--blue);color:var(--ink);border-color:var(--blue);transform:translateY(-2px);}
+
+    /* Two-column / method cards */
+    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+    .method-card{
+      background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px;
+      transition:border-color .18s ease,transform .18s ease;
+    }
+    .method-card:hover{border-color:var(--blue);transform:translateY(-3px);}
+    .method-card h4{
+      font-size:15px;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;
+    }
+    .method-card h4 i{font-size:18px;color:var(--blue);}
+    .method-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin-bottom:8px;}
+    .method-card p strong{color:var(--text);}
+    .method-example{
+      background:var(--blue-dim);border-radius:8px;padding:9px 11px;font-size:13px;font-style:italic;
+      color:var(--text-dim);margin-top:6px;border-left:3px solid var(--blue);
     }
 
-    .pill {
-      font-size: 13px;
-      padding: 8px 14px;
-      border-radius: 20px;
-      background: var(--bg-light);
-      color: var(--primary);
-      border: 2px solid var(--border);
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: default;
-      position: relative;
-      overflow: hidden;
+    /* List items */
+    .list-item{
+      background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
+      padding:11px 13px;margin-bottom:8px;font-size:14px;color:var(--text-dim);line-height:1.6;
+      transition:border-color .18s ease,transform .18s ease;
     }
+    .list-item:hover{border-color:var(--blue);transform:translateX(6px);}
+    .list-item strong{color:var(--blue);display:block;margin-bottom:4px;}
 
-    .pill::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(30, 90, 158, 0.2);
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
-    }
-
-    .pill:hover::before {
-      width: 150px;
-      height: 150px;
-    }
-
-    .pill:hover {
-      background: var(--primary);
-      color: var(--white);
-      border-color: var(--primary);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 20px rgba(30, 90, 158, 0.3);
-    }
-
-    /* Two Column */
-    .two-col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 12px;
-    }
-
-    .method-card {
-      background: var(--white);
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .method-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(74, 158, 255, 0.1) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .method-card:hover::before {
-      opacity: 1;
-      animation: rotate 3s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .method-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(74, 158, 255, 0.2);
-    }
-
-    .method-card h4 {
-      font-size: 15px;
-      color: var(--primary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s ease;
-    }
-
-    .method-card:hover h4 {
-      color: var(--primary-light);
-    }
-
-    .method-card h4 i {
-      font-size: 18px;
-      transition: transform 0.3s ease;
-    }
-
-    .method-card:hover h4 i {
-      transform: scale(1.2) rotate(10deg);
-    }
-
-    .method-card p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .method-example {
-      background: var(--bg-lighter);
-      border-radius: 6px;
-      padding: 8px 10px;
-      font-size: 13px;
-      font-style: italic;
-      color: var(--text);
-      margin-top: 6px;
-      border-left: 3px solid var(--accent);
-      position: relative;
-      z-index: 1;
-      transition: all 0.3s ease;
-    }
-
-    .method-card:hover .method-example {
-      background: rgba(74, 158, 255, 0.15);
-      border-left-width: 5px;
-      transform: translateX(5px);
-    }
-
-    /* List Items */
-    .list-item {
-      background: var(--bg-lighter);
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-      font-size: 14px;
-      line-height: 1.6;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .list-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 3px;
-      background: var(--accent);
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
-    }
-
-    .list-item:hover::before {
-      transform: scaleY(1);
-    }
-
-    .list-item:hover {
-      background: var(--white);
-      border-color: var(--accent);
-      transform: translateX(8px);
-      box-shadow: 0 4px 15px rgba(74, 158, 255, 0.15);
-    }
-
-    .list-item strong {
-      color: var(--primary);
-      display: block;
-      margin-bottom: 4px;
-      transition: color 0.3s ease;
-    }
-
-    .list-item:hover strong {
-      color: var(--primary-light);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-
-      .header h1 {
-        font-size: 20px;
-      }
-
-      .obj-grid,
-      .two-col,
-      .rules {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width:768px){
+      .hero{padding:36px 18px 22px;}
+      .toc{padding:16px 18px 10px;}
+      .container{padding:6px 18px 80px;}
+      .obj-grid,.two-col,.rules{grid-template-columns:1fr;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <h1>🎯 MaaS360 Cold Call Cheat Sheet</h1>
-      <span class="badge">IBM MaaS360</span>
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a class="site-nav-brand" href="index.html"><span class="sq"></span>MaaS360 Sales Guide</a>
+      <div class="site-nav-links">
+        <a href="index.html">Hub</a>
+        <a href="prospecting.html">Prospecting</a>
+        <a href="cold-call.html" class="active">Cold Call</a>
+        <a href="resources.html">Resources</a>
+        <a href="onboarding.html">Onboarding</a>
+        <a href="rep-alignment.html">Rep Alignment</a>
+        <a href="territory-map.html">Territory Map</a>
+      </div>
     </div>
+  </nav>
+
+  <header class="hero">
+    <a class="home-link" href="index.html">&larr; Sales Guide Home</a>
+    <div class="eyebrow"><span class="dot"></span>MAAS360 SALES GUIDE — SECTION 2</div>
+    <h1><span>🎯</span>Cold Call Cheat Sheet</h1>
+    <p class="lede">What to say when they pick up. Openers by persona, a response for every objection, and the voicemail, gatekeeper, and email scripts to back it up.</p>
+    <div class="meta">UPDATED JUN 17, 2026 · 8 OBJECTIONS · 4 PERSONA SCRIPTS</div>
+  </header>
+
+  <nav class="toc" aria-label="On this page">
+    <div class="toc-inner">
+      <a href="#tips">Pro Tips</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#mindset">Mindset</a>
+      <a href="#script">Opening Script</a>
+      <a href="#objections">Objections</a>
+      <a href="#close">Always Close</a>
+      <a href="#voicemail">Voicemail</a>
+      <a href="#gatekeeper">Gatekeeper</a>
+      <a href="#email">Follow-Up Email</a>
+      <a href="#research">Research</a>
+      <a href="#tonality">Tonality</a>
+      <a href="#flags">Red / Green Flags</a>
+    </div>
+  </nav>
+
+  <div class="container">
 
     <!-- SECTION 1: TIPS & COMMENTARY -->
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-bulb"></i>
-        Pro Tips & Strategy
-      </div>
+    <section class="section" id="tips">
+      <div class="section-title"><i class="ti ti-bulb"></i>Pro Tips &amp; Strategy</div>
 
       <div class="tip-box">
         <i class="ti ti-star"></i>
@@ -876,7 +316,7 @@
         </div>
       </div>
 
-      <div class="two-col" style="margin-top: 1rem;">
+      <div class="two-col" style="margin-top:14px;">
         <div class="method-card">
           <h4><i class="ti ti-sparkles"></i> Glaze Method</h4>
           <p><strong>Best for:</strong> Natural yappers who can build rapport quickly</p>
@@ -891,14 +331,10 @@
           <div class="method-example">💬 "Are you open to a 10-minute call to see if we're a fit?"</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-checklist"></i>
-        Delivery Reminders
-      </div>
-
+    <section class="section" id="delivery">
+      <div class="section-title"><i class="ti ti-checklist"></i>Delivery Reminders</div>
       <div class="rules">
         <div class="rule yes"><i class="ti ti-check"></i> Say "for [Company Name]" with ownership, not apology</div>
         <div class="rule yes"><i class="ti ti-check"></i> Pause after your intro — let it settle</div>
@@ -909,14 +345,10 @@
         <div class="rule no"><i class="ti ti-x"></i> Don't pitch the product on the cold call</div>
         <div class="rule no"><i class="ti ti-x"></i> Ask then go quiet — let them answer</div>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-brain"></i>
-        Mindset
-      </div>
-
+    <section class="section" id="mindset">
+      <div class="section-title"><i class="ti ti-brain"></i>Mindset</div>
       <div class="pills">
         <div class="pill">You own this territory — act like it</div>
         <div class="pill">Selling 10 minutes, not MaaS360</div>
@@ -924,14 +356,11 @@
         <div class="pill">Less words, more confidence</div>
         <div class="pill">One smooth pass, then listen</div>
       </div>
-    </div>
+    </section>
 
     <!-- SECTION 2: THE CALL SCRIPT -->
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-phone-call"></i>
-        Opening Script — Pick Your Persona
-      </div>
+    <section class="section" id="script">
+      <div class="section-title"><i class="ti ti-phone-call"></i>Opening Script — Pick Your Persona</div>
 
       <div class="tabs">
         <div class="tab active" onclick="switchTab('general', event)">General</div>
@@ -940,7 +369,6 @@
         <div class="tab" onclick="switchTab('ops', event)">Operations</div>
       </div>
 
-      <!-- General -->
       <div class="tab-content active" id="tab-general">
         <div class="script-card">
           "Hey [Name], <em>[pause and wait for reply]</em><br><br>
@@ -950,7 +378,6 @@
         </div>
       </div>
 
-      <!-- IT/Security -->
       <div class="tab-content" id="tab-it">
         <div class="script-card">
           "Hey [Name], <em>[pause and wait for reply]</em><br><br>
@@ -960,7 +387,6 @@
         </div>
       </div>
 
-      <!-- Executive -->
       <div class="tab-content" id="tab-exec">
         <div class="script-card">
           "Hey [Name], <em>[pause and wait for reply]</em><br><br>
@@ -970,7 +396,6 @@
         </div>
       </div>
 
-      <!-- Operations -->
       <div class="tab-content" id="tab-ops">
         <div class="script-card">
           "Hey [Name], <em>[pause and wait for reply]</em><br><br>
@@ -979,15 +404,11 @@
           <div class="script-note">💡 Operations cares about efficiency and reducing friction. Keep it practical and workflow-focused.</div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Objections -->
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-shield-check"></i>
-        Objection Responses
-      </div>
-
+    <section class="section" id="objections">
+      <div class="section-title"><i class="ti ti-shield-check"></i>Objection Responses</div>
       <div class="obj-grid">
         <div class="obj-item" onclick="toggleObj(this)">
           <div class="obj-header">
@@ -1069,136 +490,80 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Closing -->
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-circle-check"></i>
-        Always Close With This
-      </div>
-
+    <section class="section" id="close">
+      <div class="section-title"><i class="ti ti-circle-check"></i>Always Close With This</div>
       <div class="close-box">
         <div class="label">After any objection, land here:</div>
         <p>"Does Tuesday at 2 work, or is Wednesday morning better for you?"</p>
       </div>
-
       <div class="script-card green">
         <strong>If they ask what MaaS360 does:</strong><br><br>
         "It's IBM's platform for managing and securing mobile devices and endpoints — takes a lot of the manual IT work off your plate while keeping everything locked down. Easier to show you with a real example than explain it over the phone — that's why I want the 10 minutes."
       </div>
-    </div>
+    </section>
 
     <!-- SECTION 3: ADDITIONAL TOOLS -->
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-voicemail"></i>
-        Voicemail Script
-      </div>
-
+    <section class="section" id="voicemail">
+      <div class="section-title"><i class="ti ti-voicemail"></i>Voicemail Script</div>
       <div class="script-card">
         "Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just wrapped up a deal with [similar company] and wanted to see if it made sense for us to connect. I'll shoot you an email, but if you want to chat sooner, my number is [Your Number]. Thanks!"
         <div class="script-note">💡 Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-door"></i>
-        Gatekeeper Script
-      </div>
-
+    <section class="section" id="gatekeeper">
+      <div class="section-title"><i class="ti ti-door"></i>Gatekeeper Script</div>
       <div class="script-card">
         "Hey, this is [Your Name] with IBM — I'm trying to reach [Decision Maker Name]. Are they available?"
         <div class="script-note">💡 Sound like you already have a relationship. Don't over-explain. If they ask what it's about: "It's regarding their mobile device security setup — they'll know what it's about."</div>
       </div>
-
       <div class="list-item">
         <strong>If they push back:</strong>
         "I understand — I'm the MaaS360 [AE/POC] for [Company Name] and I just wanted to introduce myself. Would it be better if I sent an email first?"
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-mail"></i>
-        Follow-Up Email Template
-      </div>
-
+    <section class="section" id="email">
+      <div class="section-title"><i class="ti ti-mail"></i>Follow-Up Email Template</div>
       <div class="script-card">
         <strong>Subject:</strong> Quick intro — MaaS360 for [Company Name]<br><br>
-        
         Hey [Name],<br><br>
-        
         [Your Name] here — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-        
         We just wrapped up a project with [similar company] helping them manage and secure their mobile devices without adding overhead for their team.<br><br>
-        
         Worth a quick 10-minute call to see if there's a fit? I can work around your schedule.<br><br>
-        
         [Your Name]<br>
         [Title] | IBM MaaS360<br>
         [Phone] | [Email]
-        
         <div class="script-note">💡 Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-search"></i>
-        Quick Company Research (30 seconds)
-      </div>
+    <section class="section" id="research">
+      <div class="section-title"><i class="ti ti-search"></i>Quick Company Research (30 seconds)</div>
+      <div class="list-item"><strong>LinkedIn:</strong> Check their profile — tenure, recent posts, mutual connections</div>
+      <div class="list-item"><strong>Company News:</strong> Google "[Company Name] news" — recent funding, expansion, leadership changes</div>
+      <div class="list-item"><strong>Company Website:</strong> About page, recent blog posts, press releases</div>
+      <div class="list-item"><strong>Industry:</strong> Know 1-2 similar companies you've worked with in their space</div>
+      <div class="list-item"><strong>Size/Scale:</strong> Employee count, number of locations (helps tailor your pitch)</div>
+    </section>
 
-      <div class="list-item">
-        <strong>LinkedIn:</strong> Check their profile — tenure, recent posts, mutual connections
-      </div>
-      <div class="list-item">
-        <strong>Company News:</strong> Google "[Company Name] news" — recent funding, expansion, leadership changes
-      </div>
-      <div class="list-item">
-        <strong>Company Website:</strong> About page, recent blog posts, press releases
-      </div>
-      <div class="list-item">
-        <strong>Industry:</strong> Know 1-2 similar companies you've worked with in their space
-      </div>
-      <div class="list-item">
-        <strong>Size/Scale:</strong> Employee count, number of locations (helps tailor your pitch)
-      </div>
-    </div>
+    <section class="section" id="tonality">
+      <div class="section-title"><i class="ti ti-volume"></i>Tonality &amp; Delivery</div>
+      <div class="list-item"><strong>Pace:</strong> Slower than you think. Rushing = nervous. Confident people don't rush.</div>
+      <div class="list-item"><strong>Pauses:</strong> After your intro, pause 1-2 seconds. Let it land. Don't fill the silence.</div>
+      <div class="list-item"><strong>Energy:</strong> Match their energy. If they're high-energy, match it. If they're calm, stay calm.</div>
+      <div class="list-item"><strong>Smile:</strong> They can hear it. Smile while you talk — it changes your tone.</div>
+      <div class="list-item"><strong>Confidence:</strong> Sound like you expected them to pick up. You're not interrupting — you're offering value.</div>
+    </section>
 
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-volume"></i>
-        Tonality & Delivery
-      </div>
-
-      <div class="list-item">
-        <strong>Pace:</strong> Slower than you think. Rushing = nervous. Confident people don't rush.
-      </div>
-      <div class="list-item">
-        <strong>Pauses:</strong> After your intro, pause 1-2 seconds. Let it land. Don't fill the silence.
-      </div>
-      <div class="list-item">
-        <strong>Energy:</strong> Match their energy. If they're high-energy, match it. If they're calm, stay calm.
-      </div>
-      <div class="list-item">
-        <strong>Smile:</strong> They can hear it. Smile while you talk — it changes your tone.
-      </div>
-      <div class="list-item">
-        <strong>Confidence:</strong> Sound like you expected them to pick up. You're not interrupting — you're offering value.
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">
-        <i class="ti ti-flag"></i>
-        Red Flags vs. Green Flags
-      </div>
-
+    <section class="section" id="flags">
+      <div class="section-title"><i class="ti ti-flag"></i>Red Flags vs. Green Flags</div>
       <div class="two-col">
         <div>
-          <h4 style="color: var(--success); margin-bottom: 0.75rem; font-size: 15px;">🟢 Green Flags (They're Interested)</h4>
+          <h4 style="color:var(--success);margin-bottom:0.75rem;font-size:15px;">🟢 Green Flags (They're Interested)</h4>
           <div class="list-item">They ask questions about MaaS360</div>
           <div class="list-item">They mention current pain points</div>
           <div class="list-item">They offer specific times to meet</div>
@@ -1206,7 +571,7 @@
           <div class="list-item">They mention upcoming projects/changes</div>
         </div>
         <div>
-          <h4 style="color: var(--danger); margin-bottom: 0.75rem; font-size: 15px;">🔴 Red Flags (Just Being Polite)</h4>
+          <h4 style="color:var(--danger);margin-bottom:0.75rem;font-size:15px;">🔴 Red Flags (Just Being Polite)</h4>
           <div class="list-item">Vague responses: "Maybe later"</div>
           <div class="list-item">"Send me some info" with no follow-up</div>
           <div class="list-item">They don't ask any questions</div>
@@ -1214,16 +579,14 @@
           <div class="list-item">"We're all set" without details</div>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 
   <script>
     function switchTab(tabId, event) {
-      // Remove active from all tabs and content
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      
-      // Add active to clicked tab and corresponding content
       event.target.classList.add('active');
       document.getElementById('tab-' + tabId).classList.add('active');
     }
@@ -1231,19 +594,31 @@
     function toggleObj(item) {
       const response = item.querySelector('.obj-response');
       const wasOpen = item.classList.contains('open');
-      
-      // Close all objections
       document.querySelectorAll('.obj-item').forEach(obj => {
         obj.classList.remove('open');
         obj.querySelector('.obj-response').classList.remove('visible');
       });
-      
-      // Open clicked one if it wasn't already open
       if (!wasOpen) {
         item.classList.add('open');
         response.classList.add('visible');
       }
     }
+
+    // Highlight the current section in the sticky TOC as you scroll.
+    (function(){
+      var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+      var map = {};
+      links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            links.forEach(function(a){ a.classList.remove('here'); });
+            if(map[e.target.id]) map[e.target.id].classList.add('here');
+          }
+        });
+      }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+      document.querySelectorAll('.section[id]').forEach(function(s){ obs.observe(s); });
+    })();
   </script>
 </body>
 </html>

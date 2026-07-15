@@ -23,6 +23,12 @@
     --blue-dim:#1C2A3B;
     --teal:#3FD0A8;
     --teal-dim:#16302A;
+    --red:#FF6259;
+    --red-dim:#34201D;
+    --violet:#B78BFF;
+    --violet-dim:#241C36;
+    --pink:#FF87C2;
+    --pink-dim:#331E2A;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -117,9 +123,15 @@
   .card.c-amber::before{background:var(--amber);}
   .card.c-blue::before{background:var(--blue);}
   .card.c-teal::before{background:var(--teal);}
+  .card.c-violet::before{background:var(--violet);}
+  .card.c-red::before{background:var(--red);}
+  .card.c-pink::before{background:var(--pink);}
   .card:hover.c-amber{border-color:var(--amber);}
   .card:hover.c-blue{border-color:var(--blue);}
   .card:hover.c-teal{border-color:var(--teal);}
+  .card:hover.c-violet{border-color:var(--violet);}
+  .card:hover.c-red{border-color:var(--red);}
+  .card:hover.c-pink{border-color:var(--pink);}
 
   .card .bignum{
     position:absolute;
@@ -136,6 +148,9 @@
   .card.c-amber .bignum{color:var(--amber);}
   .card.c-blue .bignum{color:var(--blue);}
   .card.c-teal .bignum{color:var(--teal);}
+  .card.c-violet .bignum{color:var(--violet);}
+  .card.c-red .bignum{color:var(--red);}
+  .card.c-pink .bignum{color:var(--pink);}
 
   .card .tag{
     font-family:'IBM Plex Mono',monospace;
@@ -150,6 +165,9 @@
   .card.c-amber .tag{background:var(--amber-dim);color:var(--amber);}
   .card.c-blue .tag{background:var(--blue-dim);color:var(--blue);}
   .card.c-teal .tag{background:var(--teal-dim);color:var(--teal);}
+  .card.c-violet .tag{background:var(--violet-dim);color:var(--violet);}
+  .card.c-red .tag{background:var(--red-dim);color:var(--red);}
+  .card.c-pink .tag{background:var(--pink-dim);color:var(--pink);}
 
   .card h2{
     font-size:25px;
@@ -186,6 +204,9 @@
   .card.c-amber .open-row{color:var(--amber);}
   .card.c-blue .open-row{color:var(--blue);}
   .card.c-teal .open-row{color:var(--teal);}
+  .card.c-violet .open-row{color:var(--violet);}
+  .card.c-red .open-row{color:var(--red);}
+  .card.c-pink .open-row{color:var(--pink);}
 
   .footnote{
     border-top:1px solid var(--line-soft);
@@ -217,8 +238,8 @@
   <header class="hero">
     <div class="eyebrow"><span class="dot"></span>MAAS360 SALES GUIDE</div>
     <h1>Find them. Call them. Back it up.</h1>
-    <p class="lede">Three guides, one workflow. Pick whichever stage of the deal you're in — every script, prompt, and link lives inside.</p>
-    <div class="meta">UPDATED JUN 17, 2026 · 3 GUIDES</div>
+    <p class="lede">Six guides, one workflow — from your first day of onboarding to knowing every account in your territory. Every script, prompt, dashboard, and link lives inside.</p>
+    <div class="meta">UPDATED JUL 14, 2026 · 6 GUIDES</div>
   </header>
 
   <div class="tap-hint">Tap a guide to open it</div>
@@ -252,9 +273,36 @@
       <div class="open-row"><span>Open guide</span><span class="arrow">→</span></div>
     </a>
 
+    <a class="card c-violet" href="onboarding.html">
+      <span class="bignum">04</span>
+      <span class="tag">Section 4</span>
+      <h2>Onboarding</h2>
+      <p class="tagline">Your first six weeks, start to certification — every link, system, tool, and training path a new MaaS360 hire needs, laid out in one place.</p>
+      <div class="meta-line">8 sections · roadmap + training paths</div>
+      <div class="open-row"><span>Open guide</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card c-red" href="rep-alignment.html">
+      <span class="bignum">05</span>
+      <span class="tag">Section 5</span>
+      <h2>Rep Alignment</h2>
+      <p class="tagline">Who owns what. Search, filter, and export the full coverage model to find the rep, tech rep, and manager on any account.</p>
+      <div class="meta-line">1,836 records · search + export</div>
+      <div class="open-row"><span>Open tool</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="card c-pink" href="territory-map.html">
+      <span class="bignum">06</span>
+      <span class="tag">Section 6</span>
+      <h2>Territory Map</h2>
+      <p class="tagline">Click any state to see the sales rep, telco specialists, technical rep, and managers assigned to that territory.</p>
+      <div class="meta-line">50 states · reps + telco specialists</div>
+      <div class="open-row"><span>Open tool</span><span class="arrow">→</span></div>
+    </a>
+
   </div>
 
-  <div class="footnote">Keep all four files — <code>index.html</code>, <code>prospecting.html</code>, <code>cold-call.html</code>, and <code>resources.html</code> — in the same folder. The links between guides only work if they're side by side.</div>
+  <div class="footnote">Keep every file in the same folder — the six pages (<code>index.html</code>, <code>prospecting.html</code>, <code>cold-call.html</code>, <code>resources.html</code>, <code>onboarding.html</code>, <code>rep-alignment.html</code>, <code>territory-map.html</code>) plus the data-tool assets (<code>maas-styles.css</code>, <code>maas-script.js</code>, <code>us-map-styles.css</code>, <code>us-map-script.js</code>, <code>us-map-data.js</code>). All links are relative, so it works from any subfolder on GitHub Pages — but only if the files stay side by side.</div>
 
 </div>
 </body>
