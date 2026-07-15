@@ -1,263 +1,104 @@
 <!DOCTYPE html>
 <!--
-  Cold Call cheat sheet.
-  Original content preserved verbatim; page restyled from its standalone light-blue theme
-  into the MaaS360 Sales Guide dark design system for a consistent look across the site.
+  Cold call cheat sheet. Original content preserved; example scripts kept verbatim.
+  Styled with the shared IBM Carbon theme layer (carbon.css) — light/dark, IBM Plex Sans, IBM Blue.
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cold Call — MaaS360 Sales Guide</title>
+  <title>Cold call — MaaS360 sales guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="carbon.css">
+  <script src="carbon-theme.js"></script>
   <style>
-    :root{
-      --ink:#11151A;
-      --panel:#1A2026;
-      --panel-2:#0E1216;
-      --line:#2B333B;
-      --line-soft:#222931;
-      --text:#E9ECEC;
-      --text-dim:#AEB7BE;
-      --mist:#7C8893;
-      --amber:#FF9248;
-      --amber-dim:#3A2A1C;
-      --red:#FF6259;
-      --red-dim:#34201D;
-      --blue:#5AA7FF;
-      --blue-dim:#1C2A3B;
-      --teal:#3FD0A8;
-      --teal-dim:#16302A;
-      --grey-tag:#8B96A1;
-      --grey-dim:#262C32;
-      /* semantic aliases used throughout this page */
-      --primary:var(--blue);
-      --accent:var(--blue);
-      --success:var(--teal);
-      --warning:var(--amber);
-      --danger:var(--red);
-      --nav-accent:var(--blue);
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{
-      background:
-        radial-gradient(circle at 14% 0%, rgba(90,167,255,0.05), transparent 40%),
-        radial-gradient(circle at 86% 12%, rgba(63,208,168,0.04), transparent 42%),
-        var(--ink);
-      color:var(--text);
-      font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-      line-height:1.55;
-      -webkit-font-smoothing:antialiased;
-      min-height:100vh;
-    }
-    a{color:var(--blue);text-decoration:none;}
-    a:hover{text-decoration:underline;}
+    .g-section-title{display:flex;align-items:center;gap:12px;}
+    .g-section-title::before{content:"";width:11px;height:11px;background:var(--acc);flex:0 0 auto;}
 
-    /* ===== shared site nav ===== */
-    .site-nav{position:sticky;top:0;z-index:200;background:rgba(14,18,22,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
-    .site-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:18px;min-height:54px;flex-wrap:wrap;}
-    .site-nav-brand{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:8px;}
-    .site-nav-brand:hover{text-decoration:none;}
-    .site-nav-brand .sq{width:9px;height:9px;border-radius:2px;background:var(--nav-accent);}
-    .site-nav-links{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-family:'IBM Plex Mono',monospace;}
-    .site-nav-links a{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);padding:7px 11px;border-radius:8px;transition:color .15s ease,background .15s ease;}
-    .site-nav-links a:hover{color:var(--text);background:var(--panel);text-decoration:none;}
-    .site-nav-links a.active{color:var(--ink);background:var(--nav-accent);}
-    @media(max-width:720px){.site-nav-links{width:100%;margin-left:0;padding-bottom:8px;}}
+    .callout-tip{display:flex;gap:14px;background:var(--panel-2);border-left:3px solid var(--acc);padding:16px 20px;margin-bottom:12px;}
+    .callout-tip .ic{font-size:18px;flex:0 0 auto;line-height:1.4;}
+    .callout-tip strong{display:block;color:var(--text);margin-bottom:4px;font-weight:600;}
+    .callout-tip p{margin:0;color:var(--text-dim);font-size:14px;line-height:1.6;}
 
-    .hero{max-width:1040px;margin:0 auto;padding:52px 24px 26px;border-bottom:1px solid var(--line-soft);}
-    .home-link{
-      font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);
-      display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;
-      border:1px solid var(--line);border-radius:20px;padding:6px 12px 6px 10px;
-      transition:border-color .15s ease,color .15s ease;
-    }
-    .home-link:hover{color:var(--blue);border-color:var(--blue);text-decoration:none;}
-    .eyebrow{
-      font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
-      color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:18px;
-    }
-    .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);}
-    h1{
-      font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;
-      font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 16px;letter-spacing:-.01em;
-      display:flex;align-items:center;gap:14px;
-    }
-    .hero p.lede{font-size:17px;color:var(--text-dim);max-width:640px;margin:0;}
-    .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);margin-top:18px;}
+    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px;}
+    .method-card{background:var(--panel);padding:20px;}
+    .method-card h4{font-size:15px;color:var(--text);margin:0 0 8px;font-weight:600;}
+    .method-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin:0 0 8px;}
+    .method-card p strong{color:var(--text);}
+    .method-example{background:var(--panel-2);padding:10px 12px;font-size:13px;color:var(--text-dim);margin-top:8px;border-left:3px solid var(--acc);}
 
-    /* sticky section TOC */
-    .toc{
-      max-width:1040px;margin:0 auto;padding:22px 24px 12px;
-      position:sticky;top:54px;background:linear-gradient(var(--ink) 78%, transparent);z-index:30;
-    }
-    .toc-inner{
-      display:flex;gap:6px;flex-wrap:wrap;
-      background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:6px;
-    }
-    .toc a{
-      font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600;
-      color:var(--text-dim);padding:8px 12px;border-radius:10px;text-decoration:none;
-    }
-    .toc a:hover{background:var(--panel);color:var(--text);}
-    .toc a.here{background:var(--blue-dim);color:var(--blue);}
+    .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+    .rule{background:var(--panel);padding:12px 16px;font-size:14px;color:var(--text-dim);display:flex;gap:10px;align-items:flex-start;}
+    .rule::before{font-weight:700;flex:0 0 auto;}
+    .rule.yes::before{content:"✓";color:var(--support-success);}
+    .rule.no::before{content:"✕";color:var(--support-error);}
 
-    .container{max-width:1040px;margin:0 auto;padding:6px 24px 90px;}
+    .pills{display:flex;flex-wrap:wrap;gap:8px;}
+    .pill{font-size:14px;padding:8px 14px;background:var(--panel);color:var(--text-dim);border:1px solid var(--line);}
 
-    .section{
-      background:var(--panel);border:1px solid var(--line);border-radius:16px;
-      padding:24px;margin-top:18px;scroll-margin-top:120px;
-      transition:border-color .2s ease,box-shadow .2s ease;
-    }
-    .section:hover{box-shadow:0 14px 34px rgba(0,0,0,.28);}
-    .section-title{
-      font-family:'IBM Plex Sans Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.01em;
-      color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:10px;
-      padding-bottom:12px;border-bottom:1px solid var(--line-soft);
-    }
-    .section-title i{font-size:22px;color:var(--blue);}
-
-    /* Pro Tips */
-    .tip-box{
-      background:var(--amber-dim);border:1px solid rgba(255,146,72,.35);border-radius:12px;
-      padding:16px;margin-bottom:14px;display:flex;gap:12px;font-size:14px;
-    }
-    .tip-box i{font-size:20px;color:var(--amber);flex-shrink:0;margin-top:2px;}
-    .tip-box strong{display:block;color:var(--amber);margin-bottom:4px;}
-    .tip-box p{color:var(--text-dim);line-height:1.6;}
-
-    /* Tabs */
-    .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-    .tab{
-      padding:9px 16px;border-radius:20px;border:1px solid var(--line);
-      background:var(--panel-2);color:var(--text-dim);font-size:13px;font-weight:600;
-      cursor:pointer;transition:all .18s ease;font-family:'IBM Plex Sans',sans-serif;
-    }
-    .tab:hover{border-color:var(--blue);color:var(--text);}
-    .tab.active{background:var(--blue);color:var(--ink);border-color:var(--blue);}
+    /* Carbon content switcher (persona tabs) */
+    .tabs{display:inline-flex;border:1px solid var(--primary);margin-bottom:16px;flex-wrap:wrap;}
+    .tab{padding:11px 18px;background:transparent;color:var(--link);font-family:inherit;font-size:14px;cursor:pointer;border:none;border-right:1px solid var(--primary);transition:background .11s,color .11s;}
+    .tab:last-child{border-right:none;}
+    .tab:hover{background:var(--panel-2);}
+    .tab.active{background:var(--primary);color:var(--on-primary);}
     .tab-content{display:none;}
     .tab-content.active{display:block;}
 
-    /* Script cards */
-    .script-card{
-      background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--blue);
-      border-radius:12px;padding:18px 20px;margin-bottom:14px;font-size:15px;color:var(--text-dim);line-height:1.7;
-    }
+    .script-card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);padding:18px 20px;margin-bottom:12px;font-size:15px;color:var(--text-dim);line-height:1.7;}
     .script-card strong{color:var(--text);}
-    .script-card.green{border-left-color:var(--teal);}
-    .script-card em{
-      font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--blue);
-      background:var(--blue-dim);padding:2px 7px;border-radius:5px;
-    }
-    .script-note{
-      font-size:13px;color:var(--text-dim);margin-top:12px;padding:10px 12px;
-      background:var(--blue-dim);border-radius:8px;border-left:3px solid var(--blue);
-    }
+    .script-card.blue{border-left-color:var(--primary);}
+    .script-card em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--acc-fg);background:var(--acc-bg);padding:2px 7px;}
+    .script-note{font-size:13px;color:var(--text-dim);margin-top:12px;padding:10px 12px;background:var(--panel-2);border-left:3px solid var(--primary);}
 
-    /* Objections */
-    .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;}
-    .obj-item{
-      background:var(--panel-2);border:1px solid var(--line);border-radius:12px;
-      padding:16px;cursor:pointer;transition:border-color .18s ease,transform .18s ease;
-    }
-    .obj-item:hover{border-color:var(--blue);transform:translateY(-2px);}
-    .obj-item.open{border-color:var(--blue);background:var(--blue-dim);}
+    .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+    .obj-item{background:var(--panel);padding:16px 18px;cursor:pointer;transition:background .11s;}
+    .obj-item:hover{background:var(--panel-2);}
+    .obj-item.open{background:var(--panel-2);}
     .obj-header{display:flex;justify-content:space-between;align-items:center;gap:10px;}
-    .obj-trigger{font-size:14px;font-weight:600;color:var(--blue);flex:1;}
-    .obj-chevron{
-      font-size:18px;color:var(--blue);flex-shrink:0;width:26px;height:26px;
-      display:flex;align-items:center;justify-content:center;background:var(--grey-dim);
-      border-radius:50%;transition:transform .3s ease,background .2s ease;
-    }
-    .obj-item.open .obj-chevron{transform:rotate(180deg);background:var(--blue);color:var(--ink);}
-    .obj-response{
-      display:none;font-size:14px;color:var(--text-dim);line-height:1.7;
-      margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
-    }
+    .obj-trigger{font-size:14px;font-weight:600;color:var(--text);flex:1;}
+    .obj-chevron{font-size:14px;color:var(--link);flex:0 0 auto;transition:transform .2s;}
+    .obj-item.open .obj-chevron{transform:rotate(180deg);}
+    .obj-response{display:none;font-size:14px;color:var(--text-dim);line-height:1.7;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
     .obj-response.visible{display:block;}
-    .obj-then{
-      display:inline-block;margin-top:10px;font-size:12px;font-weight:600;
-      font-family:'IBM Plex Mono',monospace;color:var(--blue);background:var(--panel);
-      padding:5px 11px;border-radius:6px;border:1px solid var(--line);
-    }
+    .obj-then{display:inline-block;margin-top:10px;font-size:12px;font-weight:500;font-family:'IBM Plex Mono',monospace;color:var(--acc-fg);background:var(--acc-bg);padding:5px 11px;}
 
-    /* Close box */
-    .close-box{
-      background:var(--teal-dim);border:1px solid rgba(63,208,168,.4);border-radius:12px;
-      padding:18px 20px;margin:6px 0 14px;
-    }
-    .close-box .label{
-      font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--teal);
-      text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;
-    }
-    .close-box p{font-size:17px;color:var(--text);font-weight:600;}
+    .close-box{background:var(--panel-2);border-left:3px solid var(--acc);padding:18px 20px;margin:6px 0 12px;}
+    .close-box .label{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--text-dim);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;}
+    .close-box p{font-size:17px;color:var(--text);font-weight:600;margin:0;}
 
-    /* Rules */
-    .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;}
-    .rule{
-      background:var(--panel-2);border-radius:10px;padding:11px 13px;font-size:13.5px;color:var(--text-dim);
-      display:flex;gap:9px;align-items:flex-start;border-left:4px solid transparent;transition:transform .15s ease;
-    }
-    .rule:hover{transform:translateX(4px);}
-    .rule i{font-size:18px;flex-shrink:0;}
-    .rule.yes{border-left-color:var(--teal);}
-    .rule.yes i{color:var(--teal);}
-    .rule.no{border-left-color:var(--red);}
-    .rule.no i{color:var(--red);}
+    .list-item{background:var(--panel);border:1px solid var(--line);padding:12px 16px;margin-bottom:8px;font-size:14px;color:var(--text-dim);line-height:1.6;}
+    .list-item strong{color:var(--text);display:block;margin-bottom:4px;}
 
-    /* Pills */
-    .pills{display:flex;flex-wrap:wrap;gap:8px;}
-    .pill{
-      font-size:13px;padding:8px 14px;border-radius:20px;background:var(--grey-dim);
-      color:var(--text-dim);border:1px solid var(--line);font-weight:600;transition:all .18s ease;
-    }
-    .pill:hover{background:var(--blue);color:var(--ink);border-color:var(--blue);transform:translateY(-2px);}
+    .flag-col h4{font-size:15px;margin:0 0 12px;font-weight:600;}
+    .flag-col.green h4{color:var(--support-success);}
+    .flag-col.red h4{color:var(--support-error);}
 
-    /* Two-column / method cards */
-    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
-    .method-card{
-      background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px;
-      transition:border-color .18s ease,transform .18s ease;
-    }
-    .method-card:hover{border-color:var(--blue);transform:translateY(-3px);}
-    .method-card h4{
-      font-size:15px;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;
-    }
-    .method-card h4 i{font-size:18px;color:var(--blue);}
-    .method-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin-bottom:8px;}
-    .method-card p strong{color:var(--text);}
-    .method-example{
-      background:var(--blue-dim);border-radius:8px;padding:9px 11px;font-size:13px;font-style:italic;
-      color:var(--text-dim);margin-top:6px;border-left:3px solid var(--blue);
-    }
-
-    /* List items */
-    .list-item{
-      background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
-      padding:11px 13px;margin-bottom:8px;font-size:14px;color:var(--text-dim);line-height:1.6;
-      transition:border-color .18s ease,transform .18s ease;
-    }
-    .list-item:hover{border-color:var(--blue);transform:translateX(6px);}
-    .list-item strong{color:var(--blue);display:block;margin-bottom:4px;}
-
-    @media (max-width:768px){
-      .hero{padding:36px 18px 22px;}
-      .toc{padding:16px 18px 10px;}
-      .container{padding:6px 18px 80px;}
-      .obj-grid,.two-col,.rules{grid-template-columns:1fr;}
-    }
+    @media (max-width:768px){.obj-grid,.two-col,.rules{grid-template-columns:1fr;}}
   </style>
 </head>
-<body>
+<body class="acc-cold">
 
-  <nav class="site-nav">
+  <header class="site-nav">
     <div class="site-nav-inner">
-      <a class="site-nav-brand" href="index.html"><span class="sq"></span>MaaS360 Sales Guide</a>
-      <div class="site-nav-links">
+      <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+        <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+          <defs><mask id="ibmbars">
+            <rect width="110" height="44" fill="#000"/>
+            <g fill="#fff">
+              <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+              <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+              <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+              <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+            </g>
+          </mask></defs>
+          <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+        </svg>
+        <span class="product">MaaS360 Sales Guide</span>
+      </a>
+      <nav class="site-nav-links" aria-label="Guides">
         <a href="index.html">Hub</a>
         <a href="prospecting.html">Prospecting</a>
         <a href="cold-call.html" class="active">Cold Call</a>
@@ -265,90 +106,85 @@
         <a href="onboarding.html">Onboarding</a>
         <a href="rep-alignment.html">Rep Alignment</a>
         <a href="territory-map.html">Territory Map</a>
-      </div>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+        <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+        <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+        <span class="tt-label">Dark</span>
+      </button>
     </div>
-  </nav>
-
-  <header class="hero">
-    <a class="home-link" href="index.html">&larr; Sales Guide Home</a>
-    <div class="eyebrow"><span class="dot"></span>MAAS360 SALES GUIDE — SECTION 2</div>
-    <h1><span>🎯</span>Cold Call Cheat Sheet</h1>
-    <p class="lede">What to say when they pick up. Openers by persona, a response for every objection, and the voicemail, gatekeeper, and email scripts to back it up.</p>
-    <div class="meta">UPDATED JUN 17, 2026 · 8 OBJECTIONS · 4 PERSONA SCRIPTS</div>
   </header>
 
-  <nav class="toc" aria-label="On this page">
-    <div class="toc-inner">
-      <a href="#tips">Pro Tips</a>
+  <div class="guide">
+    <header class="g-hero">
+      <div class="g-eyebrow">Section 2</div>
+      <h1 class="g-h1">Cold call cheat sheet</h1>
+      <p class="g-lede">What to say when they pick up. Openers by persona, a response for every objection, and the voicemail, gatekeeper, and email scripts to back it up.</p>
+      <div class="g-meta">Updated Jun 17, 2026 · 8 objections · 4 persona scripts</div>
+    </header>
+  </div>
+
+  <nav class="g-toc" aria-label="On this page">
+    <div class="g-toc-inner">
+      <a href="#tips">Pro tips</a>
       <a href="#delivery">Delivery</a>
       <a href="#mindset">Mindset</a>
-      <a href="#script">Opening Script</a>
+      <a href="#script">Opening script</a>
       <a href="#objections">Objections</a>
-      <a href="#close">Always Close</a>
+      <a href="#close">Always close</a>
       <a href="#voicemail">Voicemail</a>
       <a href="#gatekeeper">Gatekeeper</a>
-      <a href="#email">Follow-Up Email</a>
+      <a href="#email">Follow-up email</a>
       <a href="#research">Research</a>
       <a href="#tonality">Tonality</a>
-      <a href="#flags">Red / Green Flags</a>
+      <a href="#flags">Flags</a>
     </div>
   </nav>
 
-  <div class="container">
+  <main class="g-main">
 
-    <!-- SECTION 1: TIPS & COMMENTARY -->
-    <section class="section" id="tips">
-      <div class="section-title"><i class="ti ti-bulb"></i>Pro Tips &amp; Strategy</div>
-
-      <div class="tip-box">
-        <i class="ti ti-star"></i>
-        <div>
-          <strong>🔥 The Power Move</strong>
-          <p>Say "I'm the MaaS360 [AE/POC] for [Company Name]" — it sounds like you were assigned to them specifically, not like you're blasting a list. They feel like the call was coming regardless. Way more authority than "I'm calling to introduce myself."</p>
-        </div>
+    <section class="g-section" id="tips">
+      <h2 class="g-section-title">Pro tips and strategy</h2>
+      <div class="callout-tip">
+        <span class="ic">🔥</span>
+        <div><strong>The power move</strong><p>Say "I'm the MaaS360 [AE/POC] for [Company Name]" — it sounds like you were assigned to them specifically, not like you're blasting a list. They feel like the call was coming regardless. More authority than "I'm calling to introduce myself."</p></div>
       </div>
-
-      <div class="tip-box">
-        <i class="ti ti-trophy"></i>
-        <div>
-          <strong>💪 Fight for Every Second</strong>
-          <p>Be positive. Your default response: "I'm glad you brought that up." Keep fighting — even if they're rude, stay professional: "Thank you for sharing that, that's exactly why I wanted to talk to you today." Never give up easily.</p>
-        </div>
+      <div class="callout-tip">
+        <span class="ic">💪</span>
+        <div><strong>Fight for every second</strong><p>Be positive. Your default response: "I'm glad you brought that up." Keep fighting — even if they're rude, stay professional: "Thank you for sharing that, that's exactly why I wanted to talk to you today." Never give up easily.</p></div>
       </div>
-
-      <div class="two-col" style="margin-top:14px;">
+      <div class="two-col">
         <div class="method-card">
-          <h4><i class="ti ti-sparkles"></i> Glaze Method</h4>
+          <h4>Glaze method</h4>
           <p><strong>Best for:</strong> Natural yappers who can build rapport quickly</p>
           <p>Build warmth first. Reference something real about them or their company. Compliment genuinely. Let them talk before pivoting to the ask.</p>
-          <div class="method-example">💬 "I saw you guys just expanded to three new locations — that's impressive growth!"</div>
+          <div class="method-example">"I saw you just expanded to three new locations — that's impressive growth."</div>
         </div>
-
         <div class="method-card">
-          <h4><i class="ti ti-bolt"></i> Direct Method</h4>
+          <h4>Direct method</h4>
           <p><strong>Best for:</strong> Getting straight to business</p>
           <p>Skip the small talk. Go straight to the ask. Respect their time by being efficient.</p>
-          <div class="method-example">💬 "Are you open to a 10-minute call to see if we're a fit?"</div>
+          <div class="method-example">"Are you open to a 10-minute call to see if we're a fit?"</div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="delivery">
-      <div class="section-title"><i class="ti ti-checklist"></i>Delivery Reminders</div>
+    <section class="g-section" id="delivery">
+      <h2 class="g-section-title">Delivery reminders</h2>
       <div class="rules">
-        <div class="rule yes"><i class="ti ti-check"></i> Say "for [Company Name]" with ownership, not apology</div>
-        <div class="rule yes"><i class="ti ti-check"></i> Pause after your intro — let it settle</div>
-        <div class="rule yes"><i class="ti ti-check"></i> Always end with two specific times</div>
-        <div class="rule yes"><i class="ti ti-check"></i> Sound like you expected them to pick up</div>
-        <div class="rule no"><i class="ti ti-x"></i> Don't rush — slower = more confident</div>
-        <div class="rule no"><i class="ti ti-x"></i> No "I was just calling to..."</div>
-        <div class="rule no"><i class="ti ti-x"></i> Don't pitch the product on the cold call</div>
-        <div class="rule no"><i class="ti ti-x"></i> Ask then go quiet — let them answer</div>
+        <div class="rule yes">Say "for [Company Name]" with ownership, not apology</div>
+        <div class="rule yes">Pause after your intro — let it settle</div>
+        <div class="rule yes">Always end with two specific times</div>
+        <div class="rule yes">Sound like you expected them to pick up</div>
+        <div class="rule no">Don't rush — slower reads as more confident</div>
+        <div class="rule no">No "I was just calling to..."</div>
+        <div class="rule no">Don't pitch the product on the cold call</div>
+        <div class="rule no">Ask, then go quiet — let them answer</div>
       </div>
     </section>
 
-    <section class="section" id="mindset">
-      <div class="section-title"><i class="ti ti-brain"></i>Mindset</div>
+    <section class="g-section" id="mindset">
+      <h2 class="g-section-title">Mindset</h2>
       <div class="pills">
         <div class="pill">You own this territory — act like it</div>
         <div class="pill">Selling 10 minutes, not MaaS360</div>
@@ -358,220 +194,153 @@
       </div>
     </section>
 
-    <!-- SECTION 2: THE CALL SCRIPT -->
-    <section class="section" id="script">
-      <div class="section-title"><i class="ti ti-phone-call"></i>Opening Script — Pick Your Persona</div>
-
+    <section class="g-section" id="script">
+      <h2 class="g-section-title">Opening script — pick your persona</h2>
       <div class="tabs">
-        <div class="tab active" onclick="switchTab('general', event)">General</div>
-        <div class="tab" onclick="switchTab('it', event)">IT/Security</div>
-        <div class="tab" onclick="switchTab('exec', event)">Executive</div>
-        <div class="tab" onclick="switchTab('ops', event)">Operations</div>
+        <button class="tab active" onclick="switchTab('general', event)">General</button>
+        <button class="tab" onclick="switchTab('it', event)">IT/security</button>
+        <button class="tab" onclick="switchTab('exec', event)">Executive</button>
+        <button class="tab" onclick="switchTab('ops', event)">Operations</button>
       </div>
-
       <div class="tab-content active" id="tab-general">
-        <div class="script-card">
-          "Hey [Name], <em>[pause and wait for reply]</em><br><br>
+        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
           This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
           I just wrapped up a deal with [similar company in their industry] and I think we'd be a great fit based on what I know. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">💡 Mentioning a recent win with a similar company is the credibility hook. It signals you're relevant to them specifically, not just mass-dialing. If they ask what it's about, you're already one foot in the door.</div>
+          <div class="script-note">Mentioning a recent win with a similar company is the credibility hook. It signals you're relevant to them specifically, not just mass-dialing. If they ask what it's about, you're already one foot in the door.</div>
         </div>
       </div>
-
       <div class="tab-content" id="tab-it">
-        <div class="script-card">
-          "Hey [Name], <em>[pause and wait for reply]</em><br><br>
+        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
           This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-          We help IT teams manage and secure mobile and endpoint devices — cuts down admin overhead and tightens up security. Just closed something with [similar company] and honestly I think we'd be a natural fit for your environment too. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">💡 "Compare notes" or "natural fit for your environment" lands well with IT people — it's peer-to-peer, not a pitch.</div>
+          We help IT teams manage and secure mobile and endpoint devices — cuts down admin overhead and tightens up security. Just closed something with [similar company] and I think we'd be a natural fit for your environment too. I know this is a long shot but I wanted to see if it made sense to connect."
+          <div class="script-note">"Compare notes" or "natural fit for your environment" lands well with IT people — it's peer-to-peer, not a pitch.</div>
         </div>
       </div>
-
       <div class="tab-content" id="tab-exec">
-        <div class="script-card">
-          "Hey [Name], <em>[pause and wait for reply]</em><br><br>
+        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
           This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-          We help companies keep their mobile devices secure without adding overhead — saves time, reduces risk. Just finished up a project with [similar company] and I think we'd be a really natural fit for you guys too. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">💡 Execs want outcomes — "saves time, reduces risk" in one breath is enough. Don't go deeper until the meeting.</div>
+          We help companies keep their mobile devices secure without adding overhead — saves time, reduces risk. Just finished up a project with [similar company] and I think we'd be a really natural fit for you too. I know this is a long shot but I wanted to see if it made sense to connect."
+          <div class="script-note">Execs want outcomes — "saves time, reduces risk" in one breath is enough. Don't go deeper until the meeting.</div>
         </div>
       </div>
-
       <div class="tab-content" id="tab-ops">
-        <div class="script-card">
-          "Hey [Name], <em>[pause and wait for reply]</em><br><br>
+        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
           This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
           We help operations teams streamline device management and keep everything running smoothly — less friction, better security. Just wrapped up something with [similar company] and I think we'd work really well together. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">💡 Operations cares about efficiency and reducing friction. Keep it practical and workflow-focused.</div>
+          <div class="script-note">Operations cares about efficiency and reducing friction. Keep it practical and workflow-focused.</div>
         </div>
       </div>
     </section>
 
-    <!-- Objections -->
-    <section class="section" id="objections">
-      <div class="section-title"><i class="ti ti-shield-check"></i>Objection Responses</div>
+    <section class="g-section" id="objections">
+      <h2 class="g-section-title">Objection responses</h2>
       <div class="obj-grid">
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"What's this about?" / "Can you explain more?"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"Yeah for sure — it's really just a quick call about how we help companies deal with mobile security and device management. I'm not trying to sell you anything today, just see if there's something worth exploring. Tuesday or Wednesday work?"
-            <span class="obj-then">→ Two times</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"What's this about?" / "Can you explain more?"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Yeah for sure — it's really just a quick call about how we help companies deal with mobile security and device management. I'm not trying to sell you anything today, just see if there's something worth exploring. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"Just send an email" / "Email me the details"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"Happy to — though honestly it's a lot easier to make sense of in a quick call so I can tailor it to your setup. Give me 10 minutes and if it's not relevant, I'll just send you the info and leave you alone. Tuesday or Wednesday work?"
-            <span class="obj-then">→ Two times</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"Just send an email" / "Email me the details"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Happy to — though it's a lot easier to make sense of in a quick call so I can tailor it to your setup. Give me 10 minutes and if it's not relevant, I'll just send you the info and leave you alone. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"Wrong person" / "I don't handle that"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"No worries at all — do you know offhand who does handle the device or security side of things? Would it be okay if I mention your name when I reach out to them?"
-            <span class="obj-then">→ Get name + warm handoff</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"Wrong person" / "I don't handle that"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"No worries at all — do you know offhand who does handle the device or security side of things? Would it be okay if I mention your name when I reach out to them?"<span class="obj-then">→ Get name + warm handoff</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"Already have something" / "We use [competitor]"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"That makes sense — most folks I talk to already have something. I'm not here to rip and replace, just curious if there are any gaps or headaches with what you've got. Worth 10 minutes to compare?"
-            <span class="obj-then">→ Two times</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"Already have something" / "We use [competitor]"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"That makes sense — most folks I talk to already have something. I'm not here to rip and replace, just curious if there are any gaps or headaches with what you've got. Worth 10 minutes to compare?"<span class="obj-then">→ Two times</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"No budget" / "Budget's tight right now"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"Totally get it — I'm not asking for anything today. Just a quick call so that if timing changes, you already know what's out there. Worth a chat?"
-            <span class="obj-then">→ Two times</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"No budget" / "Budget's tight right now"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Totally get it — I'm not asking for anything today. Just a quick call so that if timing changes, you already know what's out there. Worth a chat?"<span class="obj-then">→ Two times</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"Bad time" / "I'm in a meeting / busy"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"Of course — sorry to catch you at a bad time. When's better? I can work around your schedule, even next week is fine."
-            <span class="obj-then">→ Get specific time</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"Bad time" / "I'm in a meeting / busy"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Of course — sorry to catch you at a bad time. When's better? I can work around your schedule, even next week is fine."<span class="obj-then">→ Get specific time</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"How much does it cost?" / "What's the price?"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"It really depends on your size and setup — which is why I'd love a quick call first. Once I know what you're working with I can give you something that actually makes sense. Tuesday or Wednesday work?"
-            <span class="obj-then">→ Two times</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"How much does it cost?" / "What's the price?"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"It really depends on your size and setup — which is why I'd love a quick call first. Once I know what you're working with I can give you something that actually makes sense. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
         </div>
-
         <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header">
-            <div class="obj-trigger">"Not interested" / "We're good, thanks"</div>
-            <div class="obj-chevron"><i class="ti ti-chevron-down"></i></div>
-          </div>
-          <div class="obj-response">"Fair enough — appreciate you picking up. Things change sometimes though — new devices, people going remote, security stuff comes up. Would it be alright if I checked back in a few months?"
-            <span class="obj-then">→ Leave door open</span>
-          </div>
+          <div class="obj-header"><div class="obj-trigger">"Not interested" / "We're good, thanks"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Fair enough — appreciate you picking up. Things change sometimes though — new devices, people going remote, security stuff comes up. Would it be alright if I checked back in a few months?"<span class="obj-then">→ Leave door open</span></div>
         </div>
       </div>
     </section>
 
-    <!-- Closing -->
-    <section class="section" id="close">
-      <div class="section-title"><i class="ti ti-circle-check"></i>Always Close With This</div>
+    <section class="g-section" id="close">
+      <h2 class="g-section-title">Always close with this</h2>
       <div class="close-box">
-        <div class="label">After any objection, land here:</div>
+        <div class="label">After any objection, land here</div>
         <p>"Does Tuesday at 2 work, or is Wednesday morning better for you?"</p>
       </div>
-      <div class="script-card green">
+      <div class="script-card blue">
         <strong>If they ask what MaaS360 does:</strong><br><br>
         "It's IBM's platform for managing and securing mobile devices and endpoints — takes a lot of the manual IT work off your plate while keeping everything locked down. Easier to show you with a real example than explain it over the phone — that's why I want the 10 minutes."
       </div>
     </section>
 
-    <!-- SECTION 3: ADDITIONAL TOOLS -->
-    <section class="section" id="voicemail">
-      <div class="section-title"><i class="ti ti-voicemail"></i>Voicemail Script</div>
-      <div class="script-card">
-        "Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just wrapped up a deal with [similar company] and wanted to see if it made sense for us to connect. I'll shoot you an email, but if you want to chat sooner, my number is [Your Number]. Thanks!"
-        <div class="script-note">💡 Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
+    <section class="g-section" id="voicemail">
+      <h2 class="g-section-title">Voicemail script</h2>
+      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just wrapped up a deal with [similar company] and wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
+        <div class="script-note">Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
       </div>
     </section>
 
-    <section class="section" id="gatekeeper">
-      <div class="section-title"><i class="ti ti-door"></i>Gatekeeper Script</div>
-      <div class="script-card">
-        "Hey, this is [Your Name] with IBM — I'm trying to reach [Decision Maker Name]. Are they available?"
-        <div class="script-note">💡 Sound like you already have a relationship. Don't over-explain. If they ask what it's about: "It's regarding their mobile device security setup — they'll know what it's about."</div>
+    <section class="g-section" id="gatekeeper">
+      <h2 class="g-section-title">Gatekeeper script</h2>
+      <div class="script-card">"Hey, this is [Your Name] with IBM — I'm trying to reach [Decision Maker Name]. Are they available?"
+        <div class="script-note">Sound like you already have a relationship. Don't over-explain. If they ask what it's about: "It's regarding their mobile device security setup — they'll know what it's about."</div>
       </div>
-      <div class="list-item">
-        <strong>If they push back:</strong>
-        "I understand — I'm the MaaS360 [AE/POC] for [Company Name] and I just wanted to introduce myself. Would it be better if I sent an email first?"
-      </div>
+      <div class="list-item"><strong>If they push back:</strong> "I understand — I'm the MaaS360 [AE/POC] for [Company Name] and I just wanted to introduce myself. Would it be better if I sent an email first?"</div>
     </section>
 
-    <section class="section" id="email">
-      <div class="section-title"><i class="ti ti-mail"></i>Follow-Up Email Template</div>
+    <section class="g-section" id="email">
+      <h2 class="g-section-title">Follow-up email template</h2>
       <div class="script-card">
         <strong>Subject:</strong> Quick intro — MaaS360 for [Company Name]<br><br>
         Hey [Name],<br><br>
         [Your Name] here — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
         We just wrapped up a project with [similar company] helping them manage and secure their mobile devices without adding overhead for their team.<br><br>
         Worth a quick 10-minute call to see if there's a fit? I can work around your schedule.<br><br>
-        [Your Name]<br>
-        [Title] | IBM MaaS360<br>
-        [Phone] | [Email]
-        <div class="script-note">💡 Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
+        [Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]
+        <div class="script-note">Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
       </div>
     </section>
 
-    <section class="section" id="research">
-      <div class="section-title"><i class="ti ti-search"></i>Quick Company Research (30 seconds)</div>
+    <section class="g-section" id="research">
+      <h2 class="g-section-title">Quick company research (30 seconds)</h2>
       <div class="list-item"><strong>LinkedIn:</strong> Check their profile — tenure, recent posts, mutual connections</div>
-      <div class="list-item"><strong>Company News:</strong> Google "[Company Name] news" — recent funding, expansion, leadership changes</div>
-      <div class="list-item"><strong>Company Website:</strong> About page, recent blog posts, press releases</div>
+      <div class="list-item"><strong>Company news:</strong> Search "[Company Name] news" — recent funding, expansion, leadership changes</div>
+      <div class="list-item"><strong>Company website:</strong> About page, recent blog posts, press releases</div>
       <div class="list-item"><strong>Industry:</strong> Know 1-2 similar companies you've worked with in their space</div>
-      <div class="list-item"><strong>Size/Scale:</strong> Employee count, number of locations (helps tailor your pitch)</div>
+      <div class="list-item"><strong>Size/scale:</strong> Employee count, number of locations (helps tailor your pitch)</div>
     </section>
 
-    <section class="section" id="tonality">
-      <div class="section-title"><i class="ti ti-volume"></i>Tonality &amp; Delivery</div>
-      <div class="list-item"><strong>Pace:</strong> Slower than you think. Rushing = nervous. Confident people don't rush.</div>
+    <section class="g-section" id="tonality">
+      <h2 class="g-section-title">Tonality and delivery</h2>
+      <div class="list-item"><strong>Pace:</strong> Slower than you think. Rushing reads as nervous. Confident people don't rush.</div>
       <div class="list-item"><strong>Pauses:</strong> After your intro, pause 1-2 seconds. Let it land. Don't fill the silence.</div>
       <div class="list-item"><strong>Energy:</strong> Match their energy. If they're high-energy, match it. If they're calm, stay calm.</div>
       <div class="list-item"><strong>Smile:</strong> They can hear it. Smile while you talk — it changes your tone.</div>
       <div class="list-item"><strong>Confidence:</strong> Sound like you expected them to pick up. You're not interrupting — you're offering value.</div>
     </section>
 
-    <section class="section" id="flags">
-      <div class="section-title"><i class="ti ti-flag"></i>Red Flags vs. Green Flags</div>
+    <section class="g-section" id="flags">
+      <h2 class="g-section-title">Red flags vs. green flags</h2>
       <div class="two-col">
-        <div>
-          <h4 style="color:var(--success);margin-bottom:0.75rem;font-size:15px;">🟢 Green Flags (They're Interested)</h4>
+        <div class="method-card flag-col green">
+          <h4>Green flags (they're interested)</h4>
           <div class="list-item">They ask questions about MaaS360</div>
           <div class="list-item">They mention current pain points</div>
           <div class="list-item">They offer specific times to meet</div>
           <div class="list-item">They ask about pricing/timeline</div>
           <div class="list-item">They mention upcoming projects/changes</div>
         </div>
-        <div>
-          <h4 style="color:var(--danger);margin-bottom:0.75rem;font-size:15px;">🔴 Red Flags (Just Being Polite)</h4>
+        <div class="method-card flag-col red">
+          <h4>Red flags (just being polite)</h4>
           <div class="list-item">Vague responses: "Maybe later"</div>
           <div class="list-item">"Send me some info" with no follow-up</div>
           <div class="list-item">They don't ask any questions</div>
@@ -581,43 +350,28 @@
       </div>
     </section>
 
-  </div>
+  </main>
 
   <script>
-    function switchTab(tabId, event) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    function switchTab(tabId, event){
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
       event.target.classList.add('active');
-      document.getElementById('tab-' + tabId).classList.add('active');
+      document.getElementById('tab-'+tabId).classList.add('active');
     }
-
-    function toggleObj(item) {
-      const response = item.querySelector('.obj-response');
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.obj-item').forEach(obj => {
-        obj.classList.remove('open');
-        obj.querySelector('.obj-response').classList.remove('visible');
-      });
-      if (!wasOpen) {
-        item.classList.add('open');
-        response.classList.add('visible');
-      }
+    function toggleObj(item){
+      const response=item.querySelector('.obj-response');
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.obj-item').forEach(obj=>{obj.classList.remove('open');obj.querySelector('.obj-response').classList.remove('visible');});
+      if(!wasOpen){item.classList.add('open');response.classList.add('visible');}
     }
-
-    // Highlight the current section in the sticky TOC as you scroll.
     (function(){
-      var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
-      var map = {};
-      links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
-      var obs = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){
-            links.forEach(function(a){ a.classList.remove('here'); });
-            if(map[e.target.id]) map[e.target.id].classList.add('here');
-          }
-        });
-      }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
-      document.querySelectorAll('.section[id]').forEach(function(s){ obs.observe(s); });
+      var links=[].slice.call(document.querySelectorAll('.g-toc a')),map={};
+      links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+      var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){links.forEach(function(a){a.classList.remove('here');});if(map[e.target.id])map[e.target.id].classList.add('here');}
+      });},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+      document.querySelectorAll('.g-section[id]').forEach(function(s){obs.observe(s);});
     })();
   </script>
 </body>

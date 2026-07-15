@@ -3,47 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prospecting — MaaS360 Sales Guide</title>
+<title>Prospecting — MaaS360 sales guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="carbon.css">
+<script src="carbon-theme.js"></script>
 <style>
-  :root{
-    --ink:#11151A;
-    --panel:#1A2026;
-    --panel-2:#0E1216;
-    --line:#2B333B;
-    --line-soft:#222931;
-    --text:#E9ECEC;
-    --text-dim:#AEB7BE;
-    --mist:#7C8893;
-    --amber:#FF9248;
-    --amber-dim:#3A2A1C;
-    --red:#FF6259;
-    --red-dim:#34201D;
-    --blue:#5AA7FF;
-    --blue-dim:#1C2A3B;
-    --teal:#3FD0A8;
-    --teal-dim:#16302A;
-    --grey-tag:#8B96A1;
-    --grey-dim:#262C32;
-    --radius:14px;
-    --nav-accent:var(--amber);
+  /* Prospecting accents mapped to the IBM Design Language palette.
+     Method 1 (AI + ZoomInfo) = Purple, method 2 (LinkedIn) = IBM Blue.
+     Structural tokens come from carbon.css; these add page-specific accents. */
+  :root,:root[data-theme="light"]{
+    --amber:#8a3ffc; --amber-dim:#e8daff;
+    --blue:#0f62fe;  --blue-dim:#d0e2ff;
+    --teal:#007d79;  --teal-dim:#9ef0f0;
+    --red:#da1e28;   --red-dim:#fff1f1;
+    --grey-tag:#6f6f6f; --grey-dim:#f4f4f4;
+    --radius:0;
+    --amber-fg:#6929c4; --blue-fg:#0043ce; --teal-fg:#005d5d; --red-fg:#a2191f;
+  }
+  :root[data-theme="dark"]{
+    --amber:#be95ff; --amber-dim:#31135e;
+    --blue:#78a9ff;  --blue-dim:#00297a;
+    --teal:#08bdba;  --teal-dim:#022b30;
+    --red:#fa4d56;   --red-dim:#520408;
+    --grey-tag:#8d8d8d; --grey-dim:#393939;
+    --amber-fg:#e8daff; --blue-fg:#d0e2ff; --teal-fg:#9ef0f0; --red-fg:#ffb3b8;
   }
 
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--ink);
-    color:var(--text);
-    font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-    font-size:16px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  a{color:var(--amber);text-decoration:none;border-bottom:1px solid transparent;}
-  a:hover{border-bottom-color:var(--amber);}
+  .wrap-body{background:var(--ink);color:var(--text);}
+  a{color:var(--link);text-decoration:none;border-bottom:none;}
+  a:hover{color:var(--link-hover);text-decoration:underline;}
 
   .wrap{max-width:920px;margin:0 auto;padding:0 24px 120px;}
 
@@ -82,7 +72,7 @@
   }
   .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);display:inline-block;}
   h1{
-    font-family:'IBM Plex Sans Condensed',sans-serif;
+    font-family:'IBM Plex Sans',sans-serif;
     font-weight:700;
     font-size:clamp(34px,5vw,52px);
     line-height:1.05;
@@ -103,16 +93,7 @@
   }
 
   /* ===== shared site nav ===== */
-  .site-nav{position:sticky;top:0;z-index:200;background:rgba(14,18,22,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
-  .site-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:18px;min-height:54px;flex-wrap:wrap;}
-  .site-nav-brand{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:8px;border-bottom:none;}
-  .site-nav-brand:hover{border-bottom:none;}
-  .site-nav-brand .sq{width:9px;height:9px;border-radius:2px;background:var(--nav-accent);}
-  .site-nav-links{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-family:'IBM Plex Mono',monospace;}
-  .site-nav-links a{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);padding:7px 11px;border-radius:8px;border-bottom:none;transition:color .15s ease,background .15s ease;}
-  .site-nav-links a:hover{color:var(--text);background:var(--panel);}
-  .site-nav-links a.active{color:var(--ink);background:var(--nav-accent);}
-  @media(max-width:720px){.site-nav-links{width:100%;margin-left:0;padding-bottom:8px;}}
+  /* site nav styling now comes from carbon.css */
 
   /* ---------- METHOD TOGGLE ---------- */
   .toggle-row{
@@ -120,8 +101,8 @@
     margin:0 auto;
     padding:22px 24px 0;
     position:sticky;
-    top:54px;
-    background:linear-gradient(var(--ink) 78%, transparent);
+    top:48px;
+    background:var(--ink);
     z-index:40;
     padding-bottom:14px;
   }
@@ -174,7 +155,7 @@
   }
   .rail{
     position:sticky;
-    top:174px;
+    top:168px;
     height:fit-content;
     display:flex;
     flex-direction:column;
@@ -295,8 +276,8 @@
     line-height:1.5;
   }
   .callout .icon{flex-shrink:0;font-size:15px;line-height:1.5;}
-  .callout.tip{background:var(--amber-dim);color:#FFD4AC;border:1px solid #4A3522;}
-  .callout.warn{background:var(--red-dim);color:#FFC2BD;border:1px solid #4E2B27;}
+  .callout.tip{background:var(--amber-dim);color:var(--amber-fg);border:1px solid transparent;border-left:3px solid var(--amber);}
+  .callout.warn{background:var(--red-dim);color:var(--red-fg);border:1px solid transparent;border-left:3px solid var(--red);}
 
   /* ---------- CODE BLOCKS ---------- */
   .codebox{
@@ -344,7 +325,7 @@
     font-family:'IBM Plex Mono',monospace;
     font-size:12.8px;
     line-height:1.65;
-    color:#D7DBDD;
+    color:var(--text);
     white-space:pre-wrap;
     word-break:break-word;
     max-height:420px;
@@ -352,7 +333,7 @@
   }
   .codebox pre mark{
     background:var(--amber-dim);
-    color:var(--amber);
+    color:var(--amber-fg);
     border-radius:4px;
     padding:0 3px;
     font-weight:600;
@@ -410,10 +391,24 @@
 </head>
 <body>
 
-<nav class="site-nav">
+<header class="site-nav">
   <div class="site-nav-inner">
-    <a class="site-nav-brand" href="index.html"><span class="sq"></span>MaaS360 Sales Guide</a>
-    <div class="site-nav-links">
+    <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+      <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+        <defs><mask id="ibmbars">
+          <rect width="110" height="44" fill="#000"/>
+          <g fill="#fff">
+            <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+            <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+            <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+            <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+          </g>
+        </mask></defs>
+        <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+      </svg>
+      <span class="product">MaaS360 Sales Guide</span>
+    </a>
+    <nav class="site-nav-links" aria-label="Guides">
       <a href="index.html">Hub</a>
       <a href="prospecting.html" class="active">Prospecting</a>
       <a href="cold-call.html">Cold Call</a>
@@ -421,13 +416,18 @@
       <a href="onboarding.html">Onboarding</a>
       <a href="rep-alignment.html">Rep Alignment</a>
       <a href="territory-map.html">Territory Map</a>
-    </div>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+      <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+      <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+      <span class="tt-label">Dark</span>
+    </button>
   </div>
-</nav>
+</header>
 
 <header class="hero">
-  <a class="home-link" href="index.html">&larr; Sales Guide Home</a>
-  <div class="eyebrow"><span class="dot"></span>MAAS360 SALES GUIDE — SECTION 1</div>
+  <a class="home-link" href="index.html">← Sales guide home</a>
+  <div class="eyebrow"><span class="dot"></span>MaaS360 sales guide — section 1</div>
   <h1>Prospecting</h1>
   <p class="lede">Two ways to build a list of real MaaS360 accounts. One leans on AI and ZoomInfo for volume, the other leans on LinkedIn Sales Navigator for quality. Pick a lane below — every step, prompt, and screenshot you need is in it.</p>
   <div class="meta">UPDATED JUN 17, 2026</div>

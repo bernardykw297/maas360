@@ -1,0 +1,244 @@
+/* =====================================================================
+   MaaS360 Sales Guide — shared IBM Carbon Design System theme layer.
+   Grounded in carbondesignsystem.com: IBM Plex Sans, IBM Blue #0f62fe,
+   Carbon Gray palette, flat surfaces (no gradients), square geometry,
+   2x-grid spacing. Light (White / Gray 10) is default; dark is Gray 100.
+   Tokens are owned here so every page shares one system and both themes.
+   ===================================================================== */
+
+/* ---------- Light theme (default) ---------- */
+:root,
+:root[data-theme="light"]{
+  --ink:#f4f4f4;          /* page background (Gray 10)            */
+  --panel:#ffffff;        /* primary surface / tile (Layer 01)   */
+  --panel-2:#f4f4f4;      /* inset / field (Layer 02)            */
+  --field:#f4f4f4;        /* input fill                          */
+  --line:#e0e0e0;         /* border-subtle (Gray 20)             */
+  --line-soft:#e0e0e0;    /* subtle divider                      */
+  --line-strong:#8d8d8d;  /* border-strong (Gray 50)             */
+  --text:#161616;         /* text-primary (Gray 100)             */
+  --text-dim:#525252;     /* text-secondary (Gray 70)            */
+  --mist:#6f6f6f;         /* text-helper / placeholder (Gray 60) */
+
+  --primary:#0f62fe;      /* IBM Blue 60 — the one interactive color */
+  --primary-hover:#0050e6;
+  --primary-active:#002d9c;
+  --link:#0f62fe;
+  --link-hover:#0043ce;
+  --focus:#0f62fe;
+  --on-primary:#ffffff;
+
+  /* Section category accents (subtle tags/markers only) — IBM palette */
+  --acc-prospect:#0f62fe; --acc-prospect-bg:#d0e2ff; --acc-prospect-fg:#0043ce;  /* Blue    */
+  --acc-cold:#007d79;     --acc-cold-bg:#9ef0f0;     --acc-cold-fg:#005d5d;      /* Teal    */
+  --acc-resources:#8a3ffc;--acc-resources-bg:#e8daff;--acc-resources-fg:#6929c4; /* Purple  */
+  --acc-onboarding:#d02670;--acc-onboarding-bg:#ffd6e8;--acc-onboarding-fg:#9f1853; /* Magenta */
+  --acc-rep:#1192e8;      --acc-rep-bg:#bae6ff;      --acc-rep-fg:#00539a;       /* Cyan    */
+  --acc-territory:#198038;--acc-territory-bg:#a7f0ba;--acc-territory-fg:#0e6027; /* Green   */
+
+  --support-error:#da1e28;
+  --support-success:#198038;
+  --overlay:rgba(22,22,22,0.05);
+  --shadow:0 2px 6px rgba(0,0,0,0.10);
+}
+
+/* ---------- Dark theme (Gray 100) ---------- */
+:root[data-theme="dark"]{
+  --ink:#161616;          /* background (Gray 100)   */
+  --panel:#262626;        /* Layer 01 (Gray 90)      */
+  --panel-2:#393939;      /* Layer 02 / field (Gray 80) */
+  --field:#393939;
+  --line:#393939;         /* border-subtle dark      */
+  --line-soft:#303030;
+  --line-strong:#6f6f6f;
+  --text:#f4f4f4;         /* text-primary (Gray 10)  */
+  --text-dim:#c6c6c6;     /* text-secondary (Gray 30)*/
+  --mist:#8d8d8d;         /* text-helper (Gray 50)   */
+
+  --primary:#0f62fe;
+  --primary-hover:#0353e9;
+  --primary-active:#002d9c;
+  --link:#78a9ff;         /* Blue 40 for links on dark */
+  --link-hover:#a6c8ff;
+  --focus:#ffffff;
+  --on-primary:#ffffff;
+
+  --acc-prospect:#78a9ff; --acc-prospect-bg:#00297a; --acc-prospect-fg:#d0e2ff;
+  --acc-cold:#08bdba;     --acc-cold-bg:#022b30;     --acc-cold-fg:#9ef0f0;
+  --acc-resources:#be95ff;--acc-resources-bg:#31135e;--acc-resources-fg:#e8daff;
+  --acc-onboarding:#ff7eb6;--acc-onboarding-bg:#510224;--acc-onboarding-fg:#ffd6e8;
+  --acc-rep:#33b1ff;      --acc-rep-bg:#003a6d;      --acc-rep-fg:#bae6ff;
+  --acc-territory:#42be65;--acc-territory-bg:#022d0d; --acc-territory-fg:#a7f0ba;
+
+  --support-error:#fa4d56;
+  --support-success:#42be65;
+  --overlay:rgba(255,255,255,0.06);
+  --shadow:0 2px 6px rgba(0,0,0,0.40);
+}
+
+*{box-sizing:border-box;}
+html{color-scheme:light;}
+html[data-theme="dark"]{color-scheme:dark;}
+
+html,body{margin:0;padding:0;}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  transition:background .12s linear, color .12s linear;
+}
+
+a{color:var(--link);text-decoration:none;}
+a:hover{color:var(--link-hover);text-decoration:underline;}
+
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
+
+/* ---------- IBM 8-bar logo (never stretched or recolored: uses currentColor) ---------- */
+.ibm-logo{height:23px;width:auto;display:block;color:var(--text);flex:0 0 auto;}
+
+/* ---------- Shared site navigation ---------- */
+.site-nav{
+  position:sticky;top:0;z-index:200;
+  background:var(--panel);
+  border-bottom:1px solid var(--line);
+}
+.site-nav-inner{
+  max-width:1584px;margin:0 auto;padding:0 16px;
+  display:flex;align-items:center;gap:24px;min-height:48px;flex-wrap:wrap;
+}
+.site-nav-brand{
+  display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);
+  padding-right:16px;border-right:1px solid var(--line);
+}
+.site-nav-brand:hover{text-decoration:none;color:var(--text);}
+.site-nav-brand .product{font-weight:600;font-size:14px;letter-spacing:.01em;white-space:nowrap;}
+.site-nav-links{display:flex;gap:0;flex-wrap:wrap;margin-left:0;}
+.site-nav-links a{
+  font-size:14px;color:var(--text-dim);
+  padding:0 16px;height:48px;display:inline-flex;align-items:center;
+  border-bottom:2px solid transparent;
+  transition:background .11s, color .11s, border-color .11s;
+}
+.site-nav-links a:hover{background:var(--panel-2);color:var(--text);text-decoration:none;}
+.site-nav-links a.active{color:var(--text);border-bottom-color:var(--primary);font-weight:600;}
+.site-nav-spacer{margin-left:auto;}
+
+/* Theme toggle (Carbon ghost button) */
+.theme-toggle{
+  margin-left:auto;
+  display:inline-flex;align-items:center;gap:8px;
+  height:40px;padding:0 14px;
+  background:transparent;color:var(--text);
+  border:1px solid transparent;border-radius:0;
+  font-family:inherit;font-size:14px;cursor:pointer;
+  transition:background .11s;
+}
+.theme-toggle:hover{background:var(--panel-2);}
+.theme-toggle svg{width:18px;height:18px;fill:currentColor;flex:0 0 auto;}
+.theme-toggle .tt-moon{display:block;}
+.theme-toggle .tt-sun{display:none;}
+html[data-theme="dark"] .theme-toggle .tt-moon{display:none;}
+html[data-theme="dark"] .theme-toggle .tt-sun{display:block;}
+@media(max-width:760px){
+  .site-nav-links{width:100%;order:3;}
+  .site-nav-links a{height:44px;padding:0 12px;}
+  .theme-toggle{margin-left:auto;}
+}
+
+/* ---------- Carbon buttons ---------- */
+.btn-primary,.btn-secondary,.btn-tertiary{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:32px;
+  font-family:inherit;font-size:14px;font-weight:400;line-height:1;
+  border-radius:0;cursor:pointer;border:1px solid transparent;
+  padding:13px 16px;min-height:48px;transition:background .11s,border-color .11s,color .11s;
+}
+.btn-primary{background:var(--primary);color:var(--on-primary);}
+.btn-primary:hover{background:var(--primary-hover);color:var(--on-primary);text-decoration:none;}
+.btn-primary:active{background:var(--primary-active);}
+.btn-secondary{background:transparent;color:var(--link);border-color:var(--primary);}
+.btn-secondary:hover{background:var(--primary);color:var(--on-primary);text-decoration:none;}
+.btn-tertiary{background:transparent;color:var(--link);}
+.btn-tertiary:hover{background:var(--panel-2);text-decoration:none;}
+
+/* ---------- Carbon tag (rounded pill is Carbon-accurate) ---------- */
+.ctag{
+  display:inline-flex;align-items:center;
+  font-size:12px;line-height:1;font-weight:400;
+  padding:5px 10px;border-radius:16px;white-space:nowrap;
+}
+
+/* Section accent helpers */
+.acc-prospect{--acc:var(--acc-prospect);--acc-bg:var(--acc-prospect-bg);--acc-fg:var(--acc-prospect-fg);}
+.acc-cold{--acc:var(--acc-cold);--acc-bg:var(--acc-cold-bg);--acc-fg:var(--acc-cold-fg);}
+.acc-resources{--acc:var(--acc-resources);--acc-bg:var(--acc-resources-bg);--acc-fg:var(--acc-resources-fg);}
+.acc-onboarding{--acc:var(--acc-onboarding);--acc-bg:var(--acc-onboarding-bg);--acc-fg:var(--acc-onboarding-fg);}
+.acc-rep{--acc:var(--acc-rep);--acc-bg:var(--acc-rep-bg);--acc-fg:var(--acc-rep-fg);}
+.acc-territory{--acc:var(--acc-territory);--acc-bg:var(--acc-territory-bg);--acc-fg:var(--acc-territory-fg);}
+
+/* =====================================================================
+   Shared guide-page layer (hero, sticky TOC, sections, tiles, lists)
+   ===================================================================== */
+.guide{max-width:1056px;margin:0 auto;padding:0 16px;}
+
+.g-hero{padding:64px 0 28px;border-bottom:1px solid var(--line);}
+.g-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--acc,var(--text-dim));margin-bottom:20px;
+}
+.g-h1{font-weight:600;font-size:clamp(32px,5vw,48px);line-height:1.1;margin:0 0 16px;letter-spacing:-.01em;color:var(--text);}
+.g-lede{font-size:19px;font-weight:300;color:var(--text-dim);max-width:640px;margin:0;line-height:1.5;}
+.g-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);margin-top:20px;}
+
+/* Sticky in-page tabs (table of contents) */
+.g-toc{position:sticky;top:48px;z-index:100;background:var(--panel);border-bottom:1px solid var(--line);}
+.g-toc-inner{max-width:1056px;margin:0 auto;padding:0 16px;display:flex;gap:0;overflow-x:auto;}
+.g-toc a{
+  flex:0 0 auto;font-size:14px;color:var(--text-dim);
+  padding:14px 16px;border-bottom:2px solid transparent;white-space:nowrap;
+  transition:background .11s,color .11s,border-color .11s;
+}
+.g-toc a:hover{background:var(--panel-2);color:var(--text);text-decoration:none;}
+.g-toc a.here{color:var(--text);border-bottom-color:var(--acc,var(--primary));font-weight:600;}
+
+.g-main{max-width:1056px;margin:0 auto;padding:0 16px;}
+.g-section{padding:48px 0;border-bottom:1px solid var(--line);scroll-margin-top:104px;}
+.g-section:last-child{border-bottom:none;}
+.g-section-title{font-size:28px;font-weight:600;letter-spacing:-.01em;margin:0 0 8px;color:var(--text);}
+.g-section-lede{font-size:16px;color:var(--text-dim);margin:0 0 28px;max-width:640px;}
+
+/* Carbon tiles */
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+.tile{background:var(--panel);padding:24px;}
+.tile h3{font-size:18px;font-weight:600;margin:0 0 16px;color:var(--text);}
+.tile h4{font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text);}
+
+/* Link lists */
+.link-list,.checklist,.tool-list,.resource-list{margin:0;padding:0;list-style:none;}
+.link-list li,.resource-list li,.tool-list li{
+  font-size:14px;color:var(--text-dim);line-height:1.5;padding:10px 0 10px 22px;position:relative;
+  border-top:1px solid var(--line);
+}
+.link-list li:first-child,.resource-list li:first-child,.tool-list li:first-child{border-top:none;}
+.link-list li::before,.resource-list li::before{content:"→";position:absolute;left:0;top:10px;color:var(--acc,var(--primary));}
+.tool-list li{padding-left:16px;}
+.tool-list li::before{content:"";position:absolute;left:0;top:16px;width:6px;height:6px;background:var(--acc,var(--primary));}
+.checklist li{font-size:14px;color:var(--text-dim);line-height:1.5;padding:10px 0 10px 26px;position:relative;border-top:1px solid var(--line);}
+.checklist li:first-child{border-top:none;}
+.checklist li::before{content:"";position:absolute;left:2px;top:14px;width:8px;height:8px;border:1.5px solid var(--acc,var(--primary));}
+.tile strong{color:var(--text);font-weight:600;}
+
+/* Callout / info box */
+.callout{background:var(--panel-2);border-left:3px solid var(--acc,var(--primary));padding:16px 20px;}
+.callout h3{margin:0 0 6px;font-size:15px;color:var(--text);}
+.callout p{margin:0;font-size:14px;color:var(--text-dim);}
+
+/* Section category tag */
+.g-tag{display:inline-flex;align-items:center;font-size:12px;padding:5px 10px;border-radius:16px;background:var(--acc-bg);color:var(--acc-fg);margin-bottom:20px;}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;animation:none !important;}
+}

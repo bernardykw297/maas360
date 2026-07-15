@@ -3,306 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MaaS360 Sales Guide</title>
+<title>MaaS360 sales guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="carbon.css">
+<script src="carbon-theme.js"></script>
 <style>
-  :root{
-    --ink:#11151A;
-    --panel:#1A2026;
-    --panel-2:#0E1216;
-    --line:#2B333B;
-    --line-soft:#222931;
-    --text:#E9ECEC;
-    --text-dim:#AEB7BE;
-    --mist:#7C8893;
-    --amber:#FF9248;
-    --amber-dim:#3A2A1C;
-    --blue:#5AA7FF;
-    --blue-dim:#1C2A3B;
-    --teal:#3FD0A8;
-    --teal-dim:#16302A;
-    --red:#FF6259;
-    --red-dim:#34201D;
-    --violet:#B78BFF;
-    --violet-dim:#241C36;
-    --pink:#FF87C2;
-    --pink-dim:#331E2A;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:
-      radial-gradient(circle at 15% 0%, rgba(255,146,72,0.05), transparent 38%),
-      radial-gradient(circle at 85% 15%, rgba(90,167,255,0.05), transparent 40%),
-      radial-gradient(circle at 50% 90%, rgba(63,208,168,0.05), transparent 45%),
-      var(--ink);
-    color:var(--text);
-    font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;text-decoration:none;}
+  .page{max-width:1056px;margin:0 auto;padding:0 16px;}
 
-  .page{max-width:1040px;margin:0 auto;padding:0 24px;}
-
-  .hero{padding:80px 0 18px;}
+  .hero{padding:80px 0 24px;}
   .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12.5px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--mist);
-    display:flex;align-items:center;gap:10px;
-    margin-bottom:22px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.02em;
+    text-transform:uppercase;color:var(--text-dim);margin-bottom:24px;
   }
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--text-dim);}
   h1{
-    font-family:'IBM Plex Sans Condensed',sans-serif;
-    font-weight:700;
-    font-size:clamp(40px,6.5vw,68px);
-    line-height:1.02;
-    margin:0 0 20px;
-    letter-spacing:-.015em;
-    max-width:720px;
+    font-weight:600;font-size:clamp(38px,6vw,60px);line-height:1.07;
+    margin:0 0 20px;letter-spacing:-.01em;max-width:760px;color:var(--text);
   }
-  .hero p.lede{
-    font-size:18px;
-    color:var(--text-dim);
-    max-width:560px;
-    margin:0 0 8px;
-    line-height:1.6;
-  }
-  .hero .meta{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    color:var(--mist);
-    margin-top:22px;
-  }
+  .lede{font-size:20px;font-weight:300;color:var(--text-dim);max-width:600px;margin:0;line-height:1.5;}
+  .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);margin-top:24px;}
 
-  .tap-hint{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--mist);
-    margin:50px 0 16px;
-    display:flex;
-    align-items:center;
-    gap:10px;
+  .hint{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.02em;
+    text-transform:uppercase;color:var(--mist);margin:48px 0 16px;
+    display:flex;align-items:center;gap:12px;
   }
-  .tap-hint::after{content:"";flex:1;height:1px;background:var(--line-soft);}
+  .hint::after{content:"";flex:1;height:1px;background:var(--line);}
 
   .grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:18px;
-    padding-bottom:60px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    margin-bottom:80px;
   }
-
   .card{
-    position:relative;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:30px 26px 26px;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    min-height:300px;
-    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    position:relative;background:var(--panel);
+    padding:24px 24px 20px;
+    display:flex;flex-direction:column;min-height:236px;
+    text-decoration:none;color:var(--text);
+    transition:background .11s;
   }
-  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.35);}
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0;left:0;right:0;
-    height:4px;
-  }
-  .card.c-amber::before{background:var(--amber);}
-  .card.c-blue::before{background:var(--blue);}
-  .card.c-teal::before{background:var(--teal);}
-  .card.c-violet::before{background:var(--violet);}
-  .card.c-red::before{background:var(--red);}
-  .card.c-pink::before{background:var(--pink);}
-  .card:hover.c-amber{border-color:var(--amber);}
-  .card:hover.c-blue{border-color:var(--blue);}
-  .card:hover.c-teal{border-color:var(--teal);}
-  .card:hover.c-violet{border-color:var(--violet);}
-  .card:hover.c-red{border-color:var(--red);}
-  .card:hover.c-pink{border-color:var(--pink);}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--acc);}
+  .card:hover{background:var(--panel-2);text-decoration:none;}
 
-  .card .bignum{
-    position:absolute;
-    top:10px; right:16px;
-    font-family:'IBM Plex Sans Condensed',sans-serif;
-    font-weight:700;
-    font-size:88px;
-    line-height:1;
-    -webkit-text-stroke:1.5px currentColor;
-    color:transparent;
-    opacity:.5;
-    pointer-events:none;
-  }
-  .card.c-amber .bignum{color:var(--amber);}
-  .card.c-blue .bignum{color:var(--blue);}
-  .card.c-teal .bignum{color:var(--teal);}
-  .card.c-violet .bignum{color:var(--violet);}
-  .card.c-red .bignum{color:var(--red);}
-  .card.c-pink .bignum{color:var(--pink);}
-
-  .card .tag{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    padding:4px 10px;
-    border-radius:20px;
-    width:fit-content;
-    margin-bottom:18px;
-  }
-  .card.c-amber .tag{background:var(--amber-dim);color:var(--amber);}
-  .card.c-blue .tag{background:var(--blue-dim);color:var(--blue);}
-  .card.c-teal .tag{background:var(--teal-dim);color:var(--teal);}
-  .card.c-violet .tag{background:var(--violet-dim);color:var(--violet);}
-  .card.c-red .tag{background:var(--red-dim);color:var(--red);}
-  .card.c-pink .tag{background:var(--pink-dim);color:var(--pink);}
-
-  .card h2{
-    font-size:25px;
-    font-weight:600;
-    margin:0 0 10px;
-    letter-spacing:-.01em;
-    position:relative;
-    z-index:1;
-  }
-  .card p.tagline{
-    font-size:14.5px;
-    color:var(--text-dim);
-    line-height:1.55;
-    margin:0 0 18px;
-    flex-grow:1;
-    position:relative;
-    z-index:1;
-  }
-  .card .meta-line{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;
-    color:var(--mist);
-    margin-bottom:16px;
-  }
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+  .ctag{background:var(--acc-bg);color:var(--acc-fg);}
+  .card-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);}
+  .card h2{font-size:22px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em;color:var(--text);}
+  .card .tagline{font-size:15px;color:var(--text-dim);line-height:1.5;margin:0 0 16px;flex-grow:1;}
+  .card .meta-line{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);margin-bottom:16px;}
   .card .open-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    font-weight:600;
-    font-size:14.5px;
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:14px;font-weight:400;color:var(--link);
   }
-  .card .open-row .arrow{transition:transform .2s ease;}
-  .card:hover .open-row .arrow{transform:translateX(4px);}
-  .card.c-amber .open-row{color:var(--amber);}
-  .card.c-blue .open-row{color:var(--blue);}
-  .card.c-teal .open-row{color:var(--teal);}
-  .card.c-violet .open-row{color:var(--violet);}
-  .card.c-red .open-row{color:var(--red);}
-  .card.c-pink .open-row{color:var(--pink);}
+  .card:hover .open-row{color:var(--link-hover);}
+  .card .arrow{transition:transform .11s;}
+  .card:hover .arrow{transform:translateX(4px);}
 
   .footnote{
-    border-top:1px solid var(--line-soft);
-    padding:24px 0 60px;
-    font-size:13px;
-    color:var(--mist);
-    max-width:600px;
-    line-height:1.6;
+    border-top:1px solid var(--line);padding:24px 0 80px;
+    font-size:14px;color:var(--text-dim);max-width:640px;line-height:1.6;
   }
   .footnote code{
-    font-family:'IBM Plex Mono',monospace;
-    background:var(--panel-2);
-    padding:1px 6px;
-    border-radius:5px;
-    border:1px solid var(--line-soft);
-    font-size:12px;
+    font-family:'IBM Plex Mono',monospace;background:var(--panel-2);
+    padding:1px 6px;border:1px solid var(--line);font-size:13px;
   }
 
-  @media (max-width:860px){
-    .grid{grid-template-columns:1fr;}
-    .hero{padding:56px 0 12px;}
-    .card{min-height:0;}
-  }
+  @media (max-width:900px){.grid{grid-template-columns:1fr;}.hero{padding:56px 0 16px;}.card{min-height:0;}}
 </style>
 </head>
 <body>
+
+<header class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+      <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+        <defs><mask id="ibmbars">
+          <rect width="110" height="44" fill="#000"/>
+          <g fill="#fff">
+            <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+            <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+            <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+            <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+          </g>
+        </mask></defs>
+        <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+      </svg>
+      <span class="product">MaaS360 Sales Guide</span>
+    </a>
+    <nav class="site-nav-links" aria-label="Guides">
+      <a href="index.html" class="active">Hub</a>
+      <a href="prospecting.html">Prospecting</a>
+      <a href="cold-call.html">Cold Call</a>
+      <a href="resources.html">Resources</a>
+      <a href="onboarding.html">Onboarding</a>
+      <a href="rep-alignment.html">Rep Alignment</a>
+      <a href="territory-map.html">Territory Map</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+      <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+      <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+      <span class="tt-label">Dark</span>
+    </button>
+  </div>
+</header>
+
 <div class="page">
 
   <header class="hero">
-    <div class="eyebrow"><span class="dot"></span>MAAS360 SALES GUIDE</div>
-    <h1>Find them. Call them. Back it up.</h1>
-    <p class="lede">Six guides, one workflow — from your first day of onboarding to knowing every account in your territory. Every script, prompt, dashboard, and link lives inside.</p>
-    <div class="meta">UPDATED JUL 14, 2026 · 6 GUIDES</div>
+    <div class="eyebrow">MaaS360 sales guide</div>
+    <h1>Six Guides, One Workflow</h1>
+    <p class="lede">Everything from onboarding to territory — scripts, prompts, and dashboards in one place.</p>
+    <div class="meta">Updated Jul 14, 2026 · 6 guides</div>
   </header>
 
-  <div class="tap-hint">Tap a guide to open it</div>
+  <div class="hint">Select a guide to open it</div>
 
   <div class="grid">
 
-    <a class="card c-amber" href="prospecting.html">
-      <span class="bignum">01</span>
-      <span class="tag">Section 1</span>
+    <a class="card acc-prospect" href="prospecting.html">
+      <div class="card-top"><span class="ctag">Prospecting</span><span class="card-num">01</span></div>
       <h2>Prospecting</h2>
       <p class="tagline">Find 50 real, mid-market accounts before you ever pick up the phone — AI-built lists matched in ZoomInfo, or hand-picked from LinkedIn Sales Navigator.</p>
       <div class="meta-line">2 methods · prompts + screenshots</div>
       <div class="open-row"><span>Open guide</span><span class="arrow">→</span></div>
     </a>
 
-    <a class="card c-blue" href="cold-call.html">
-      <span class="bignum">02</span>
-      <span class="tag">Section 2</span>
+    <a class="card acc-cold" href="cold-call.html">
+      <div class="card-top"><span class="ctag">Cold Call</span><span class="card-num">02</span></div>
       <h2>Cold Call</h2>
       <p class="tagline">What to say when they pick up. Openers, rapport styles, discovery questions, and a response for every objection you'll hear.</p>
-      <div class="meta-line">8 objections · voicemail & email scripts</div>
+      <div class="meta-line">8 objections · voicemail &amp; email scripts</div>
       <div class="open-row"><span>Open guide</span><span class="arrow">→</span></div>
     </a>
 
-    <a class="card c-teal" href="resources.html">
-      <span class="bignum">03</span>
-      <span class="tag">Section 3</span>
+    <a class="card acc-resources" href="resources.html">
+      <div class="card-top"><span class="ctag">Resources</span><span class="card-num">03</span></div>
       <h2>Resources</h2>
       <p class="tagline">Calculators, case studies, technical docs, and training — organized by what you're trying to prove, with direct links where one exists.</p>
       <div class="meta-line">4 categories · 20+ linked resources</div>
       <div class="open-row"><span>Open guide</span><span class="arrow">→</span></div>
     </a>
 
-    <a class="card c-violet" href="onboarding.html">
-      <span class="bignum">04</span>
-      <span class="tag">Section 4</span>
+    <a class="card acc-onboarding" href="onboarding.html">
+      <div class="card-top"><span class="ctag">Onboarding</span><span class="card-num">04</span></div>
       <h2>Onboarding</h2>
       <p class="tagline">Your first six weeks, start to certification — every link, system, tool, and training path a new MaaS360 hire needs, laid out in one place.</p>
       <div class="meta-line">8 sections · roadmap + training paths</div>
       <div class="open-row"><span>Open guide</span><span class="arrow">→</span></div>
     </a>
 
-    <a class="card c-red" href="rep-alignment.html">
-      <span class="bignum">05</span>
-      <span class="tag">Section 5</span>
+    <a class="card acc-rep" href="rep-alignment.html">
+      <div class="card-top"><span class="ctag">Rep Alignment</span><span class="card-num">05</span></div>
       <h2>Rep Alignment</h2>
       <p class="tagline">Who owns what. Search, filter, and export the full coverage model to find the rep, tech rep, and manager on any account.</p>
       <div class="meta-line">1,836 records · search + export</div>
       <div class="open-row"><span>Open tool</span><span class="arrow">→</span></div>
     </a>
 
-    <a class="card c-pink" href="territory-map.html">
-      <span class="bignum">06</span>
-      <span class="tag">Section 6</span>
+    <a class="card acc-territory" href="territory-map.html">
+      <div class="card-top"><span class="ctag">Territory Map</span><span class="card-num">06</span></div>
       <h2>Territory Map</h2>
-      <p class="tagline">Click any state to see the sales rep, telco specialists, technical rep, and managers assigned to that territory.</p>
+      <p class="tagline">Select any state to see the sales rep, telco specialists, technical rep, and managers assigned to that territory.</p>
       <div class="meta-line">50 states · reps + telco specialists</div>
       <div class="open-row"><span>Open tool</span><span class="arrow">→</span></div>
     </a>
 
   </div>
 
-  <div class="footnote">Keep every file in the same folder — the six pages (<code>index.html</code>, <code>prospecting.html</code>, <code>cold-call.html</code>, <code>resources.html</code>, <code>onboarding.html</code>, <code>rep-alignment.html</code>, <code>territory-map.html</code>) plus the data-tool assets (<code>maas-styles.css</code>, <code>maas-script.js</code>, <code>us-map-styles.css</code>, <code>us-map-script.js</code>, <code>us-map-data.js</code>). All links are relative, so it works from any subfolder on GitHub Pages — but only if the files stay side by side.</div>
+  <div class="footnote">Keep every file in the same folder — the six pages (<code>index.html</code>, <code>prospecting.html</code>, <code>cold-call.html</code>, <code>resources.html</code>, <code>onboarding.html</code>, <code>rep-alignment.html</code>, <code>territory-map.html</code>), the shared theme (<code>carbon.css</code>, <code>carbon-theme.js</code>), and the data-tool assets (<code>maas-styles.css</code>, <code>maas-script.js</code>, <code>us-map-styles.css</code>, <code>us-map-script.js</code>, <code>us-map-data.js</code>). All links are relative, so it works from any subfolder on GitHub Pages.</div>
 
 </div>
 </body>

@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <!--
-  Territory Map.
-  Source: maas360-territory-map (index.html + us-map-script.js + us-map-data.js + us-map-styles.css).
-  Interactive D3 map kept fully functional; restyled from the light IBM Carbon theme
-  into the MaaS360 Sales Guide dark design system.
-  NOTE: D3.js, topojson and the us-atlas TopoJSON are loaded from public CDNs at runtime
-  (the map needs an internet connection to render the state shapes).
+  Territory map. Interactive D3 map kept fully functional. Styled with the shared
+  IBM Carbon theme layer (carbon.css). NOTE: D3.js, topojson and the us-atlas TopoJSON
+  are loaded from public CDNs at runtime (the map needs an internet connection to render).
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Territory Map — MaaS360 Sales Guide</title>
+  <title>Territory map — MaaS360 sales guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="carbon.css">
   <link rel="stylesheet" href="us-map-styles.css">
+  <script src="carbon-theme.js"></script>
 </head>
 <body>
-  <nav class="site-nav">
+  <header class="site-nav">
     <div class="site-nav-inner">
-      <a class="site-nav-brand" href="index.html"><span class="sq"></span>MaaS360 Sales Guide</a>
-      <div class="site-nav-links">
+      <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+        <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+          <defs><mask id="ibmbars">
+            <rect width="110" height="44" fill="#000"/>
+            <g fill="#fff">
+              <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+              <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+              <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+              <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+            </g>
+          </mask></defs>
+          <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+        </svg>
+        <span class="product">MaaS360 Sales Guide</span>
+      </a>
+      <nav class="site-nav-links" aria-label="Guides">
         <a href="index.html">Hub</a>
         <a href="prospecting.html">Prospecting</a>
         <a href="cold-call.html">Cold Call</a>
@@ -29,54 +42,48 @@
         <a href="onboarding.html">Onboarding</a>
         <a href="rep-alignment.html">Rep Alignment</a>
         <a href="territory-map.html" class="active">Territory Map</a>
-      </div>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+        <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+        <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+        <span class="tt-label">Dark</span>
+      </button>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
-    <header>
-      <h1>Territory Map</h1>
-      <p class="subtitle">Click any state to view the assigned representatives</p>
-    </header>
+  <div class="app-wrap">
+    <div class="container">
+      <header class="app-header">
+        <h1>Territory Map</h1>
+        <p class="subtitle">Select any state to view the assigned representatives</p>
+      </header>
 
-    <div class="content-wrapper">
-      <div class="map-section">
-        <svg id="us-map" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-          <!-- US States rendered here by JavaScript with D3.js -->
-        </svg>
-      </div>
-
-      <div class="info-panel">
-        <div class="info-header">
-          <h2>State Information</h2>
+      <div class="content-wrapper">
+        <div class="map-section">
+          <svg id="us-map" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <!-- US states rendered here by JavaScript with D3.js -->
+          </svg>
         </div>
-        <div id="state-info" class="state-details">
-          <div class="placeholder">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-              <path d="M2 17l10 5 10-5"/>
-              <path d="M2 12l10 5 10-5"/>
-            </svg>
-            <p>Click on a state to view representative details</p>
+
+        <div class="info-panel">
+          <div class="info-header"><h2>State information</h2></div>
+          <div id="state-info" class="state-details">
+            <div class="placeholder">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
+              <p>Select a state to view representative details</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="legend">
-      <h3>Legend</h3>
-      <div class="legend-items">
-        <div class="legend-item">
-          <span class="legend-color" style="background: #FF87C2;"></span>
-          <span>State with Representative</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color" style="background: #262C32;"></span>
-          <span>No Data Available</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color" style="background: #FF4FA3;"></span>
-          <span>Selected State</span>
+      <div class="legend">
+        <h3>Legend</h3>
+        <div class="legend-items">
+          <div class="legend-item"><span class="legend-color lg-has"></span><span>State with representative</span></div>
+          <div class="legend-item"><span class="legend-color lg-none"></span><span>No data available</span></div>
+          <div class="legend-item"><span class="legend-color lg-sel"></span><span>Selected state</span></div>
         </div>
       </div>
     </div>

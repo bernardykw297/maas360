@@ -3,231 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resources — MaaS360 Sales Guide</title>
+<title>Resources — MaaS360 sales guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="carbon.css">
+<script src="carbon-theme.js"></script>
 <style>
-  :root{
-    --ink:#11151A;
-    --panel:#1A2026;
-    --panel-2:#0E1216;
-    --line:#2B333B;
-    --line-soft:#222931;
-    --text:#E9ECEC;
-    --text-dim:#AEB7BE;
-    --mist:#7C8893;
-    --amber:#FF9248;
-    --amber-dim:#3A2A1C;
-    --red:#FF6259;
-    --red-dim:#34201D;
-    --blue:#5AA7FF;
-    --blue-dim:#1C2A3B;
-    --teal:#3FD0A8;
-    --teal-dim:#16302A;
-    --grey-tag:#8B96A1;
-    --grey-dim:#262C32;
-    --violet:#B78BFF;
-    --pink:#FF87C2;
-    --nav-accent:var(--teal);
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--ink);
-    color:var(--text);
-    font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-    font-size:16px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--amber);text-decoration:none;}
-  a:hover{text-decoration:underline;}
-
-  /* ===== shared site nav ===== */
-  .site-nav{position:sticky;top:0;z-index:200;background:rgba(14,18,22,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
-  .site-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:18px;min-height:54px;flex-wrap:wrap;}
-  .site-nav-brand{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:8px;}
-  .site-nav-brand:hover{text-decoration:none;}
-  .site-nav-brand .sq{width:9px;height:9px;border-radius:2px;background:var(--nav-accent);}
-  .site-nav-links{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-family:'IBM Plex Mono',monospace;}
-  .site-nav-links a{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);padding:7px 11px;border-radius:8px;transition:color .15s ease,background .15s ease;}
-  .site-nav-links a:hover{color:var(--text);background:var(--panel);text-decoration:none;}
-  .site-nav-links a.active{color:var(--ink);background:var(--nav-accent);}
-  @media(max-width:720px){.site-nav-links{width:100%;margin-left:0;padding-bottom:8px;}}
-
-  .wrap{max-width:980px;margin:0 auto;padding:0 24px 100px;}
-
-  .hero{padding:56px 24px 30px;max-width:980px;margin:0 auto;border-bottom:1px solid var(--line-soft);}
-  .home-link{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    color:var(--mist);
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    margin-bottom:22px;
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:6px 12px 6px 10px;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .home-link:hover{color:var(--teal);border-color:var(--teal);text-decoration:none;}
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12.5px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--teal);
-    display:flex;align-items:center;gap:10px;
-    margin-bottom:18px;
-  }
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;}
-  h1{
-    font-family:'IBM Plex Sans Condensed',sans-serif;
-    font-weight:700;
-    font-size:clamp(34px,5vw,52px);
-    line-height:1.05;
-    margin:0 0 16px;
-    letter-spacing:-.01em;
-  }
-  .hero p.lede{font-size:17px;color:var(--text-dim);max-width:640px;margin:0 0 6px;}
-  .hero .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mist);margin-top:18px;}
-
-  /* quick access strip */
-  .quick{max-width:980px;margin:0 auto;padding:28px 24px 8px;}
-  .quick-label{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--mist);margin-bottom:12px;
-  }
-  .portal-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
-    gap:10px;
-  }
-  .portal{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:14px 16px;
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    transition:border-color .15s ease, transform .15s ease;
-  }
-  .portal:hover{border-color:var(--teal);transform:translateY(-2px);}
-  .portal .pname{font-size:14px;font-weight:600;color:var(--text);text-decoration:none;}
+  .quick{max-width:1056px;margin:0 auto;padding:28px 16px 4px;}
+  .quick-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--mist);margin-bottom:12px;}
+  .portal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .portal{background:var(--panel);padding:16px 18px;display:flex;flex-direction:column;gap:6px;transition:background .11s;}
+  .portal:hover{background:var(--panel-2);text-decoration:none;}
+  .portal .pname{font-size:14px;font-weight:600;color:var(--text);}
   .portal .pdesc{font-size:12px;color:var(--mist);}
-  .lock-badge{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:10px;
-    color:var(--grey-tag);
-    display:inline-flex;align-items:center;gap:4px;
-    margin-top:2px;
-  }
+  .lock-badge{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mist);margin-top:2px;}
 
-  /* category nav */
-  .catnav{
-    max-width:980px;margin:0 auto;
-    padding:22px 24px 0;
-    position:sticky;top:54px;
-    background:linear-gradient(var(--ink) 80%, transparent);
-    z-index:30;
-    padding-bottom:12px;
-  }
-  .catnav-inner{
-    display:flex;gap:8px;flex-wrap:wrap;
-    background:var(--panel-2);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:6px;
-  }
-  .catnav a{
-    font-family:'IBM Plex Sans',sans-serif;
-    font-size:13px;font-weight:600;
-    color:var(--text-dim);
-    padding:9px 14px;
-    border-radius:10px;
-    text-decoration:none;
-  }
-  .catnav a:hover{background:var(--panel);color:var(--text);}
-
-  main{max-width:980px;margin:0 auto;padding:10px 24px 0;}
-
-  .category{padding:38px 0 8px;border-bottom:1px solid var(--line-soft);}
-  .category:last-child{border-bottom:none;}
   .cat-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-  .cat-dot{width:10px;height:10px;border-radius:50%;}
-  .category.c-sales .cat-dot{background:var(--amber);}
-  .category.c-evidence .cat-dot{background:var(--teal);}
-  .category.c-tech .cat-dot{background:var(--blue);}
-  .category.c-enable .cat-dot{background:var(--red);}
-  .cat-head h2{font-size:22px;font-weight:600;margin:0;letter-spacing:-.01em;}
-  .cat-sub{font-size:14px;color:var(--text-dim);margin:0 0 22px;max-width:560px;}
+  .cat-dot{width:10px;height:10px;background:var(--acc);flex:0 0 auto;}
 
-  .res-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-    gap:14px;
-  }
-  .res-card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:16px 18px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
+  .res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .res-card{background:var(--panel);padding:18px 20px;display:flex;flex-direction:column;gap:8px;}
   .res-card .rtitle{font-size:15px;font-weight:600;color:var(--text);}
-  .res-card .rpath{font-size:13px;color:var(--mist);line-height:1.5;flex-grow:1;}
-  .res-card .rpath b{color:var(--text-dim);font-weight:500;}
+  .res-card .rpath{font-size:13px;color:var(--text-dim);line-height:1.5;flex-grow:1;}
+  .res-card .rpath b{color:var(--text);font-weight:500;}
   .res-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;}
-  .open-btn{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;font-weight:500;
-    color:var(--ink);
-    background:var(--text-dim);
-    padding:6px 12px;
-    border-radius:8px;
-    text-decoration:none;
-    transition:background .15s ease;
-  }
-  .category.c-sales .open-btn:hover{background:var(--amber);}
-  .category.c-evidence .open-btn:hover{background:var(--teal);}
-  .category.c-tech .open-btn:hover{background:var(--blue);}
-  .category.c-enable .open-btn:hover{background:var(--red);}
-  .note-badge{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:var(--grey-tag);
-  }
+  .open-btn{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:400;color:var(--link);}
+  .open-btn:hover{color:var(--link-hover);}
+  .note-badge{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mist);}
 
-  .end-note{
-    margin:50px 0 0;
-    padding:20px 0 0;
-    border-top:1px solid var(--line-soft);
-    font-size:13.5px;
-    color:var(--mist);
-    max-width:600px;
-  }
-
-  @media (max-width:760px){
-    .hero{padding:40px 18px 24px;}
-    .quick{padding:24px 18px 8px;}
-    .catnav{padding:16px 18px 10px;}
-    main{padding:10px 18px 0;}
-    .wrap{padding:0 18px 90px;}
-  }
+  .end-note{max-width:1056px;margin:0 auto;padding:24px 16px 80px;font-size:14px;color:var(--text-dim);max-width:640px;}
 </style>
 </head>
-<body>
+<body class="acc-resources">
 
-<nav class="site-nav">
+<header class="site-nav">
   <div class="site-nav-inner">
-    <a class="site-nav-brand" href="index.html"><span class="sq"></span>MaaS360 Sales Guide</a>
-    <div class="site-nav-links">
+    <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+      <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+        <defs><mask id="ibmbars">
+          <rect width="110" height="44" fill="#000"/>
+          <g fill="#fff">
+            <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+            <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+            <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+            <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+          </g>
+        </mask></defs>
+        <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+      </svg>
+      <span class="product">MaaS360 Sales Guide</span>
+    </a>
+    <nav class="site-nav-links" aria-label="Guides">
       <a href="index.html">Hub</a>
       <a href="prospecting.html">Prospecting</a>
       <a href="cold-call.html">Cold Call</a>
@@ -235,216 +62,108 @@
       <a href="onboarding.html">Onboarding</a>
       <a href="rep-alignment.html">Rep Alignment</a>
       <a href="territory-map.html">Territory Map</a>
-    </div>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+      <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+      <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+      <span class="tt-label">Dark</span>
+    </button>
   </div>
-</nav>
-
-<header class="hero">
-  <a class="home-link" href="index.html">&larr; Sales Guide Home</a>
-  <div class="eyebrow"><span class="dot"></span>MAAS360 SALES GUIDE — SECTION 3</div>
-  <h1>Resources</h1>
-  <p class="lede">Calculators, case studies, technical docs, and training — organized by what you're trying to do, with direct links where one exists.</p>
-  <div class="meta">UPDATED JUN 17, 2026</div>
 </header>
+
+<div class="guide">
+  <header class="g-hero">
+    <div class="g-eyebrow">Section 3</div>
+    <h1 class="g-h1">Resources</h1>
+    <p class="g-lede">Calculators, case studies, technical docs, and training — organized by what you're trying to do, with direct links where one exists.</p>
+    <div class="g-meta">Updated Jun 17, 2026</div>
+  </header>
+</div>
 
 <div class="quick">
   <div class="quick-label">Jump straight to a portal</div>
   <div class="portal-grid">
-    <a class="portal" href="https://ibm.seismic.com/" target="_blank" rel="noopener">
-      <span class="pname">IBM Seismic</span>
-      <span class="pdesc">Primary sales content repository</span>
-      <span class="lock-badge">🔒 Partner/employee access</span>
-    </a>
-    <a class="portal" href="https://partnerportal.ibm.com/" target="_blank" rel="noopener">
-      <span class="pname">IBM Partner Portal</span>
-      <span class="pdesc">Partner-specific resources & tools</span>
-      <span class="lock-badge">🔒 Partner/employee access</span>
-    </a>
-    <a class="portal" href="https://techzone.ibm.com/home" target="_blank" rel="noopener">
-      <span class="pname">IBM Technology Zone</span>
-      <span class="pdesc">Demo environments & sandboxes</span>
-    </a>
-    <a class="portal" href="https://www.ibm.com/products/maas360" target="_blank" rel="noopener">
-      <span class="pname">IBM MaaS360</span>
-      <span class="pdesc">Public-facing product info</span>
-    </a>
-    <a class="portal" href="https://skillsbuild.org/" target="_blank" rel="noopener">
-      <span class="pname">IBM Skills Gateway</span>
-      <span class="pdesc">Training & certification</span>
-    </a>
-    <a class="portal" href="https://www.ibm.com/docs/en/maas360" target="_blank" rel="noopener">
-      <span class="pname">IBM Documentation</span>
-      <span class="pdesc">Technical docs & guides</span>
-    </a>
+    <a class="portal" href="https://ibm.seismic.com/" target="_blank" rel="noopener"><span class="pname">IBM Seismic</span><span class="pdesc">Primary sales content repository</span><span class="lock-badge">Partner/employee access</span></a>
+    <a class="portal" href="https://partnerportal.ibm.com/" target="_blank" rel="noopener"><span class="pname">IBM Partner Portal</span><span class="pdesc">Partner-specific resources and tools</span><span class="lock-badge">Partner/employee access</span></a>
+    <a class="portal" href="https://techzone.ibm.com/home" target="_blank" rel="noopener"><span class="pname">IBM Technology Zone</span><span class="pdesc">Demo environments and sandboxes</span></a>
+    <a class="portal" href="https://www.ibm.com/products/maas360" target="_blank" rel="noopener"><span class="pname">IBM MaaS360</span><span class="pdesc">Public-facing product info</span></a>
+    <a class="portal" href="https://skillsbuild.org/" target="_blank" rel="noopener"><span class="pname">IBM Skills Gateway</span><span class="pdesc">Training and certification</span></a>
+    <a class="portal" href="https://www.ibm.com/docs/en/maas360" target="_blank" rel="noopener"><span class="pname">IBM Documentation</span><span class="pdesc">Technical docs and guides</span></a>
   </div>
 </div>
 
-<nav class="catnav">
-  <div class="catnav-inner">
-    <a href="#sales-tools">Sales Tools</a>
-    <a href="#customer-evidence">Customer Evidence</a>
-    <a href="#technical-resources">Technical Resources</a>
+<nav class="g-toc" aria-label="On this page">
+  <div class="g-toc-inner">
+    <a href="#sales-tools">Sales tools</a>
+    <a href="#customer-evidence">Customer evidence</a>
+    <a href="#technical-resources">Technical resources</a>
     <a href="#enablement">Enablement</a>
   </div>
 </nav>
 
-<main>
+<main class="g-main">
 
-  <section class="category c-sales" id="sales-tools">
-    <div class="cat-head"><span class="cat-dot"></span><h2>Sales Tools</h2></div>
-    <p class="cat-sub">Calculators and comparison tools to bring into a deal conversation.</p>
+  <section class="g-section" id="sales-tools">
+    <div class="cat-head"><span class="cat-dot"></span><h2 class="g-section-title">Sales tools</h2></div>
+    <p class="g-section-lede">Calculators and comparison tools to bring into a deal conversation.</p>
     <div class="res-grid">
-
-      <div class="res-card">
-        <div class="rtitle">ROI Calculator</div>
-        <div class="rpath"><b>IBM Partner Portal</b> → Sales Tools → MaaS360 ROI Calculator</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://partnerportal.ibm.com/" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">TCO Comparison</div>
-        <div class="rpath"><b>IBM Seismic</b> → MaaS360 → Competitive Tools</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://ibm.seismic.com/" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Battle Cards</div>
-        <div class="rpath">Competitive positioning, one-pagers per competitor.</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://ibm.seismic.com/Link/Content/DCRgjRmf4jD7qGTRHcfVmcQ73GH3" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Demo Environment</div>
-        <div class="rpath"><b>IBM Technology Zone</b> (techzone.ibm.com) → MaaS360 Demo</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="http://techzone.ibm.com/" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Trial Program</div>
-        <div class="rpath"><b>IBM MaaS360 website</b> → Free Trial, or contact the MaaS360 sales team</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/account/reg/us-en/signup?formid=urx-30629" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Goldmine</div>
-        <div class="rpath">Type "MaaS360" in the search bar.</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://goldmine.ied.wdc.app.cirrus.ibm.com/gems" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
+      <div class="res-card"><div class="rtitle">ROI calculator</div><div class="rpath"><b>IBM Partner Portal</b> → Sales Tools → MaaS360 ROI Calculator</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://partnerportal.ibm.com/" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">TCO comparison</div><div class="rpath"><b>IBM Seismic</b> → MaaS360 → Competitive Tools</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://ibm.seismic.com/" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Battle cards</div><div class="rpath">Competitive positioning, one-pagers per competitor.</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://ibm.seismic.com/Link/Content/DCRgjRmf4jD7qGTRHcfVmcQ73GH3" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Demo environment</div><div class="rpath"><b>IBM Technology Zone</b> (techzone.ibm.com) → MaaS360 Demo</div><div class="res-foot"><span></span><a class="open-btn" href="http://techzone.ibm.com/" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Trial program</div><div class="rpath"><b>IBM MaaS360 website</b> → Free Trial, or contact the MaaS360 sales team</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/account/reg/us-en/signup?formid=urx-30629" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Goldmine</div><div class="rpath">Type "MaaS360" in the search bar.</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://goldmine.ied.wdc.app.cirrus.ibm.com/gems" target="_blank" rel="noopener">Open →</a></div></div>
     </div>
   </section>
 
-  <section class="category c-evidence" id="customer-evidence">
-    <div class="cat-head"><span class="cat-dot"></span><h2>Customer Evidence</h2></div>
-    <p class="cat-sub">Proof points for skeptical buyers — case studies, analyst reports, testimonials.</p>
+  <section class="g-section" id="customer-evidence">
+    <div class="cat-head"><span class="cat-dot"></span><h2 class="g-section-title">Customer evidence</h2></div>
+    <p class="g-section-lede">Proof points for skeptical buyers — case studies, analyst reports, testimonials.</p>
     <div class="res-grid">
-
-      <div class="res-card">
-        <div class="rtitle">MaaS360 Case Studies</div>
-        <div class="rpath">Customer stories filtered to MaaS360.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/case-studies?field_hierarchy_01%5b0%5d%5b0%5d=Security&field_hierarchy_01%5b1%5d%5b0%5d=IBM%20MaaS360" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Reference Customers</div>
-        <div class="rpath">IBM Reference Program (internal) — or ask your IBM account team directly.</div>
-        <div class="res-foot"><span class="note-badge">Ask your account team</span><span></span></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Gartner UEM Reviews</div>
-        <div class="rpath">Independent analyst reviews of the UEM market.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.gartner.com/reviews/market/endpoint-management-tools" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Forrester Report</div>
-        <div class="rpath">Forrester's take on MaaS360 and the broader UEM space.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/account/reg/us-en/subscribe?formid=urx-38144" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Customer Testimonials</div>
-        <div class="rpath">MaaS360 Credico Study — a named customer telling the story.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/case-studies/credico-security" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
+      <div class="res-card"><div class="rtitle">MaaS360 case studies</div><div class="rpath">Customer stories filtered to MaaS360.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/case-studies?field_hierarchy_01%5b0%5d%5b0%5d=Security&field_hierarchy_01%5b1%5d%5b0%5d=IBM%20MaaS360" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Reference customers</div><div class="rpath">IBM Reference Program (internal) — or ask your IBM account team directly.</div><div class="res-foot"><span class="note-badge">Ask your account team</span><span></span></div></div>
+      <div class="res-card"><div class="rtitle">Gartner UEM reviews</div><div class="rpath">Independent analyst reviews of the UEM market.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.gartner.com/reviews/market/endpoint-management-tools" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Forrester report</div><div class="rpath">Forrester's take on MaaS360 and the broader UEM space.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/account/reg/us-en/subscribe?formid=urx-38144" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Customer testimonials</div><div class="rpath">MaaS360 Credico study — a named customer telling the story.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/case-studies/credico-security" target="_blank" rel="noopener">Open →</a></div></div>
     </div>
   </section>
 
-  <section class="category c-tech" id="technical-resources">
-    <div class="cat-head"><span class="cat-dot"></span><h2>Technical Resources</h2></div>
-    <p class="cat-sub">For when the conversation turns to "how does this actually work."</p>
+  <section class="g-section" id="technical-resources">
+    <div class="cat-head"><span class="cat-dot"></span><h2 class="g-section-title">Technical resources</h2></div>
+    <p class="g-section-lede">For when the conversation turns to how this actually works.</p>
     <div class="res-grid">
-
-      <div class="res-card">
-        <div class="rtitle">Solution Briefs</div>
-        <div class="rpath">Resources / Solution Brief library on ibm.com.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/products/maas360/resources" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Integration Guides</div>
-        <div class="rpath">MaaS360 Integrations documentation.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/docs/en/maas360?topic=maas360-product-integrations" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Security Documentation</div>
-        <div class="rpath">IBM MaaS360 Trust Center, or the Security Portal.</div>
-        <div class="res-foot"><span class="note-badge">Search internally</span><span></span></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Architecture Diagrams</div>
-        <div class="rpath">IBM Redbooks (redbooks.ibm.com) → search "MaaS360"</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="http://redbooks.ibm.com/" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">API Documentation</div>
-        <div class="rpath">Full API reference for MaaS360 services.</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/docs/en/maas360?topic=services-maas360-api-reference-web" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
+      <div class="res-card"><div class="rtitle">Solution briefs</div><div class="rpath">Resources / Solution Brief library on ibm.com.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/products/maas360/resources" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Integration guides</div><div class="rpath">MaaS360 integrations documentation.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/docs/en/maas360?topic=maas360-product-integrations" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Security documentation</div><div class="rpath">IBM MaaS360 Trust Center, or the Security Portal.</div><div class="res-foot"><span class="note-badge">Search internally</span><span></span></div></div>
+      <div class="res-card"><div class="rtitle">Architecture diagrams</div><div class="rpath">IBM Redbooks (redbooks.ibm.com) → search "MaaS360"</div><div class="res-foot"><span></span><a class="open-btn" href="http://redbooks.ibm.com/" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">API documentation</div><div class="rpath">Full API reference for MaaS360 services.</div><div class="res-foot"><span></span><a class="open-btn" href="https://www.ibm.com/docs/en/maas360?topic=services-maas360-api-reference-web" target="_blank" rel="noopener">Open →</a></div></div>
     </div>
   </section>
 
-  <section class="category c-enable" id="enablement">
-    <div class="cat-head"><span class="cat-dot"></span><h2>Enablement</h2></div>
-    <p class="cat-sub">Training and playbooks for leveling up your own pitch.</p>
+  <section class="g-section" id="enablement">
+    <div class="cat-head"><span class="cat-dot"></span><h2 class="g-section-title">Enablement</h2></div>
+    <p class="g-section-lede">Training and playbooks for leveling up your own pitch.</p>
     <div class="res-grid">
-
-      <div class="res-card">
-        <div class="rtitle">Product Training</div>
-        <div class="rpath">IBM Skills Gateway or IBM Training Portal → MaaS360 courses</div>
-        <div class="res-foot"><span></span><a class="open-btn" href="https://skillsbuild.org/" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Sales Playbooks</div>
-        <div class="rpath">Structured plays for common deal scenarios.</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://ibm.seismic.com/Link/Content/DCQXW9FXCRhjTGc2BjgWHPHRqdfd" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Demo Resources</div>
-        <div class="rpath">Scripts, click-throughs, and demo support material.</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://ibm.seismic.com/apps/search?appType=All&keyword=demo&contentType=All%20Documents&folderId=&folderName=&fromAppType=&currentTeamSiteId=&sharedTeamSiteId=&profileItemId=&selectedProperties=Offering%20Name%3AMaaS360%2520Mobile%2520Security%2520and%2520Management%3B&pageIndex=0&strategy=" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
-      <div class="res-card">
-        <div class="rtitle">Objection Handling</div>
-        <div class="rpath"><b>IBM Seismic</b> → MaaS360 → Competitive/Objection Handling</div>
-        <div class="res-foot"><span class="note-badge">🔒 Internal</span><a class="open-btn" href="https://ibm.seismic.com/" target="_blank" rel="noopener">Open →</a></div>
-      </div>
-
+      <div class="res-card"><div class="rtitle">Product training</div><div class="rpath">IBM Skills Gateway or IBM Training Portal → MaaS360 courses</div><div class="res-foot"><span></span><a class="open-btn" href="https://skillsbuild.org/" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Sales playbooks</div><div class="rpath">Structured plays for common deal scenarios.</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://ibm.seismic.com/Link/Content/DCQXW9FXCRhjTGc2BjgWHPHRqdfd" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Demo resources</div><div class="rpath">Scripts, click-throughs, and demo support material.</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://ibm.seismic.com/apps/search?keyword=demo" target="_blank" rel="noopener">Open →</a></div></div>
+      <div class="res-card"><div class="rtitle">Objection handling</div><div class="rpath"><b>IBM Seismic</b> → MaaS360 → Competitive/Objection Handling</div><div class="res-foot"><span class="note-badge">Internal</span><a class="open-btn" href="https://ibm.seismic.com/" target="_blank" rel="noopener">Open →</a></div></div>
     </div>
   </section>
-
-  <div class="end-note">Seismic and Partner Portal links require IBM partner or employee login. Everything else above is publicly accessible.</div>
 
 </main>
 
+<div class="end-note">Seismic and Partner Portal links require IBM partner or employee login. Everything else above is publicly accessible.</div>
+
+<script>
+  (function(){
+    var links=[].slice.call(document.querySelectorAll('.g-toc a')),map={};
+    links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+    var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(a){a.classList.remove('here');});if(map[e.target.id])map[e.target.id].classList.add('here');}
+    });},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+    document.querySelectorAll('main section[id]').forEach(function(s){obs.observe(s);});
+  })();
+</script>
 </body>
 </html>

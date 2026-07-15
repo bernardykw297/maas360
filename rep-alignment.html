@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <!--
-  Rep Alignment dashboard.
-  Source: maas360-repalignment (index.html + maas-script.js + maas-styles.css).
-  Interactive table kept fully functional (maas-script.js unchanged, embedded data);
-  restyled from the light IBM Carbon theme into the MaaS360 Sales Guide dark design system.
+  Rep alignment dashboard. Interactive table kept fully functional (maas-script.js
+  unchanged, embedded data). Styled with the shared IBM Carbon theme layer (carbon.css).
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rep Alignment — MaaS360 Sales Guide</title>
+  <title>Rep alignment — MaaS360 sales guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="carbon.css">
   <link rel="stylesheet" href="maas-styles.css">
+  <script src="carbon-theme.js"></script>
 </head>
 <body>
-  <nav class="site-nav">
+  <header class="site-nav">
     <div class="site-nav-inner">
-      <a class="site-nav-brand" href="index.html"><span class="sq"></span>MaaS360 Sales Guide</a>
-      <div class="site-nav-links">
+      <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+        <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+          <defs><mask id="ibmbars">
+            <rect width="110" height="44" fill="#000"/>
+            <g fill="#fff">
+              <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+              <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+              <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+              <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+            </g>
+          </mask></defs>
+          <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+        </svg>
+        <span class="product">MaaS360 Sales Guide</span>
+      </a>
+      <nav class="site-nav-links" aria-label="Guides">
         <a href="index.html">Hub</a>
         <a href="prospecting.html">Prospecting</a>
         <a href="cold-call.html">Cold Call</a>
@@ -27,129 +41,81 @@
         <a href="onboarding.html">Onboarding</a>
         <a href="rep-alignment.html" class="active">Rep Alignment</a>
         <a href="territory-map.html">Territory Map</a>
-      </div>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+        <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+        <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+        <span class="tt-label">Dark</span>
+      </button>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
-    <header>
-      <h1>Rep Alignment Dashboard</h1>
-      <p class="subtitle">June 2026 · 1,836 coverage records · search, filter &amp; export</p>
-    </header>
+  <div class="app-wrap">
+    <div class="container">
+      <header class="app-header">
+        <h1>Rep alignment dashboard</h1>
+        <p class="subtitle">June 2026 · 1,836 coverage records · search, filter and export</p>
+      </header>
 
-    <div class="controls-section">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 Search across all fields...">
-      </div>
-
-      <div class="filters-grid">
-        <div class="filter-group">
-          <label for="marketNameFilter">Market Name</label>
-          <select id="marketNameFilter">
-            <option value="">Select Market Name</option>
-          </select>
+      <div class="controls-section">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search across all fields...">
         </div>
 
-        <div class="filter-group">
-          <label for="coverageClientTypeFilter">Coverage Client Type</label>
-          <select id="coverageClientTypeFilter">
-            <option value="">Select Coverage Client Type</option>
-          </select>
+        <div class="filters-grid">
+          <div class="filter-group"><label for="marketNameFilter">Market name</label><select id="marketNameFilter"><option value="">Select market name</option></select></div>
+          <div class="filter-group"><label for="coverageClientTypeFilter">Coverage client type</label><select id="coverageClientTypeFilter"><option value="">Select coverage client type</option></select></div>
+          <div class="filter-group"><label for="coverageClientSubtypeFilter">Coverage client subtype</label><select id="coverageClientSubtypeFilter"><option value="">Select coverage client subtype</option></select></div>
+          <div class="filter-group"><label for="coverageNameFilter">Coverage name</label><select id="coverageNameFilter"><option value="">Select coverage name</option></select></div>
+          <div class="filter-group"><label for="coverageIdFilter">Coverage ID</label><select id="coverageIdFilter"><option value="">Select coverage ID</option></select></div>
+          <div class="filter-group"><label for="repFilter">Rep</label><select id="repFilter"><option value="">Select rep</option></select></div>
+          <div class="filter-group"><label for="techRepFilter">Tech rep</label><select id="techRepFilter"><option value="">Select tech rep</option></select></div>
+          <div class="filter-group"><label for="managerFilter">Manager</label><select id="managerFilter"><option value="">Select manager</option></select></div>
+          <div class="filter-group"><label for="techManagerFilter">Tech manager</label><select id="techManagerFilter"><option value="">Select tech manager</option></select></div>
         </div>
 
-        <div class="filter-group">
-          <label for="coverageClientSubtypeFilter">Coverage Client Subtype</label>
-          <select id="coverageClientSubtypeFilter">
-            <option value="">Select Coverage Client Subtype</option>
-          </select>
+        <div class="action-buttons">
+          <button id="clearFilters" class="btn-secondary">Clear all filters</button>
+          <button id="exportBtn" class="btn-primary">Export results</button>
         </div>
 
-        <div class="filter-group">
-          <label for="coverageNameFilter">Coverage Name</label>
-          <select id="coverageNameFilter">
-            <option value="">Select Coverage Name</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="coverageIdFilter">Coverage ID</label>
-          <select id="coverageIdFilter">
-            <option value="">Select Coverage ID</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="repFilter">Rep</label>
-          <select id="repFilter">
-            <option value="">Select Rep</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="techRepFilter">Tech Rep</label>
-          <select id="techRepFilter">
-            <option value="">Select Tech Rep</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="managerFilter">Manager</label>
-          <select id="managerFilter">
-            <option value="">Select Manager</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="techManagerFilter">Tech Manager</label>
-          <select id="techManagerFilter">
-            <option value="">Select Tech Manager</option>
-          </select>
+        <div class="results-info">
+          <span id="resultsCount">Select a filter or search to view data</span>
         </div>
       </div>
 
-      <div class="action-buttons">
-        <button id="clearFilters" class="btn-secondary">Clear All Filters</button>
-        <button id="exportBtn" class="btn-primary">Export Results</button>
+      <div class="table-container">
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th data-sort="GEOGRAPHY_NAME">Geography ↕</th>
+              <th data-sort="MARKET_NAME">Market ↕</th>
+              <th data-sort="SUB_MARKET_NAME">Sub market ↕</th>
+              <th data-sort="SALES_GROUP_NAME">Sales group ↕</th>
+              <th data-sort="COVE_CLIENT_TYPE_DESC">Client type ↕</th>
+              <th data-sort="BRANCH_NAME">Branch ↕</th>
+              <th data-sort="BRANCH_UNIT_NAME">Branch unit ↕</th>
+              <th data-sort="COVERAGE_NAME">Coverage ↕</th>
+              <th data-sort="Rep">Rep ↕</th>
+              <th data-sort="Role">Role ↕</th>
+              <th data-sort="Rep Email">Rep email ↕</th>
+              <th data-sort="Tech Rep">Tech rep ↕</th>
+              <th data-sort="Tech Rep Email">Tech rep email ↕</th>
+              <th data-sort="Manager">Manager ↕</th>
+              <th data-sort="Manager Email">Manager email ↕</th>
+              <th data-sort="Tech Manager">Tech manager ↕</th>
+              <th data-sort="Tech Manager Email">Tech manager email ↕</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"><!-- populated by JavaScript --></tbody>
+        </table>
       </div>
 
-      <div class="results-info">
-        <span id="resultsCount">Select a filter or search to view data</span>
+      <div class="pagination">
+        <button id="prevPage" class="btn-secondary">← Previous</button>
+        <span id="pageInfo">Page 1 of 1</span>
+        <button id="nextPage" class="btn-secondary">Next →</button>
       </div>
-    </div>
-
-    <div class="table-container">
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th data-sort="GEOGRAPHY_NAME">Geography ↕</th>
-            <th data-sort="MARKET_NAME">Market ↕</th>
-            <th data-sort="SUB_MARKET_NAME">Sub Market ↕</th>
-            <th data-sort="SALES_GROUP_NAME">Sales Group ↕</th>
-            <th data-sort="COVE_CLIENT_TYPE_DESC">Client Type ↕</th>
-            <th data-sort="BRANCH_NAME">Branch ↕</th>
-            <th data-sort="BRANCH_UNIT_NAME">Branch Unit ↕</th>
-            <th data-sort="COVERAGE_NAME">Coverage ↕</th>
-            <th data-sort="Rep">Rep ↕</th>
-            <th data-sort="Role">Role ↕</th>
-            <th data-sort="Rep Email">Rep Email ↕</th>
-            <th data-sort="Tech Rep">Tech Rep ↕</th>
-            <th data-sort="Tech Rep Email">Tech Rep Email ↕</th>
-            <th data-sort="Manager">Manager ↕</th>
-            <th data-sort="Manager Email">Manager Email ↕</th>
-            <th data-sort="Tech Manager">Tech Manager ↕</th>
-            <th data-sort="Tech Manager Email">Tech Manager Email ↕</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <!-- Data will be populated by JavaScript -->
-        </tbody>
-      </table>
-    </div>
-
-    <div class="pagination">
-      <button id="prevPage" class="btn-secondary">← Previous</button>
-      <span id="pageInfo">Page 1 of 1</span>
-      <button id="nextPage" class="btn-secondary">Next →</button>
     </div>
   </div>
 
