@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--
+  Cold call cheat sheet. Original content preserved; example scripts kept verbatim.
+  Styled with the shared IBM Carbon theme layer (carbon.css) — light/dark, IBM Plex Sans, IBM Blue.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cold call — MaaS360 sales guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="carbon.css">
+  <script src="carbon-theme.js"></script>
+  <style>
+    .g-section-title{display:flex;align-items:center;gap:12px;}
+    .g-section-title::before{content:"";width:11px;height:11px;background:var(--acc);flex:0 0 auto;}
+
+    .callout-tip{display:flex;gap:14px;background:var(--panel-2);border-left:3px solid var(--acc);padding:16px 20px;margin-bottom:12px;}
+    .callout-tip .ic{font-size:18px;flex:0 0 auto;line-height:1.4;}
+    .callout-tip strong{display:block;color:var(--text);margin-bottom:4px;font-weight:600;}
+    .callout-tip p{margin:0;color:var(--text-dim);font-size:14px;line-height:1.6;}
+
+    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px;}
+    .method-card{background:var(--panel);padding:20px;}
+    .method-card h4{font-size:15px;color:var(--text);margin:0 0 8px;font-weight:600;}
+    .method-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin:0 0 8px;}
+    .method-card p strong{color:var(--text);}
+    .method-example{background:var(--panel-2);padding:10px 12px;font-size:13px;color:var(--text-dim);margin-top:8px;border-left:3px solid var(--acc);}
+
+    .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+    .rule{background:var(--panel);padding:12px 16px;font-size:14px;color:var(--text-dim);display:flex;gap:10px;align-items:flex-start;}
+    .rule::before{font-weight:700;flex:0 0 auto;}
+    .rule.yes::before{content:"✓";color:var(--support-success);}
+    .rule.no::before{content:"✕";color:var(--support-error);}
+
+    .pills{display:flex;flex-wrap:wrap;gap:8px;}
+    .pill{font-size:14px;padding:8px 14px;background:var(--panel);color:var(--text-dim);border:1px solid var(--line);}
+
+    /* Carbon content switcher (persona tabs) */
+    .tabs{display:inline-flex;border:1px solid var(--primary);margin-bottom:16px;flex-wrap:wrap;}
+    .tab{padding:11px 18px;background:transparent;color:var(--link);font-family:inherit;font-size:14px;cursor:pointer;border:none;border-right:1px solid var(--primary);transition:background .11s,color .11s;}
+    .tab:last-child{border-right:none;}
+    .tab:hover{background:var(--panel-2);}
+    .tab.active{background:var(--primary);color:var(--on-primary);}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+
+    .script-card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);padding:18px 20px;margin-bottom:12px;font-size:15px;color:var(--text-dim);line-height:1.7;}
+    .script-card strong{color:var(--text);}
+    .script-card.blue{border-left-color:var(--primary);}
+    .script-card em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--acc-fg);background:var(--acc-bg);padding:2px 7px;}
+    .script-note{font-size:13px;color:var(--text-dim);margin-top:12px;padding:10px 12px;background:var(--panel-2);border-left:3px solid var(--primary);}
+
+    .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+    .obj-item{background:var(--panel);padding:16px 18px;cursor:pointer;transition:background .11s;}
+    .obj-item:hover{background:var(--panel-2);}
+    .obj-item.open{background:var(--panel-2);}
+    .obj-header{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+    .obj-trigger{font-size:14px;font-weight:600;color:var(--text);flex:1;}
+    .obj-chevron{font-size:14px;color:var(--link);flex:0 0 auto;transition:transform .2s;}
+    .obj-item.open .obj-chevron{transform:rotate(180deg);}
+    .obj-response{display:none;font-size:14px;color:var(--text-dim);line-height:1.7;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+    .obj-response.visible{display:block;}
+    .obj-then{display:inline-block;margin-top:10px;font-size:12px;font-weight:500;font-family:'IBM Plex Mono',monospace;color:var(--acc-fg);background:var(--acc-bg);padding:5px 11px;}
+
+    .close-box{background:var(--panel-2);border-left:3px solid var(--acc);padding:18px 20px;margin:6px 0 12px;}
+    .close-box .label{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--text-dim);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;}
+    .close-box p{font-size:17px;color:var(--text);font-weight:600;margin:0;}
+
+    .list-item{background:var(--panel);border:1px solid var(--line);padding:12px 16px;margin-bottom:8px;font-size:14px;color:var(--text-dim);line-height:1.6;}
+    .list-item strong{color:var(--text);display:block;margin-bottom:4px;}
+
+    .flag-col h4{font-size:15px;margin:0 0 12px;font-weight:600;}
+    .flag-col.green h4{color:var(--support-success);}
+    .flag-col.red h4{color:var(--support-error);}
+
+    @media (max-width:768px){.obj-grid,.two-col,.rules{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body class="acc-cold">
+
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+        <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+          <defs><mask id="ibmbars">
+            <rect width="110" height="44" fill="#000"/>
+            <g fill="#fff">
+              <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+              <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+              <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+              <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+            </g>
+          </mask></defs>
+          <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+        </svg>
+        <span class="product">MaaS360 Sales Guide</span>
+      </a>
+      <nav class="site-nav-links" aria-label="Guides">
+        <a href="index.html">Hub</a>
+        <a href="prospecting.html">Prospecting</a>
+        <a href="cold-call.html" class="active">Cold Call</a>
+        <a href="resources.html">Resources</a>
+        <a href="onboarding.html">Onboarding</a>
+        <a href="rep-alignment.html">Rep Alignment</a>
+        <a href="territory-map.html">Territory Map</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+        <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+        <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+        <span class="tt-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="guide">
+    <header class="g-hero">
+      <div class="g-eyebrow">Section 2</div>
+      <h1 class="g-h1">Cold call cheat sheet</h1>
+      <p class="g-lede">What to say when they pick up. One opening script that flexes by persona, a response for every objection, and the voicemail, gatekeeper, email, and cadence to back it up.</p>
+      <div class="g-meta">Updated Jul 27, 2026 · 9 objections · one script, persona swap-ins</div>
+    </header>
+  </div>
+
+  <nav class="g-toc" aria-label="On this page">
+    <div class="g-toc-inner">
+      <a href="#tips">Pro tips</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#mindset">Mindset</a>
+      <a href="#script">Opening script</a>
+      <a href="#objections">Objections</a>
+      <a href="#close">Always close</a>
+      <a href="#voicemail">Voicemail</a>
+      <a href="#gatekeeper">Gatekeeper</a>
+      <a href="#email">Follow-up email</a>
+      <a href="#cadence">Cadence</a>
+      <a href="#research">Research</a>
+      <a href="#tonality">Tonality</a>
+      <a href="#flags">Flags</a>
+    </div>
+  </nav>
+
+  <main class="g-main">
+
+    <section class="g-section" id="tips">
+      <h2 class="g-section-title">Pro tips and strategy</h2>
+      <div class="callout-tip">
+        <span class="ic">🔥</span>
+        <div><strong>The power move</strong><p>Say "I'm the MaaS360 [AE/POC] for [Company Name]" — it sounds like you were assigned to them specifically, not like you're blasting a list. They feel like the call was coming regardless. More authority than "I'm calling to introduce myself."</p></div>
+      </div>
+      <div class="callout-tip">
+        <span class="ic">💪</span>
+        <div><strong>Fight for every second</strong><p>Be positive. Your default response: "I'm glad you brought that up." Keep fighting — even if they're rude, stay professional: "Thank you for sharing that, that's exactly why I wanted to talk to you today." Never give up easily.</p></div>
+      </div>
+      <div class="two-col">
+        <div class="method-card">
+          <h4>Glaze method</h4>
+          <p><strong>Best for:</strong> Natural yappers who can build rapport quickly</p>
+          <p>Build warmth first. Reference something real about them or their company. Compliment genuinely. Let them talk before pivoting to the ask.</p>
+          <div class="method-example">"I saw you just expanded to three new locations — that's impressive growth."</div>
+        </div>
+        <div class="method-card">
+          <h4>Direct method</h4>
+          <p><strong>Best for:</strong> Getting straight to business</p>
+          <p>Skip the small talk. Go straight to the ask. Respect their time by being efficient.</p>
+          <div class="method-example">"Are you open to a 10-minute call to see if we're a fit?"</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-section" id="delivery">
+      <h2 class="g-section-title">Delivery reminders</h2>
+      <div class="rules">
+        <div class="rule yes">Say "for [Company Name]" with ownership, not apology</div>
+        <div class="rule yes">Pause after your intro — let it settle</div>
+        <div class="rule yes">Always end with two specific times</div>
+        <div class="rule yes">Sound like you expected them to pick up</div>
+        <div class="rule no">Don't rush — slower reads as more confident</div>
+        <div class="rule no">No "I was just calling to..."</div>
+        <div class="rule no">Don't pitch the product on the cold call</div>
+        <div class="rule no">Ask, then go quiet — let them answer</div>
+      </div>
+    </section>
+
+    <section class="g-section" id="mindset">
+      <h2 class="g-section-title">Mindset</h2>
+      <div class="pills">
+        <div class="pill">You own this territory — act like it</div>
+        <div class="pill">Selling 10 minutes, not MaaS360</div>
+        <div class="pill">Curious beats pushy every time</div>
+        <div class="pill">Less words, more confidence</div>
+        <div class="pill">One smooth pass, then listen</div>
+      </div>
+    </section>
+
+    <section class="g-section" id="script">
+      <h2 class="g-section-title">Opening script</h2>
+      <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
+        This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
+        <em>[if you've got a trigger]</em> Saw [trigger — new locations, funding, leadership change, security news] and figured it was a good time to reach out.<br><br>
+        We just helped [similar company in their industry] [specific outcome — e.g. cut device provisioning time by 40%, closed a compliance gap in a quarter], and figured it was worth a quick call to see if it's relevant for you too."
+        <div class="script-note">Two upgrades from the old version: (1) the trigger line, when you've got one from your 30-second research, beats any generic opener — it proves the call isn't mass-dialed. (2) The credibility hook needs a real outcome attached, not just a name-drop — "cut provisioning time by 40%" does far more work than "we just closed a deal." Fill in the bracket every time; don't let it go out blank.<br><br>Dropped entirely: "I know this is a long shot." It undercuts everything above it — you're handing them the exit before you've made the ask. Own the call instead.</div>
+      </div>
+
+      <div class="list-item"><strong>Swap the outcome line based on who picks up:</strong> Same script skeleton — just swap what comes after "cut provisioning time by 40%" to match how each persona hears value.</div>
+      <div class="list-item"><strong>IT/security:</strong> "...cuts down admin overhead and tightens up security — happy to compare notes on your setup." <em>Peer-to-peer framing, not a pitch.</em></div>
+      <div class="list-item"><strong>Executive:</strong> "...saves time and reduces risk company-wide." <em>Outcome only — don't go deeper than one breath until the meeting.</em></div>
+      <div class="list-item"><strong>Operations:</strong> "...cuts friction in day-to-day device management without adding overhead for the team." <em>Practical and workflow-focused.</em></div>
+    </section>
+
+    <section class="g-section" id="objections">
+      <h2 class="g-section-title">Objection responses</h2>
+      <div class="obj-grid">
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"What's this about?" / "Can you explain more?"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Yeah for sure — it's really just a quick call about how we help companies deal with mobile security and device management. I'm not trying to sell you anything today, just see if there's something worth exploring. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Just send an email" / "Email me the details"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Happy to — though it's a lot easier to make sense of in a quick call so I can tailor it to your setup. Give me 10 minutes and if it's not relevant, I'll just send you the info and leave you alone. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Wrong person" / "I don't handle that"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"No worries at all — do you know offhand who does handle the device or security side of things? Would it be okay if I mention your name when I reach out to them?"<span class="obj-then">→ Get name + warm handoff</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Already have something" / "We use [competitor]"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"That makes sense — most folks I talk to already have something. I'm not here to rip and replace, just curious if there are any gaps or headaches with what you've got. Worth 10 minutes to compare?"<span class="obj-then">→ Two times</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"No budget" / "Budget's tight right now"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Totally get it — I'm not asking for anything today. Just a quick call so that if timing changes, you already know what's out there. Worth a chat?"<span class="obj-then">→ Two times</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Bad time" / "I'm in a meeting / busy"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Of course — sorry to catch you at a bad time. When's better? I can work around your schedule, even next week is fine."<span class="obj-then">→ Get specific time</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"How much does it cost?" / "What's the price?"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"It really depends on your size and setup — which is why I'd love a quick call first. Once I know what you're working with I can give you something that actually makes sense. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Not interested" / "We're good, thanks"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Fair enough — appreciate you picking up. Things change sometimes though — new devices, people going remote, security stuff comes up. Would it be alright if I checked back in a few months?"<span class="obj-then">→ Leave door open</span></div>
+        </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Please don't call again"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Understood — I'll take you off my list and won't call again. Appreciate your time today." Then actually stop: no follow-up email, no next-quarter check-in. Log it so the account isn't touched again for a while — burning the contact costs more than one meeting is worth.<span class="obj-then">→ Close the door cleanly</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-section" id="close">
+      <h2 class="g-section-title">Always close with this</h2>
+      <div class="close-box">
+        <div class="label">After any objection, land here</div>
+        <p>"Does Tuesday at 2 work, or is Wednesday morning better for you?"</p>
+      </div>
+      <div class="script-card">
+        <strong>If they won't commit to either time:</strong><br><br>
+        "No worries — what's your calendar usually look like, mornings or afternoons?" Get a general window, then follow up by email to lock the exact time. Some people will book a meeting but won't pick from two fixed options on the spot — don't let the call end without at least a window.
+      </div>
+      <div class="script-card blue">
+        <strong>If they ask what MaaS360 does:</strong><br><br>
+        "It's IBM's platform for managing and securing mobile devices and endpoints — takes a lot of the manual IT work off your plate while keeping everything locked down. Easier to show you with a real example than explain it over the phone — that's why I want the 10 minutes."
+      </div>
+    </section>
+
+    <section class="g-section" id="voicemail">
+      <h2 class="g-section-title">Voicemail script</h2>
+      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just helped [similar company] [specific outcome] and wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
+        <div class="script-note">Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
+      </div>
+    </section>
+
+    <section class="g-section" id="gatekeeper">
+      <h2 class="g-section-title">Gatekeeper script</h2>
+      <div class="script-card">"Hey, this is [Your Name] with IBM — I'm trying to reach [Decision Maker Name]. Are they available?"
+        <div class="script-note">Sound like you already have a relationship. Don't over-explain. If they ask what it's about: "It's regarding their mobile device security setup — they'll know what it's about."</div>
+      </div>
+      <div class="list-item"><strong>If they push back:</strong> "I understand — I'm the MaaS360 [AE/POC] for [Company Name] and I just wanted to introduce myself. Would it be better if I sent an email first?"</div>
+    </section>
+
+    <section class="g-section" id="email">
+      <h2 class="g-section-title">Follow-up email template</h2>
+      <div class="script-card">
+        <strong>Subject:</strong> Quick intro — MaaS360 for [Company Name]<br><br>
+        Hey [Name],<br><br>
+        [Your Name] here — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
+        We just wrapped up a project with [similar company] helping them manage and secure their mobile devices without adding overhead for their team.<br><br>
+        Worth a quick 10-minute call to see if there's a fit? I can work around your schedule.<br><br>
+        [Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]
+        <div class="script-note">Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
+      </div>
+    </section>
+
+    <section class="g-section" id="cadence">
+      <h2 class="g-section-title">Cadence — if no answer</h2>
+      <div class="list-item"><strong>Attempt 1:</strong> Call. No answer → leave voicemail, then send the follow-up email same day.</div>
+      <div class="list-item"><strong>Attempt 2 (2-3 days later):</strong> Call again. No voicemail this time — you already left one. If no answer, a short LinkedIn connection request referencing the voicemail is optional here.</div>
+      <div class="list-item"><strong>Attempt 3 (about a week later):</strong> Call one more time. If still no answer, this is the point to leave it — don't leave a second voicemail; it reads as pushy rather than persistent.</div>
+      <div class="list-item"><strong>After attempt 3:</strong> Move to a longer-cycle nurture — quarterly check-in, or triggered by news (funding, leadership change, security incident) rather than a fixed calendar date.</div>
+    </section>
+
+    <section class="g-section" id="research">
+      <h2 class="g-section-title">Quick company research (30 seconds)</h2>
+      <div class="list-item"><strong>LinkedIn:</strong> Check their profile — tenure, recent posts, mutual connections</div>
+      <div class="list-item"><strong>Company news:</strong> Search "[Company Name] news" — recent funding, expansion, leadership changes</div>
+      <div class="list-item"><strong>Company website:</strong> About page, recent blog posts, press releases</div>
+      <div class="list-item"><strong>Industry:</strong> Know 1-2 similar companies you've worked with in their space</div>
+      <div class="list-item"><strong>Size/scale:</strong> Employee count, number of locations (helps tailor your pitch)</div>
+    </section>
+
+    <section class="g-section" id="tonality">
+      <h2 class="g-section-title">Tonality and delivery</h2>
+      <div class="list-item"><strong>Pace:</strong> Slower than you think. Rushing reads as nervous. Confident people don't rush.</div>
+      <div class="list-item"><strong>Pauses:</strong> After your intro, pause 1-2 seconds. Let it land. Don't fill the silence.</div>
+      <div class="list-item"><strong>Energy:</strong> Match their energy. If they're high-energy, match it. If they're calm, stay calm.</div>
+      <div class="list-item"><strong>Smile:</strong> They can hear it. Smile while you talk — it changes your tone.</div>
+      <div class="list-item"><strong>Confidence:</strong> Sound like you expected them to pick up. You're not interrupting — you're offering value.</div>
+    </section>
+
+    <section class="g-section" id="flags">
+      <h2 class="g-section-title">Red flags vs. green flags</h2>
+      <div class="two-col">
+        <div class="method-card flag-col green">
+          <h4>Green flags (they're interested)</h4>
+          <div class="list-item">They ask questions about MaaS360</div>
+          <div class="list-item">They mention current pain points</div>
+          <div class="list-item">They offer specific times to meet</div>
+          <div class="list-item">They ask about pricing/timeline</div>
+          <div class="list-item">They mention upcoming projects/changes</div>
+        </div>
+        <div class="method-card flag-col red">
+          <h4>Red flags (just being polite)</h4>
+          <div class="list-item">Vague responses: "Maybe later"</div>
+          <div class="list-item">"Send me some info" with no follow-up</div>
+          <div class="list-item">They don't ask any questions</div>
+          <div class="list-item">They're distracted/multitasking</div>
+          <div class="list-item">"We're all set" without details</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function switchTab(tabId, event){
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-'+tabId).classList.add('active');
+    }
+    function toggleObj(item){
+      const response=item.querySelector('.obj-response');
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.obj-item').forEach(obj=>{obj.classList.remove('open');obj.querySelector('.obj-response').classList.remove('visible');});
+      if(!wasOpen){item.classList.add('open');response.classList.add('visible');}
+    }
+    (function(){
+      var links=[].slice.call(document.querySelectorAll('.g-toc a')),map={};
+      links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+      var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){links.forEach(function(a){a.classList.remove('here');});if(map[e.target.id])map[e.target.id].classList.add('here');}
+      });},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+      document.querySelectorAll('.g-section[id]').forEach(function(s){obs.observe(s);});
+    })();
+  </script>
+</body>
+</html>
