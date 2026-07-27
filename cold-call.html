@@ -119,8 +119,8 @@
     <header class="g-hero">
       <div class="g-eyebrow">Section 2</div>
       <h1 class="g-h1">Cold call cheat sheet</h1>
-      <p class="g-lede">What to say when they pick up. Openers by persona, a response for every objection, and the voicemail, gatekeeper, and email scripts to back it up.</p>
-      <div class="g-meta">Updated Jun 17, 2026 · 8 objections · 4 persona scripts</div>
+      <p class="g-lede">What to say when they pick up. One opening script that flexes by persona, a response for every objection, and the voicemail, gatekeeper, email, and cadence to back it up.</p>
+      <div class="g-meta">Updated Jul 27, 2026 · 9 objections · one script, persona swap-ins</div>
     </header>
   </div>
 
@@ -135,6 +135,7 @@
       <a href="#voicemail">Voicemail</a>
       <a href="#gatekeeper">Gatekeeper</a>
       <a href="#email">Follow-up email</a>
+      <a href="#cadence">Cadence</a>
       <a href="#research">Research</a>
       <a href="#tonality">Tonality</a>
       <a href="#flags">Flags</a>
@@ -195,41 +196,18 @@
     </section>
 
     <section class="g-section" id="script">
-      <h2 class="g-section-title">Opening script — pick your persona</h2>
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab('general', event)">General</button>
-        <button class="tab" onclick="switchTab('it', event)">IT/security</button>
-        <button class="tab" onclick="switchTab('exec', event)">Executive</button>
-        <button class="tab" onclick="switchTab('ops', event)">Operations</button>
+      <h2 class="g-section-title">Opening script</h2>
+      <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
+        This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
+        <em>[if you've got a trigger]</em> Saw [trigger — new locations, funding, leadership change, security news] and figured it was a good time to reach out.<br><br>
+        We just helped [similar company in their industry] [specific outcome — e.g. cut device provisioning time by 40%, closed a compliance gap in a quarter], and figured it was worth a quick call to see if it's relevant for you too."
+        <div class="script-note">Two upgrades from the old version: (1) the trigger line, when you've got one from your 30-second research, beats any generic opener — it proves the call isn't mass-dialed. (2) The credibility hook needs a real outcome attached, not just a name-drop — "cut provisioning time by 40%" does far more work than "we just closed a deal." Fill in the bracket every time; don't let it go out blank.<br><br>Dropped entirely: "I know this is a long shot." It undercuts everything above it — you're handing them the exit before you've made the ask. Own the call instead.</div>
       </div>
-      <div class="tab-content active" id="tab-general">
-        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
-          This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-          I just wrapped up a deal with [similar company in their industry] and I think we'd be a great fit based on what I know. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">Mentioning a recent win with a similar company is the credibility hook. It signals you're relevant to them specifically, not just mass-dialing. If they ask what it's about, you're already one foot in the door.</div>
-        </div>
-      </div>
-      <div class="tab-content" id="tab-it">
-        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
-          This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-          We help IT teams manage and secure mobile and endpoint devices — cuts down admin overhead and tightens up security. Just closed something with [similar company] and I think we'd be a natural fit for your environment too. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">"Compare notes" or "natural fit for your environment" lands well with IT people — it's peer-to-peer, not a pitch.</div>
-        </div>
-      </div>
-      <div class="tab-content" id="tab-exec">
-        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
-          This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-          We help companies keep their mobile devices secure without adding overhead — saves time, reduces risk. Just finished up a project with [similar company] and I think we'd be a really natural fit for you too. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">Execs want outcomes — "saves time, reduces risk" in one breath is enough. Don't go deeper until the meeting.</div>
-        </div>
-      </div>
-      <div class="tab-content" id="tab-ops">
-        <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
-          This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-          We help operations teams streamline device management and keep everything running smoothly — less friction, better security. Just wrapped up something with [similar company] and I think we'd work really well together. I know this is a long shot but I wanted to see if it made sense to connect."
-          <div class="script-note">Operations cares about efficiency and reducing friction. Keep it practical and workflow-focused.</div>
-        </div>
-      </div>
+
+      <div class="list-item"><strong>Swap the outcome line based on who picks up:</strong> Same script skeleton — just swap what comes after "cut provisioning time by 40%" to match how each persona hears value.</div>
+      <div class="list-item"><strong>IT/security:</strong> "...cuts down admin overhead and tightens up security — happy to compare notes on your setup." <em>Peer-to-peer framing, not a pitch.</em></div>
+      <div class="list-item"><strong>Executive:</strong> "...saves time and reduces risk company-wide." <em>Outcome only — don't go deeper than one breath until the meeting.</em></div>
+      <div class="list-item"><strong>Operations:</strong> "...cuts friction in day-to-day device management without adding overhead for the team." <em>Practical and workflow-focused.</em></div>
     </section>
 
     <section class="g-section" id="objections">
@@ -267,6 +245,10 @@
           <div class="obj-header"><div class="obj-trigger">"Not interested" / "We're good, thanks"</div><div class="obj-chevron">▾</div></div>
           <div class="obj-response">"Fair enough — appreciate you picking up. Things change sometimes though — new devices, people going remote, security stuff comes up. Would it be alright if I checked back in a few months?"<span class="obj-then">→ Leave door open</span></div>
         </div>
+        <div class="obj-item" onclick="toggleObj(this)">
+          <div class="obj-header"><div class="obj-trigger">"Please don't call again"</div><div class="obj-chevron">▾</div></div>
+          <div class="obj-response">"Understood — I'll take you off my list and won't call again. Appreciate your time today." Then actually stop: no follow-up email, no next-quarter check-in. Log it so the account isn't touched again for a while — burning the contact costs more than one meeting is worth.<span class="obj-then">→ Close the door cleanly</span></div>
+        </div>
       </div>
     </section>
 
@@ -276,6 +258,10 @@
         <div class="label">After any objection, land here</div>
         <p>"Does Tuesday at 2 work, or is Wednesday morning better for you?"</p>
       </div>
+      <div class="script-card">
+        <strong>If they won't commit to either time:</strong><br><br>
+        "No worries — what's your calendar usually look like, mornings or afternoons?" Get a general window, then follow up by email to lock the exact time. Some people will book a meeting but won't pick from two fixed options on the spot — don't let the call end without at least a window.
+      </div>
       <div class="script-card blue">
         <strong>If they ask what MaaS360 does:</strong><br><br>
         "It's IBM's platform for managing and securing mobile devices and endpoints — takes a lot of the manual IT work off your plate while keeping everything locked down. Easier to show you with a real example than explain it over the phone — that's why I want the 10 minutes."
@@ -284,7 +270,7 @@
 
     <section class="g-section" id="voicemail">
       <h2 class="g-section-title">Voicemail script</h2>
-      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just wrapped up a deal with [similar company] and wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
+      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just helped [similar company] [specific outcome] and wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
         <div class="script-note">Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
       </div>
     </section>
@@ -308,6 +294,14 @@
         [Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]
         <div class="script-note">Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
       </div>
+    </section>
+
+    <section class="g-section" id="cadence">
+      <h2 class="g-section-title">Cadence — if no answer</h2>
+      <div class="list-item"><strong>Attempt 1:</strong> Call. No answer → leave voicemail, then send the follow-up email same day.</div>
+      <div class="list-item"><strong>Attempt 2 (2-3 days later):</strong> Call again. No voicemail this time — you already left one. If no answer, a short LinkedIn connection request referencing the voicemail is optional here.</div>
+      <div class="list-item"><strong>Attempt 3 (about a week later):</strong> Call one more time. If still no answer, this is the point to leave it — don't leave a second voicemail; it reads as pushy rather than persistent.</div>
+      <div class="list-item"><strong>After attempt 3:</strong> Move to a longer-cycle nurture — quarterly check-in, or triggered by news (funding, leadership change, security incident) rather than a fixed calendar date.</div>
     </section>
 
     <section class="g-section" id="research">
