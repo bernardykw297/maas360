@@ -1,97 +1,235 @@
 <!DOCTYPE html>
 <!--
-  Cold call cheat sheet. Original content preserved; example scripts kept verbatim.
-  Styled with the shared IBM Carbon theme layer (carbon.css) — light/dark, IBM Plex Sans, IBM Blue.
+  MaaS360 Cold Call — Master Cockpit
+  Combines the best of three sheets into one:
+    • Live-Call Cockpit  → fast "what do I say next" engine + Live Mode + floating rail
+    • Conversational sheet → deep guide (delivery, discovery, close, voicemail, gatekeeper, email, cadence, research, tonality, flags)
+    • Final sheet         → richest scripts (conversation starters, pattern interrupts, 4-step formula, meeting ask library)
+  Self-contained: IBM Carbon theme, fonts, and light/dark toggle are embedded. No external CSS/JS needed.
+  Live Mode collapses the page to the 4 in-call sections. Press L to toggle.
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cold call — MaaS360 sales guide</title>
+  <title>Cold Call Cockpit — MaaS360</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="carbon.css">
   <script src="carbon-theme.js"></script>
   <style>
-    .g-section-title{display:flex;align-items:center;gap:12px;}
-    .g-section-title::before{content:"";width:11px;height:11px;background:var(--acc);flex:0 0 auto;}
+    /* ===== Cockpit-specific styles only. Theme tokens (--vars), fonts, the shared
+       site-nav, and the theme-toggle all come from carbon.css / carbon-theme.js. ===== */
 
-    .callout-tip{display:flex;gap:14px;background:var(--panel-2);border-left:3px solid var(--acc);padding:16px 20px;margin-bottom:12px;}
-    .callout-tip .ic{font-size:18px;flex:0 0 auto;line-height:1.4;}
-    .callout-tip strong{display:block;color:var(--text);margin-bottom:4px;font-weight:600;}
-    .callout-tip p{margin:0;color:var(--text-dim);font-size:14px;line-height:1.6;}
+    /* Live Mode button in the shared nav */
+    .live-btn{
+      display:flex; align-items:center; gap:7px; background:var(--primary); border:1px solid var(--primary);
+      color:var(--on-primary); font-family:inherit; font-size:13px; font-weight:600;
+      padding:7px 13px; cursor:pointer; transition:filter .12s;
+    }
+    .live-btn:hover{filter:brightness(1.08);}
+    .live-btn .dot{width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.9;}
+    body.live .live-btn{background:var(--support-error); border-color:var(--support-error);}
 
-    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px;}
-    .method-card{background:var(--panel);padding:20px;}
-    .method-card h4{font-size:15px;color:var(--text);margin:0 0 8px;font-weight:600;}
-    .method-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin:0 0 8px;}
-    .method-card p strong{color:var(--text);}
-    .method-example{background:var(--panel-2);padding:10px 12px;font-size:13px;color:var(--text-dim);margin-top:8px;border-left:3px solid var(--acc);}
+    /* ===================== LAYOUT ===================== */
+    .cc-wrap{max-width:1120px; margin:0 auto; padding:24px 20px 90px;}
 
-    .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
-    .rule{background:var(--panel);padding:12px 16px;font-size:14px;color:var(--text-dim);display:flex;gap:10px;align-items:flex-start;}
-    .rule::before{font-weight:700;flex:0 0 auto;}
-    .rule.yes::before{content:"✓";color:var(--support-success);}
-    .rule.no::before{content:"✕";color:var(--support-error);}
+    /* Header */
+    .cc-head{margin-bottom:20px;}
+    .cc-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--primary); margin-bottom:8px;}
+    .cc-head h1{font-size:30px; font-weight:600; letter-spacing:-.02em; line-height:1.15; margin:0 0 8px; color:var(--text);}
+    .cc-head p.sub{font-size:15px; color:var(--text-dim); max-width:760px; margin:0;}
+    .cc-head p.sub b{color:var(--text);}
+    .live-hint{display:none; font-size:12.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; margin-top:10px;}
+    .live-hint b{color:var(--text);}
 
-    .pills{display:flex;flex-wrap:wrap;gap:8px;}
-    .pill{font-size:14px;padding:8px 14px;background:var(--panel);color:var(--text-dim);border:1px solid var(--line);}
+    /* Jump bar (full-guide only) */
+    .jump{display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 26px; padding:12px; background:var(--panel); border:1px solid var(--line);}
+    .jump a{font-size:12.5px; text-decoration:none; color:var(--text-dim); padding:5px 10px; border:1px solid var(--line); background:var(--panel-2);}
+    .jump a:hover{color:var(--text); border-color:var(--primary);}
 
-    /* Carbon content switcher (persona tabs) */
-    .tabs{display:inline-flex;border:1px solid var(--primary);margin-bottom:16px;flex-wrap:wrap;}
-    .tab{padding:11px 18px;background:transparent;color:var(--link);font-family:inherit;font-size:14px;cursor:pointer;border:none;border-right:1px solid var(--primary);transition:background .11s,color .11s;}
+    /* Outcome bar */
+    .outcome-bar{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; padding:12px; background:var(--panel); border:1px solid var(--line);}
+    .outcome{display:flex; align-items:center; gap:8px; flex:1 1 auto; justify-content:center; min-width:140px; padding:11px 12px;
+      background:var(--panel-2); border:1px solid var(--line); font-size:13.5px; font-weight:600; color:var(--text); border-left:4px solid var(--chip,var(--primary));}
+    .outcome .ico{font-size:16px;}
+    .outcome.book{--chip:var(--support-success);}
+    .outcome.callback{--chip:var(--primary);}
+    .outcome.referral{--chip:#8a3ffc;}
+    .outcome.follow{--chip:#f1c21b;}
+    .outcome.closed{--chip:var(--support-error);}
+
+    /* Section shell */
+    .cc-sec{margin-bottom:36px;}
+    .cc-sec-title{display:flex; align-items:center; gap:11px; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); margin-bottom:14px;}
+    .cc-sec-title::before{content:""; width:10px; height:10px; background:var(--acc); flex:0 0 auto;}
+    .cc-sec-title .badge{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; letter-spacing:.02em; color:var(--acc-fg); background:var(--acc-bg); padding:3px 9px; text-transform:none;}
+
+    /* Opener switcher pills (in-call, visible in Live Mode) */
+    .opener-pills{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+    .op-pill{font-family:inherit; font-size:13px; font-weight:600; padding:8px 15px; cursor:pointer;
+      background:var(--panel); color:var(--text-dim); border:1px solid var(--line); transition:all .12s;}
+    .op-pill:hover{border-color:var(--primary); color:var(--text);}
+    .op-pill.active{background:var(--primary); color:var(--on-primary); border-color:var(--primary);}
+
+    /* HERO call flow */
+    .flow{background:var(--panel); border:1px solid var(--line); border-top:4px solid var(--primary); padding:8px;}
+    .flow-step{position:relative; background:var(--panel); padding:20px 22px 20px 64px; border-bottom:1px solid var(--line);}
+    .flow-step:last-child{border-bottom:none;}
+    .flow-step .num{position:absolute; left:18px; top:20px; width:30px; height:30px; background:var(--acc-bg); color:var(--acc-fg); font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center;}
+    .flow-step .role{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); margin-bottom:8px;}
+    .flow-step p.line{font-size:19px; line-height:1.55; color:var(--text); font-weight:400; margin:0;}
+    .flow-step p.line b{color:var(--primary); font-weight:600;}
+    .flow-step .cue{display:inline-block; margin-top:10px; font-size:12px; font-family:'IBM Plex Mono',monospace; color:var(--text-dim);}
+    .flow-arrow{text-align:center; color:var(--acc); font-size:20px; line-height:1; padding:4px 0; background:var(--panel);}
+
+    /* Tap cards — "what did they say" */
+    .say-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+    .say-card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--acc); cursor:pointer; transition:box-shadow .12s,transform .08s,background .12s; user-select:none;}
+    .say-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.12); background:var(--panel-2);}
+    .say-card:active{transform:translateY(1px);}
+    .say-card.open{border-left-color:var(--primary); box-shadow:0 2px 8px rgba(0,0,0,.12);}
+    .say-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:16px 18px;}
+    .say-head .label{font-size:16px; font-weight:600; color:var(--text);}
+    .say-head .chev{font-size:13px; color:var(--link); transition:transform .2s; flex:0 0 auto;}
+    .say-card.open .say-head .chev{transform:rotate(180deg);}
+    .say-body{display:none; padding:0 18px 18px;}
+    .say-card.open .say-body{display:block;}
+    .say-body p{font-size:16px; line-height:1.6; color:var(--text-dim); padding:14px 16px; background:var(--panel-2); border-left:3px solid var(--acc); margin:0 0 8px;}
+    .say-body p:last-child{margin-bottom:0;}
+    .say-body p b{color:var(--text);}
+    .say-body .follow{font-size:13px; font-family:'IBM Plex Mono',monospace; color:var(--acc-fg); background:var(--acc-bg); padding:3px 9px; display:inline-block; margin-top:2px;}
+
+    /* Meeting ask library */
+    .ask-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px;}
+    .ask-card{background:var(--panel); border:1px solid var(--line); padding:16px 18px; border-top:3px solid var(--acc);}
+    .ask-card.default{border-top-color:var(--support-success);}
+    .ask-card h4{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); margin:0 0 8px; font-weight:500;}
+    .ask-card.default h4{color:var(--support-success);}
+    .ask-card p{font-size:16px; line-height:1.55; color:var(--text); margin:0;}
+
+    /* Objections — tap cards */
+    .obj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;}
+    .obj-card{background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--support-error); cursor:pointer; transition:box-shadow .12s,background .12s; user-select:none;}
+    .obj-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.12); background:var(--panel-2);}
+    .obj-card.open{box-shadow:0 2px 8px rgba(0,0,0,.12);}
+    .obj-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:15px 18px;}
+    .obj-head .q{font-size:15px; font-weight:600; color:var(--text);}
+    .obj-head .chev{font-size:13px; color:var(--link); transition:transform .2s; flex:0 0 auto;}
+    .obj-card.open .chev{transform:rotate(180deg);}
+    .obj-body{display:none; padding:0 18px 16px;}
+    .obj-card.open .obj-body{display:block;}
+    .obj-body p{font-size:15.5px; line-height:1.6; color:var(--text-dim); padding:13px 15px; background:var(--panel-2); border-left:3px solid var(--acc); margin:0 0 8px;}
+    .obj-body p:last-child{margin-bottom:0;}
+    .obj-body p b{color:var(--text);}
+    .obj-body .then{display:inline-block; margin-top:2px; font-size:12px; font-family:'IBM Plex Mono',monospace; color:var(--acc-fg); background:var(--acc-bg); padding:4px 10px;}
+
+    /* Snapshot */
+    .snapshot{background:var(--acc-bg); border:1px solid var(--line); border-left:4px solid var(--primary); padding:22px 24px; margin-bottom:14px;}
+    .snapshot p{font-size:17px; line-height:1.6; color:var(--text); margin:0;}
+    .snapshot .hint{display:block; margin-top:10px; font-size:13px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace;}
+
+    /* Tabs (Carbon content switcher) */
+    .tabs{display:inline-flex; border:1px solid var(--primary); margin-bottom:16px; flex-wrap:wrap;}
+    .tab{padding:11px 18px; background:transparent; color:var(--link); font-family:inherit; font-size:14px; cursor:pointer; border:none; border-right:1px solid var(--primary); transition:background .11s,color .11s;}
     .tab:last-child{border-right:none;}
     .tab:hover{background:var(--panel-2);}
-    .tab.active{background:var(--primary);color:var(--on-primary);}
+    .tab.active{background:var(--primary); color:var(--on-primary);}
     .tab-content{display:none;}
     .tab-content.active{display:block;}
 
-    .script-card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);padding:18px 20px;margin-bottom:12px;font-size:15px;color:var(--text-dim);line-height:1.7;}
-    .script-card strong{color:var(--text);}
+    /* Script cards */
+    .script-card{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--acc); padding:18px 20px; margin-bottom:12px; font-size:16px; color:var(--text); line-height:1.7;}
     .script-card.blue{border-left-color:var(--primary);}
-    .script-card em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--acc-fg);background:var(--acc-bg);padding:2px 7px;}
-    .script-note{font-size:13px;color:var(--text-dim);margin-top:12px;padding:10px 12px;background:var(--panel-2);border-left:3px solid var(--primary);}
-    .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;}
-    .micro-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--acc-fg);background:var(--acc-bg);padding:4px 8px;border:1px solid var(--line);}
-    .flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:12px 0;}
-    .flow-card{background:var(--panel);padding:16px 18px;min-height:130px;}
-    .flow-card h4{font-size:14px;color:var(--text);margin:0 0 8px;font-weight:600;}
-    .flow-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin:0;}
-    .step-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--link);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;}
-    .branch-line{background:var(--panel-2);border-left:3px solid var(--primary);padding:12px 14px;margin-top:10px;font-size:14px;color:var(--text-dim);line-height:1.6;}
-    .branch-line strong{color:var(--text);display:block;margin-bottom:4px;}
-    .obj-response .talk-track{background:var(--panel);border-left:3px solid var(--acc);padding:10px 12px;margin:9px 0;}
-    .obj-response .why{font-size:13px;color:var(--text-dim);background:var(--panel);padding:9px 11px;margin-top:8px;border:1px solid var(--line);} .checklist-box{background:var(--panel);border:1px solid var(--line);padding:16px;margin:12px 0;} .checklist-box div{padding:6px 0;}
+    .script-card strong{color:var(--text);}
+    .script-card em{font-style:normal; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--acc-fg); background:var(--acc-bg); padding:2px 7px;}
+    .script-note{font-size:13px; color:var(--text-dim); margin-top:12px; padding:10px 12px; background:var(--panel-2); border-left:3px solid var(--primary);}
+    .human-line{font-size:13.5px; color:var(--text-dim); background:var(--panel-2); padding:9px 11px; margin-top:8px; border:1px solid var(--line);}
+    .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px;}
+    .micro-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--acc-fg); background:var(--acc-bg); padding:4px 8px; border:1px solid var(--line);}
+    .close-box{background:var(--panel-2); border-left:3px solid var(--acc); padding:16px 18px; margin:10px 0 4px;}
+    .close-box .label{font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:500; color:var(--text-dim); text-transform:uppercase; letter-spacing:.03em; margin-bottom:8px;}
+    .close-box p{font-size:16px; color:var(--text); font-weight:600; margin:0;}
 
-    .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
-    .obj-item{background:var(--panel);padding:16px 18px;cursor:pointer;transition:background .11s;}
-    .obj-item:hover{background:var(--panel-2);}
-    .obj-item.open{background:var(--panel-2);}
-    .obj-header{display:flex;justify-content:space-between;align-items:center;gap:10px;}
-    .obj-trigger{font-size:14px;font-weight:600;color:var(--text);flex:1;}
-    .obj-chevron{font-size:14px;color:var(--link);flex:0 0 auto;transition:transform .2s;}
-    .obj-item.open .obj-chevron{transform:rotate(180deg);}
-    .obj-response{display:none;font-size:14px;color:var(--text-dim);line-height:1.7;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
-    .obj-response.visible{display:block;}
-    .obj-then{display:inline-block;margin-top:10px;font-size:12px;font-weight:500;font-family:'IBM Plex Mono',monospace;color:var(--acc-fg);background:var(--acc-bg);padding:5px 11px;}
+    /* Formula grid */
+    .flow-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin:0 0 12px;}
+    .flow-card{background:var(--panel); padding:16px 18px; min-height:130px;}
+    .flow-card .step-label{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--link); text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px;}
+    .flow-card h4{font-size:14px; color:var(--text); margin:0 0 8px; font-weight:600;}
+    .flow-card p{font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;}
 
-    .close-box{background:var(--panel-2);border-left:3px solid var(--acc);padding:18px 20px;margin:6px 0 12px;}
-    .close-box .label{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--text-dim);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;}
-    .close-box p{font-size:17px;color:var(--text);font-weight:600;margin:0;}
+    /* Method / two-col */
+    .two-col{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:4px;}
+    .method-card{background:var(--panel); padding:20px;}
+    .method-card h4{font-size:15px; color:var(--text); margin:0 0 8px; font-weight:600;}
+    .method-card p{font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0 0 8px;}
+    .method-card p strong{color:var(--text);}
+    .method-card p:last-child{margin-bottom:0;}
+    .method-example{background:var(--panel-2); padding:10px 12px; font-size:13.5px; color:var(--text-dim); margin-top:8px; border-left:3px solid var(--acc);}
+    .method-card.green h4{color:var(--support-success);}
+    .method-card.red h4{color:var(--support-error);}
 
-    .list-item{background:var(--panel);border:1px solid var(--line);padding:12px 16px;margin-bottom:8px;font-size:14px;color:var(--text-dim);line-height:1.6;}
-    .list-item strong{color:var(--text);display:block;margin-bottom:4px;}
+    /* Callout / rules / pills / list */
+    .callout-tip{display:flex; gap:14px; background:var(--panel-2); border-left:3px solid var(--acc); padding:16px 20px; margin-bottom:12px;}
+    .callout-tip .ic{font-size:18px; flex:0 0 auto; line-height:1.4; color:var(--primary);}
+    .callout-tip strong{display:block; color:var(--text); margin-bottom:4px; font-weight:600;}
+    .callout-tip p{margin:0; color:var(--text-dim); font-size:14px; line-height:1.6;}
+    .rules{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
+    .rule{background:var(--panel); padding:12px 16px; font-size:14px; color:var(--text-dim); display:flex; gap:10px; align-items:flex-start;}
+    .rule::before{font-weight:700; flex:0 0 auto;}
+    .rule.yes::before{content:"✓"; color:var(--support-success);}
+    .rule.no::before{content:"✕"; color:var(--support-error);}
+    .pills{display:flex; flex-wrap:wrap; gap:8px;}
+    .pill{font-size:14px; padding:8px 14px; background:var(--panel); color:var(--text-dim); border:1px solid var(--line);}
+    .list-item{background:var(--panel); border:1px solid var(--line); padding:12px 16px; margin-bottom:8px; font-size:14px; color:var(--text-dim); line-height:1.6;}
+    .list-item strong{color:var(--text); display:block; margin-bottom:4px;}
+    .checklist-box{background:var(--panel); border:1px solid var(--line); padding:16px 18px; margin:12px 0;}
+    .checklist-box h4{margin:0 0 8px; font-size:14px; color:var(--text);}
+    .checklist-box div{padding:6px 0; color:var(--text-dim); font-size:14px;}
+    .trio{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;}
 
-    .flag-col h4{font-size:15px;margin:0 0 12px;font-weight:600;}
-    .flag-col.green h4{color:var(--support-success);}
-    .flag-col.red h4{color:var(--support-error);}
+    /* Floating live-call rail */
+    .rail{position:fixed; right:18px; bottom:18px; z-index:90; width:154px; background:var(--panel); border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,.18);}
+    .rail-head{background:var(--primary); color:var(--on-primary); font-size:12px; font-weight:600; text-align:center; padding:9px; letter-spacing:.03em;}
+    .rail a{display:block; text-align:center; font-size:13px; color:var(--text); text-decoration:none; padding:9px 6px;}
+    .rail a:hover{background:var(--panel-2);}
+    .rail .ar{text-align:center; color:var(--acc); font-size:13px; line-height:.4; padding:0;}
+    .rail-stop{background:var(--support-error); color:#fff; text-align:center; font-weight:700; font-size:13px; padding:11px; letter-spacing:.04em;}
+    .rail-tag{display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--acc-fg); background:var(--acc-bg); padding:2px 6px; margin-top:3px;}
+    .rail-close{position:absolute; top:6px; right:8px; background:transparent; border:none; color:var(--on-primary); font-size:15px; cursor:pointer; line-height:1;}
+    @media(max-width:900px){.rail{display:none;}}
 
-    @media (max-width:768px){.obj-grid,.two-col,.rules{grid-template-columns:1fr;}}
+    /* ===================== LIVE MODE ===================== */
+    /* In Live Mode, hide everything except the 4 in-call sections. */
+    body.live .full-guide,
+    body.live .cc-head p.sub,
+    body.live .jump{display:none;}
+    body.live .live-hint{display:block;}
+    body.live .cc-sec-title .badge{opacity:.65;}
+
+    /* ===================== PRINT ===================== */
+    @media print{
+      .rail,.live-btn,.theme-toggle,.jump{display:none !important;}
+      .site-nav{position:static;}
+      .cc-wrap{max-width:100%; padding:0;}
+      .cc-sec{margin-bottom:14px; break-inside:avoid;}
+      .flow,.snapshot,.say-card,.obj-card,.ask-card,.method-card,.script-card{break-inside:avoid;}
+      .say-card .say-body,.obj-card .obj-body{display:block !important;}
+      .tab-content{display:block !important;}
+    }
+
+    @media(max-width:640px){
+      .cc-head h1{font-size:24px;}
+      .flow-step{padding:16px 16px 16px 56px;}
+      .flow-step .num{left:14px;}
+      .flow-step p.line{font-size:17px;}
+      .outcome{min-width:calc(50% - 4px);}
+    }
   </style>
 </head>
 <body class="acc-cold">
-
+  <!-- ===================== NAV ===================== -->
   <header class="site-nav">
     <div class="site-nav-inner">
       <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
@@ -118,6 +256,9 @@
         <a href="rep-alignment.html">Rep Alignment</a>
         <a href="territory-map.html">Territory Map</a>
       </nav>
+      <button class="live-btn" type="button" id="liveBtn" aria-pressed="false" title="Toggle Live Mode (L)">
+        <span class="dot"></span><span id="liveLbl">Live Mode</span>
+      </button>
       <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
         <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
         <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
@@ -126,349 +267,471 @@
     </div>
   </header>
 
-  <div class="guide">
-    <header class="g-hero">
-      <div class="g-eyebrow">Section 2</div>
-      <h1 class="g-h1">Cold call cheat sheet</h1>
-      <p class="g-lede">What to say when they pick up. One opening script that flexes by persona, a response for every objection, and the voicemail, gatekeeper, email, and cadence to back it up.</p>
-      <div class="g-meta">Updated Aug 4, 2026 · opening tabs · discovery flow · objection windows · value snapshot</div>
-    </header>
-  </div>
-
-  <nav class="g-toc" aria-label="On this page">
-    <div class="g-toc-inner">
-      <a href="#tips">Pro tips</a>
-      <a href="#delivery">Delivery</a>
-      <a href="#mindset">Mindset</a>
-      <a href="#script">Opening script</a>
-      <a href="#discovery">Discovery flow</a>
-      <a href="#objections">Objections</a>
-      <a href="#value">MaaS360 value</a>
-      <a href="#close">Always close</a>
-      <a href="#voicemail">Voicemail</a>
-      <a href="#gatekeeper">Gatekeeper</a>
-      <a href="#email">Follow-up email</a>
-      <a href="#cadence">Cadence</a>
-      <a href="#research">Research</a>
-      <a href="#tonality">Tonality</a>
-      <a href="#flags">Flags</a>
+  <main class="cc-wrap" id="top">
+    <!-- Header -->
+    <div class="cc-head">
+      <div class="cc-eyebrow">IBM MaaS360 · Live-Call Cockpit</div>
+      <h1>Cold Call Cockpit</h1>
+      <p class="sub"><b>One job:</b> start a conversation, uncover a challenge, and earn a 10 to 15 minute discovery meeting. Flip <b>Live Mode</b> on for the call, off to study the full guide.</p>
+      <p class="live-hint">Live Mode on — showing only <b>Flow</b>, <b>What Did They Say</b>, <b>Ask</b>, and <b>Objections</b>. Press <b>L</b> or the button to exit.</p>
     </div>
-  </nav>
 
-  <main class="g-main">
+    <!-- Jump bar (hidden in Live Mode) -->
+    <nav class="jump full-guide" aria-label="Jump to">
+      <a href="#s-flow">Flow</a>
+      <a href="#s-say">What They Said</a>
+      <a href="#s-ask">Meeting Ask</a>
+      <a href="#s-obj">Objections</a>
+      <a href="#s-snap">Value</a>
+      <a href="#s-starters">Starters</a>
+      <a href="#s-interrupts">Interrupts</a>
+      <a href="#s-opening">Openers</a>
+      <a href="#s-formula">4-Step Formula</a>
+      <a href="#s-close">Close</a>
+      <a href="#s-voicemail">Voicemail</a>
+      <a href="#s-gatekeeper">Gatekeeper</a>
+      <a href="#s-email">Email</a>
+      <a href="#s-cadence">Cadence</a>
+      <a href="#s-research">Research</a>
+      <a href="#s-tonality">Tonality</a>
+      <a href="#s-flags">Flags</a>
+    </nav>
 
-    <section class="g-section" id="tips">
-      <h2 class="g-section-title">Pro tips and strategy</h2>
-      <div class="callout-tip">
-        <span class="ic">🔥</span>
-        <div><strong>The power move</strong><p>Say "I'm the MaaS360 [AE/POC] for [Company Name]" — it sounds like you were assigned to them specifically, not like you're blasting a list. They feel like the call was coming regardless. More authority than "I'm calling to introduce myself."</p></div>
+    <!-- Outcome bar -->
+    <div class="outcome-bar" aria-label="Possible call outcomes">
+      <div class="outcome book"><span class="ico">✅</span> Meeting Booked</div>
+      <div class="outcome callback"><span class="ico">📅</span> Call Back</div>
+      <div class="outcome referral"><span class="ico">👤</span> Referral</div>
+      <div class="outcome follow"><span class="ico">📧</span> Follow Up</div>
+      <div class="outcome closed"><span class="ico">❌</span> Closed</div>
+    </div>
+
+    <!-- ============ 1. IN-CALL: HERO FLOW ============ -->
+    <section class="cc-sec" id="s-flow">
+      <div class="cc-sec-title">Recommended Call Flow <span class="badge">say this</span></div>
+      <div class="opener-pills" id="openerPills" role="tablist" aria-label="Choose your opener">
+        <button class="op-pill active" type="button" data-open="rec">Recommended</button>
+        <button class="op-pill" type="button" data-open="soft">Soft</button>
+        <button class="op-pill" type="button" data-open="direct">Direct</button>
+        <button class="op-pill" type="button" data-open="casual">Casual</button>
       </div>
-      <div class="callout-tip">
-        <span class="ic">💪</span>
-        <div><strong>Fight for every second</strong><p>Be positive. Your default response: "I'm glad you brought that up." Keep fighting — even if they're rude, stay professional: "Thank you for sharing that, that's exactly why I wanted to talk to you today." Never give up easily.</p></div>
-      </div>
-      <div class="two-col">
-        <div class="method-card">
-          <h4>Glaze method</h4>
-          <p><strong>Best for:</strong> Natural yappers who can build rapport quickly</p>
-          <p>Build warmth first. Reference something real about them or their company. Compliment genuinely. Let them talk before pivoting to the ask.</p>
-          <div class="method-example">"I saw you just expanded to three new locations — that's impressive growth."</div>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="num">1</span>
+          <div class="role" id="openRole">Open · Recommended</div>
+          <p class="line" id="openLine">"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I'm catching you out of the blue, so I'll be quick. When it comes to company devices, what's usually the biggest headache for your team these days?"</p>
+          <span class="cue" id="openCue">then stop talking →</span>
         </div>
-        <div class="method-card">
-          <h4>Direct method</h4>
-          <p><strong>Best for:</strong> Getting straight to business</p>
-          <p>Skip the small talk. Go straight to the ask. Respect their time by being efficient.</p>
-          <div class="method-example">"Are you open to a 10-minute call to see if we're a fit?"</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="num">2</span>
+          <div class="role" id="discRole">Discover</div>
+          <p class="line" id="discLine">"Got it. How are you handling that today?"</p>
         </div>
-        <div class="method-card">
-          <h4>Permission method</h4>
-          <p><strong>Best for:</strong> Guarded prospects and busy leaders</p>
-          <p>Name the interruption first, ask for 20 seconds, then let them choose. This feels more human than forcing a pitch.</p>
-          <div class="method-example">"You weren't expecting my call. Can I take 20 seconds to tell you why I reached out, and you can tell me if it's off base?"</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="num">3</span>
+          <div class="role" id="curiRole">Create curiosity</div>
+          <p class="line" id="curiLine">"Makes sense. One thing I hear a lot is teams already have a tool, but still deal with manual work, mobile security, or support issues. Has any of that come up on your side?"</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="num">4</span>
+          <div class="role" id="askRole">Ask for the meeting</div>
+          <p class="line" id="askLine">"Interesting. That's really why I called. I don't know if MaaS360 is relevant yet, but it might be worth <b>10-15 minutes</b> to compare notes. Would that be unreasonable?"</p>
         </div>
       </div>
     </section>
 
-    <section class="g-section" id="delivery">
-      <h2 class="g-section-title">Delivery reminders</h2>
+    <!-- ============ 2. IN-CALL: WHAT DID THEY SAY ============ -->
+    <section class="cc-sec" id="s-say">
+      <div class="cc-sec-title">What Did They Say? <span class="badge">tap a card</span></div>
+      <div class="say-grid">
+        <div class="say-card" data-say>
+          <div class="say-head"><span class="label">Names a tool</span><span class="chev">▾</span></div>
+          <div class="say-body">
+            <p>"Got it, most teams I speak with already have something. How has <b>[Intune / Jamf / Workspace ONE]</b> been working overall?"</p>
+            <span class="follow">then → "Is there one part the team still complains about?"</span>
+          </div>
+        </div>
+        <div class="say-card" data-say>
+          <div class="say-head"><span class="label">Happy / "we're good"</span><span class="chev">▾</span></div>
+          <div class="say-body">
+            <p>"Totally fair, I'd be surprised if you didn't. Is it smooth across the board, or is there one area the team still gripes about? Even good tools have a weak spot."</p>
+          </div>
+        </div>
+        <div class="say-card" data-say>
+          <div class="say-head"><span class="label">Manual / messy</span><span class="chev">▾</span></div>
+          <div class="say-body">
+            <p>"That sounds like a lot to keep track of. Is the painful part the <b>setup</b>, the <b>security</b> side, or <b>supporting users</b> after the fact?"</p>
+            <span class="follow">then → "How do you handle it when someone's remote or offsite?"</span>
+          </div>
+        </div>
+        <div class="say-card" data-say>
+          <div class="say-head"><span class="label">Mentions a pain</span><span class="chev">▾</span></div>
+          <div class="say-body">
+            <p>"How are you handling that today? And is that more of a headache for <b>IT</b>, or is it starting to hit your <b>end users</b> too?"</p>
+          </div>
+        </div>
+        <div class="say-card" data-say>
+          <div class="say-head"><span class="label">Wrong person</span><span class="chev">▾</span></div>
+          <div class="say-body">
+            <p>"No worries. Who's closest to device management or mobile security on your side?"</p>
+            <span class="follow">then → "Would it be weird if I mentioned you pointed me the right way?"</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. IN-CALL: MEETING ASK LIBRARY ============ -->
+    <section class="cc-sec" id="s-ask">
+      <div class="cc-sec-title">Meeting Ask Library <span class="badge">pick one, then stop</span></div>
+      <div class="ask-grid">
+        <div class="ask-card default"><h4>Default</h4><p>"Would 10-15 minutes to compare notes be unreasonable?"</p></div>
+        <div class="ask-card"><h4>Direct</h4><p>"Worth taking a quick look together next week?"</p></div>
+        <div class="ask-card"><h4>Curious</h4><p>"I'm not sure we're a fit yet. Would it make sense to compare notes?"</p></div>
+        <div class="ask-card"><h4>Executive</h4><p>"If there's a chance to save the team time, it's probably worth a short conversation."</p></div>
+        <div class="ask-card"><h4>Soft</h4><p>"No hard pitch. Just 10 minutes to see if there's anything useful."</p></div>
+        <div class="ask-card"><h4>Calendar lock</h4><p>"Perfect. Are mornings or afternoons usually easier for you?"</p></div>
+      </div>
+    </section>
+
+    <!-- ============ 4. IN-CALL: OBJECTIONS ============ -->
+    <section class="cc-sec" id="s-obj">
+      <div class="cc-sec-title">Top Objections <span class="badge">tap to answer</span></div>
+      <div class="obj-grid">
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"What's this about?"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"Fair question. I work with teams on managing and securing company devices. I was really just trying to understand how you guys handle that today."</p><span class="then">then → "Are you close to that, or is that someone else?"</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Send me an email"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"Happy to. Just so I don't send you something generic, are you using anything today for device management?"</p><span class="then">then → "The email makes more sense with 10 min of context. Crazy to compare notes next week?"</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"We already have something"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"Makes sense, most teams I call already do. Is it working smoothly, or is there one part the team still complains about?"</p><span class="then">find the gap</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Not interested"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"Totally fair. Usually that means timing is off, you already have something that works, or I caught the wrong person. Which one is it?"</p><span class="then">learn why or exit clean</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"No budget"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"Makes sense. I'm not calling to ask you to buy anything today. Would it still be useful to know what's out there so you're not starting from scratch later?"</p><span class="then">low pressure meeting</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Bad time"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"No worries, I caught you in the middle of something. Should I try later today, or is tomorrow morning better?"</p><span class="then">get a callback window</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"How much does it cost?"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"It depends on the number of devices and what you actually need, so I don't want to throw out a random number. Roughly how many users or devices would this apply to?"</p><span class="then">qualify, then book</span></div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Please don't call again"</span><span class="chev">▾</span></div>
+          <div class="obj-body"><p>"Understood. I'll make a note and won't call again. Appreciate your time."</p><span class="then">then actually stop — log it, no follow-up</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- ============ FULL GUIDE (hidden in Live Mode) ====== -->
+    <!-- ==================================================== -->
+
+    <!-- Value snapshot -->
+    <section class="cc-sec full-guide" id="s-snap">
+      <div class="cc-sec-title">MaaS360 Value Snapshot <span class="badge">only if they ask</span></div>
+      <div class="snapshot">
+        <p>"MaaS360 helps companies manage and secure phones, tablets, laptops, and BYOD from one place, while cutting the manual work for IT."</p>
+        <span class="hint">give one line, then go straight back to the meeting ask</span>
+      </div>
+      <div class="two-col">
+        <div class="method-card"><h4>Plain English</h4><p>Manage and secure every device from one place.</p></div>
+        <div class="method-card"><h4>IT version</h4><p>Cuts manual work around setup, apps, policies, and support.</p></div>
+        <div class="method-card"><h4>Security version</h4><p>Protects work data across mobile, BYOD, and endpoints.</p></div>
+        <div class="method-card"><h4>Curiosity line</h4><p>"Most teams aren't starting from zero, they just want a cleaner way to manage devices and less support work."</p></div>
+      </div>
+    </section>
+
+    <!-- Conversation starters -->
+    <section class="cc-sec full-guide" id="s-starters">
+      <div class="cc-sec-title">Conversation Starters <span class="badge">when the opener feels stiff</span></div>
+      <div class="tabs" role="tablist" data-group="starters">
+        <button class="tab active" type="button" data-group="starters" data-id="headache">Biggest Headache</button>
+        <button class="tab" type="button" data-group="starters" data-id="teams">Most IT Teams</button>
+        <button class="tab" type="button" data-group="starters" data-id="magic">Magic Wand</button>
+        <button class="tab" type="button" data-group="starters" data-id="relevant">Maybe Not Relevant</button>
+        <button class="tab" type="button" data-group="starters" data-id="understand">Help Me Understand</button>
+      </div>
+      <div class="tab-content active" data-group="starters" data-id="headache"><div class="script-card blue">"When it comes to company devices, what's usually the biggest headache for your team these days?"<div class="human-line">Follow-up: "Interesting. What makes that part a pain?"</div><div class="human-line">Then bridge: "Yeah, that comes up a lot. Worth 10 min to compare notes?"</div></div></div>
+      <div class="tab-content" data-group="starters" data-id="teams"><div class="script-card blue">"Out of these three, what gets the most attention: device security, manual work, or support tickets?"<div class="human-line">Setup: "Most IT teams I talk to already have something in place."</div><div class="human-line">Follow-up: "Got it, what's driving that being the priority right now?"</div></div></div>
+      <div class="tab-content" data-group="starters" data-id="magic"><div class="script-card blue">"If you could wave a magic wand and fix one thing around device management, what would it be?"<div class="human-line">Follow-up: "How long has that been a thorn in the side?"</div><div class="human-line">Then bridge: "That's exactly the kind of thing we poke at. Quick look next week?"</div></div></div>
+      <div class="tab-content" data-group="starters" data-id="relevant"><div class="script-card blue">"How are you handling employee-owned devices today?"<div class="human-line">Setup: "This may not even be relevant for you, but I was curious."</div><div class="human-line">Follow-up: "Has that worked pretty well, or is BYOD still a bit of a headache?"</div></div></div>
+      <div class="tab-content" data-group="starters" data-id="understand"><div class="script-card blue">"How does your team manage phones, tablets, and laptops today?"<div class="human-line">Setup: "Help me understand something."</div></div></div>
+    </section>
+
+    <!-- Pattern interrupts -->
+    <section class="cc-sec full-guide" id="s-interrupts">
+      <div class="cc-sec-title">Pattern Interrupts <span class="badge">when the call feels guarded</span></div>
+      <div class="tabs" role="tablist" data-group="interrupts">
+        <button class="tab active" type="button" data-group="interrupts" data-id="wrong">Maybe I'm Wrong</button>
+        <button class="tab" type="button" data-group="interrupts" data-id="dumb">Dumb Question</button>
+        <button class="tab" type="button" data-group="interrupts" data-id="curious">Curiosity</button>
+        <button class="tab" type="button" data-group="interrupts" data-id="different">Everyone's Different</button>
+        <button class="tab" type="button" data-group="interrupts" data-id="heard">Heard This Before</button>
+      </div>
+      <div class="tab-content active" data-group="interrupts" data-id="wrong"><div class="script-card blue">"Are mobile devices becoming more of a security conversation for you guys lately?"<div class="human-line">Setup: "Maybe I'm completely off here."</div></div></div>
+      <div class="tab-content" data-group="interrupts" data-id="dumb"><div class="script-card blue">"Who actually owns device management over there?"<div class="human-line">Setup: "This might be a dumb question."</div></div></div>
+      <div class="tab-content" data-group="interrupts" data-id="curious"><div class="script-card blue">"Roughly how many devices are you managing these days?"<div class="human-line">Setup: "Out of curiosity."</div></div></div>
+      <div class="tab-content" data-group="interrupts" data-id="different"><div class="script-card blue">"How are you guys approaching device management today?"<div class="human-line">Setup: "Every company seems to handle this differently."</div></div></div>
+      <div class="tab-content" data-group="interrupts" data-id="heard"><div class="script-card blue">"Has manual device work come up for your team at all?"<div class="human-line">Setup: "One thing I keep hearing is IT teams spend too much time on device work."</div></div></div>
+    </section>
+
+    <!-- Opening script + persona hooks -->
+    <section class="cc-sec full-guide" id="s-opening">
+      <div class="cc-sec-title">Opening Script <span class="badge">by persona</span></div>
+      <div class="script-card"><strong>Default opener</strong><br><br>"Hey [Name]?"<br><br><em>[wait for them]</em><br><br>"Hey, this is [Your Name] with IBM. I know I'm catching you out of the blue, so I'll be quick. When it comes to company devices, what's usually the biggest headache for your team? Setup, security, support tickets, or something else?"<div class="script-note">Say it slowly, then stop talking. Make it easy to answer.</div></div>
+      <div class="tabs" role="tablist" data-group="opening">
+        <button class="tab active" type="button" data-group="opening" data-id="simple">Simple</button>
+        <button class="tab" type="button" data-group="opening" data-id="it">IT Director</button>
+        <button class="tab" type="button" data-group="opening" data-id="security">Security</button>
+        <button class="tab" type="button" data-group="opening" data-id="exec">Executive</button>
+        <button class="tab" type="button" data-group="opening" data-id="unknown">Wrong Person</button>
+        <button class="tab" type="button" data-group="opening" data-id="soft">Soft</button>
+        <button class="tab" type="button" data-group="opening" data-id="direct">Direct</button>
+        <button class="tab" type="button" data-group="opening" data-id="casual">Casual</button>
+      </div>
+      <div class="tab-content active" data-group="opening" data-id="simple"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">default</span><span class="micro-tag">natural</span></div>"How are you guys handling device management today?"<div class="human-line">Use after: "Hey [Name]? [Your Name] with IBM. I'll be quick."</div><div class="human-line">If they name a tool: "Got it. How has that been for you overall?"</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="it"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">IT</span><span class="micro-tag">workload</span></div>"With all the devices your team supports, what's the bigger headache right now? Setup, security, or support tickets?"<div class="human-line">If they pick one: "Yeah, I hear that a lot. What makes that part painful?"</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="security"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">security</span><span class="micro-tag">risk</span></div>"Are mobile devices and BYOD a security priority for your team, or is that handled somewhere else?"<div class="human-line">If they engage: "Is the biggest concern risk, compliance, or keeping work data protected?"</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="exec"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">exec</span><span class="micro-tag">business</span></div>"For your team this year, is reducing device risk or reducing manual IT work the bigger priority?"<div class="human-line">Keep it high-level: risk, time, user productivity.</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="unknown"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">route</span><span class="micro-tag">safe</span></div>"Who usually owns device management or mobile security on your side?"<div class="human-line">Use after: "You might not be the right person."</div><div class="human-line">If they give a name: "Would it be weird if I mentioned you pointed me the right way?"</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="soft"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">lowest pressure</span><span class="micro-tag">guarded prospect</span></div>"Hey [Name]? [Your Name] with IBM. I know you weren't expecting my call, so I'll keep it short. This might not even be relevant for you, but how's your team handling company devices these days?"<div class="human-line">If they open up: "Got it. Has that been pretty smooth, or is there a part that still bugs the team?"</div><div class="human-line">If they stall: "No worries. Are you even the right person for device stuff, or is that someone else?"</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="direct"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">busy prospect</span><span class="micro-tag">concrete</span></div>"Hey [Name]? [Your Name] with IBM. I'll be quick, I promise. When it comes to managing all your company's phones and laptops, what usually eats up the most time for your team?"<div class="human-line">Follow-up: "Yeah, I hear that a lot. Is that more on IT, or does it hit your users too?"</div><div class="human-line">Then bridge: "That's actually why I called, worth 10-15 min to compare notes?"</div></div></div>
+      <div class="tab-content" data-group="opening" data-id="casual"><div class="script-card blue"><div class="tag-row"><span class="micro-tag">most human</span><span class="micro-tag">routes fast</span></div>"Hey [Name]? It's [Your Name] calling from IBM. Total cold call, full transparency. Real quick though, are you the person who deals with device management and security over there, or is that somebody else?"<div class="human-line">If yes: "Perfect. Quick one then, how are you guys handling all that today?"</div><div class="human-line">If no: "No worries, who should I be talking to? Would it be weird if I said you pointed me their way?"</div></div></div>
+    </section>
+
+    <!-- 4-step formula -->
+    <section class="cc-sec full-guide" id="s-formula">
+      <div class="cc-sec-title">The 4-Step Meeting Formula <span class="badge">react · dig · curiosity · ask</span></div>
+      <div class="flow-grid">
+        <div class="flow-card"><div class="step-label">1. React</div><h4>Make them feel heard</h4><p>"Got it." · "That makes sense." · "I hear that a lot."</p></div>
+        <div class="flow-card"><div class="step-label">2. Dig</div><h4>One easy follow-up</h4><p>"How has that been working?" · "What makes that frustrating?" · "IT or users?"</p></div>
+        <div class="flow-card"><div class="step-label">3. Curiosity</div><h4>Share one pattern</h4><p>"A lot of teams already have a tool. The gaps are usually manual work, mobile security, or support."</p></div>
+        <div class="flow-card"><div class="step-label">4. Ask</div><h4>Sell the next step</h4><p>"I don't know if MaaS360 is relevant yet. Would 10-15 minutes be unreasonable?"</p></div>
+      </div>
+    </section>
+
+    <!-- Closing playbook -->
+    <section class="cc-sec full-guide" id="s-close">
+      <div class="cc-sec-title">Closing Playbook <span class="badge">pick a close</span></div>
+      <div class="tabs" role="tablist" data-group="close">
+        <button class="tab active" type="button" data-group="close" data-id="standard">Standard</button>
+        <button class="tab" type="button" data-group="close" data-id="curious">Curiosity</button>
+        <button class="tab" type="button" data-group="close" data-id="exec">Executive</button>
+        <button class="tab" type="button" data-group="close" data-id="soft">Soft No</button>
+        <button class="tab" type="button" data-group="close" data-id="lock">Calendar Lock</button>
+      </div>
+      <div class="tab-content active" data-group="close" data-id="standard"><div class="script-card">"I don't know if we have something useful yet. Based on what you mentioned, it feels worth a quick conversation. Would 10-15 minutes be unreasonable?"<div class="human-line">If yes: "Perfect. Are mornings or afternoons easier?"</div></div></div>
+      <div class="tab-content" data-group="close" data-id="curious"><div class="script-card">"I'm not even sure MaaS360 is a fit yet. That's why I think a quick conversation would be useful. We compare what you do today against where we usually help. If it's not relevant, you tell me. Unreasonable?"</div></div>
+      <div class="tab-content" data-group="close" data-id="exec"><div class="script-card">"This may not turn into a project. But if there's a chance to reduce risk or take manual work off IT, it's probably worth a short look. Would 15 minutes next week be fair?"</div></div>
+      <div class="tab-content" data-group="close" data-id="soft"><div class="script-card">"Totally fair. Before I let you go, what would need to change for this to be worth looking at later?"<div class="human-line">Then set a specific follow-up date, not "sometime later."</div></div></div>
+      <div class="tab-content" data-group="close" data-id="lock"><div class="script-card">"Perfect. I've got Tuesday at 2. What's the best email for the invite?"<br><br>After they answer: "Great, I'm sending it while we're on the phone so I don't lose you."<br><br>Then: "Anyone else who should be included if we're talking device management or security?"</div></div>
+      <div class="checklist-box"><h4>Meeting locked checklist</h4><div>✓ Date and time confirmed</div><div>✓ Correct email captured</div><div>✓ Calendar invite sent while live</div><div>✓ Other stakeholders asked about</div><div>✓ Next step is clear</div></div>
+    </section>
+
+    <!-- Pro tips + delivery + mindset -->
+    <section class="cc-sec full-guide" id="s-tips">
+      <div class="cc-sec-title">Pro Tips &amp; Strategy</div>
+      <div class="callout-tip"><span class="ic">•</span><div><strong>Your goal is not to pitch MaaS360</strong><p>Get them talking, learn one useful thing, create a little curiosity, and earn 10-15 minutes on the calendar.</p></div></div>
+      <div class="callout-tip"><span class="ic">•</span><div><strong>One question, one insight, one ask</strong><p>Ask a simple question, react, share a short pattern you're seeing, then ask for a quick meeting. Don't stack five discovery questions.</p></div></div>
+      <div class="callout-tip"><span class="ic">•</span><div><strong>Sound like you're calling a coworker</strong><p>Short sentences. Normal words. Calm pace. If a line is hard to say out loud, rewrite it until it sounds like you.</p></div></div>
+      <div class="two-col" style="margin-top:14px;">
+        <div class="method-card"><h4>Curious method</h4><p><strong>Best for:</strong> most live connects</p><p>Start with a low-pressure question that gets them talking before you explain anything.</p><div class="method-example">"When it comes to company devices, what's usually the biggest headache for your team?"</div></div>
+        <div class="method-card"><h4>Pattern method</h4><p><strong>Best for:</strong> creating a reason to meet</p><p>After they answer, mention a common pattern that may or may not apply.</p><div class="method-example">"A lot of teams already have a tool, but still hit gaps around a clearer view, mobile security, or manual support work."</div></div>
+        <div class="method-card"><h4>Referral method</h4><p><strong>Best for:</strong> unclear title</p><p>Ask for direction instead of forcing the pitch on the wrong person.</p><div class="method-example">"You may not be the right person, but who usually owns device management on your side?"</div></div>
+      </div>
+    </section>
+
+    <section class="cc-sec full-guide" id="s-delivery">
+      <div class="cc-sec-title">Delivery Reminders &amp; Mindset</div>
       <div class="rules">
-        <div class="rule yes">Say "for [Company Name]" with ownership, not apology</div>
-        <div class="rule yes">Pause after your intro — let it settle</div>
-        <div class="rule yes">Always end with two specific times</div>
-        <div class="rule yes">Sound like you expected them to pick up</div>
-        <div class="rule no">Don't rush — slower reads as more confident</div>
-        <div class="rule no">No "I was just calling to..."</div>
-        <div class="rule no">Don't pitch the product on the cold call</div>
-        <div class="rule no">Ask, then go quiet — let them answer</div>
+        <div class="rule yes">Ask a short question early</div>
+        <div class="rule yes">Pause after the question</div>
+        <div class="rule yes">Use plain English like "company devices"</div>
+        <div class="rule yes">Mirror their wording back to them</div>
+        <div class="rule no">Do not monologue about MaaS360</div>
+        <div class="rule no">Do not say "I know this is a long shot"</div>
+        <div class="rule no">Do not ask five questions in a row</div>
+        <div class="rule no">Do not end with "let me know"</div>
+      </div>
+      <div class="pills" style="margin-top:14px;">
+        <div class="pill">Start a conversation</div>
+        <div class="pill">Sell the meeting, not the platform</div>
+        <div class="pill">One question, then listen</div>
+        <div class="pill">Curious beats clever</div>
+        <div class="pill">Shorter sounds more confident</div>
       </div>
     </section>
 
-    <section class="g-section" id="mindset">
-      <h2 class="g-section-title">Mindset</h2>
-      <div class="pills">
-        <div class="pill">You own this territory — act like it</div>
-        <div class="pill">Selling 10 minutes, not MaaS360</div>
-        <div class="pill">Curious beats pushy every time</div>
-        <div class="pill">Less words, more confidence</div>
-        <div class="pill">One smooth pass, then listen</div>
-      </div>
-    </section>
-
-    <section class="g-section" id="script">
-      <h2 class="g-section-title">Opening script</h2>
-      <div class="script-card">"Hey [Name]... <em>[pause and wait for reply]</em><br><br>
-        This is [Your Name], the MaaS360 specialist with IBM for [Company Name].<br><br>
-        You weren't expecting my call, so can I take 20 seconds to tell you why I reached out, and you can tell me if it's off base?<br><br>
-        <em>[they say yes]</em><br><br>
-        Select the persona tab below, read one value line, then close for time:<br><br>
-        <strong>Does Tuesday at 2 work, or is Wednesday morning better?</strong>"
-        <div class="script-note">Keep this opener light. The cold call is not the demo. It is ownership, permission, one relevant value line, then a meeting ask.</div>
-      </div>
-
-      <div class="list-item"><strong>Persona value window:</strong> Pick the tab that fits who answered. If you are not sure, use Unknown persona. Do not read more than one value line.</div>
-      <div class="tabs" role="tablist" aria-label="Opening value lines">
-        <button class="tab active" type="button" data-tab-group="opening" onclick="switchPanel('opening','it',event)">IT / Security</button>
-        <button class="tab" type="button" data-tab-group="opening" onclick="switchPanel('opening','exec',event)">Executive</button>
-        <button class="tab" type="button" data-tab-group="opening" onclick="switchPanel('opening','ops',event)">Operations</button>
-        <button class="tab" type="button" data-tab-group="opening" onclick="switchPanel('opening','unknown',event)">Unknown persona</button>
-      </div>
-      <div class="tab-content active" data-tab-group="opening" id="tab-opening-it">
-        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">credibility</span><span class="micro-tag">setup</span><span class="micro-tag">no rip and replace</span></div>
-          "We help IT teams manage and secure phones, laptops, tablets, and other endpoints from one place, while reducing manual admin work and closing device security gaps. I am not looking to rip and replace anything today, just compare notes on your setup."</div>
-      </div>
-      <div class="tab-content" data-tab-group="opening" id="tab-opening-exec">
-        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">risk</span><span class="micro-tag">time</span><span class="micro-tag">visibility</span></div>
-          "We help companies lower device risk, simplify endpoint oversight, and free up IT time without adding more operational drag. I thought it was worth a quick look for [Company Name]."</div>
-      </div>
-      <div class="tab-content" data-tab-group="opening" id="tab-opening-ops">
-        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">friction</span><span class="micro-tag">support</span><span class="micro-tag">onboarding</span></div>
-          "We help teams take manual device work off their plate, so people are not chasing setups, lockouts, lost devices, or app access all day. I wanted to see if that kind of friction shows up for your team too."</div>
-      </div>
-      <div class="tab-content" data-tab-group="opening" id="tab-opening-unknown">
-        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">safe default</span><span class="micro-tag">simple</span><span class="micro-tag">broad value</span></div>
-          "We help companies get every device managed and secured from one place, without piling more work on IT. I figured it was worth 10 minutes to see if the same thing is useful for [Company Name]."</div>
-      </div>
-    </section>
-
-    <section class="g-section" id="discovery">
-      <h2 class="g-section-title">Discovery flow</h2>
-      <div class="callout-tip">
-        <span class="ic">✅</span>
-        <div><strong>Think branch, not question bank</strong><p>Ask one primary question. Based on their answer, use one follow-up. Then route to the meeting. If they say yes to a meeting, do not keep qualifying them on the cold call.</p></div>
-      </div>
-      <div class="tabs" role="tablist" aria-label="Discovery flows">
-        <button class="tab active" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','it',event)">IT / Security</button>
-        <button class="tab" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','exec',event)">Executive</button>
-        <button class="tab" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','ops',event)">Operations</button>
-        <button class="tab" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','route',event)">Wrong person / route</button>
-      </div>
-      <div class="tab-content active" data-tab-group="discovery" id="tab-discovery-it">
-        <div class="script-card"><div class="step-label">Primary question</div>"Out of curiosity, how are you handling device management and security today?"</div>
-        <div class="flow-grid">
-          <div class="flow-card"><h4>If they use Intune, Workspace ONE, Jamf, etc.</h4><p>"Makes sense. What made you choose that platform originally?"</p><div class="branch-line"><strong>Follow-up:</strong> "If you could improve one part of the current setup, what would it be?"</div></div>
-          <div class="flow-card"><h4>If they say it works fine</h4><p>"Good to hear. Most teams I talk to already have something in place."</p><div class="branch-line"><strong>Follow-up:</strong> "Any areas where it still creates extra work for IT?"</div></div>
-          <div class="flow-card"><h4>If they mention a pain</h4><p>"That makes sense. How are you handling that today?"</p><div class="branch-line"><strong>Transition:</strong> "That is probably easier to show than explain over the phone."</div></div>
+    <!-- Voicemail / Gatekeeper / Email -->
+    <section class="cc-sec full-guide" id="s-voicemail">
+      <div class="cc-sec-title">Voicemail, Gatekeeper &amp; Follow-Up Email</div>
+      <div class="trio">
+        <div>
+          <div class="script-card" id="s-gatekeeper"><strong>Voicemail</strong><br><br>"Hey [Name], this is [Your Name] with IBM. Quick question about how [Company] is handling device management and mobile security. I'll send a short email too. If it's easier, reach me at [Your Number]."<div class="script-note">Under 20 seconds. Don't pitch the platform.</div></div>
+          <div class="script-card"><strong>Gatekeeper</strong><br><br>"Hey, this is [Your Name] with IBM. I was trying to reach [Decision Maker]. Are they around?"<div class="script-note">If asked what it's about: "Quick question on who handles device management and mobile security there."</div></div>
         </div>
-        <div class="close-box"><div class="label">Land here</div><p>"Based on that, it is probably worth a quick look. Does Tuesday at 2 work, or is Wednesday morning better?"</p></div>
-      </div>
-      <div class="tab-content" data-tab-group="discovery" id="tab-discovery-exec">
-        <div class="script-card"><div class="step-label">Primary question</div>"When you think about endpoint management, what is the bigger priority right now: reducing risk, reducing IT workload, or supporting growth?"</div>
-        <div class="flow-grid">
-          <div class="flow-card"><h4>If risk</h4><p>"Is that being driven by compliance, cyber insurance, or overall security posture?"</p><div class="branch-line"><strong>Then:</strong> tie it to visibility and policy control.</div></div>
-          <div class="flow-card"><h4>If efficiency</h4><p>"Where is the team spending the most manual effort today?"</p><div class="branch-line"><strong>Then:</strong> tie it to admin workload and consolidation.</div></div>
-          <div class="flow-card"><h4>If growth</h4><p>"What is changing: more employees, more devices, more locations, or more remote work?"</p><div class="branch-line"><strong>Then:</strong> tie it to scale and consistency.</div></div>
-        </div>
-        <div class="close-box"><div class="label">Land here</div><p>"Got it. Sounds like it is worth a deeper conversation. Does Tuesday at 2 work, or is Wednesday morning better?"</p></div>
-      </div>
-      <div class="tab-content" data-tab-group="discovery" id="tab-discovery-ops">
-        <div class="script-card"><div class="step-label">Primary question</div>"Where do device issues create the most friction for your team today?"</div>
-        <div class="flow-grid">
-          <div class="flow-card"><h4>If onboarding</h4><p>"How much of that process is still manual?"</p><div class="branch-line"><strong>Then:</strong> tie it to faster provisioning and fewer handoffs.</div></div>
-          <div class="flow-card"><h4>If support tickets</h4><p>"What generates the majority of those tickets?"</p><div class="branch-line"><strong>Then:</strong> tie it to fewer repetitive issues.</div></div>
-          <div class="flow-card"><h4>If remote users</h4><p>"Has supporting remote users made things harder, or is it pretty streamlined now?"</p><div class="branch-line"><strong>Then:</strong> tie it to secure support from anywhere.</div></div>
-        </div>
-        <div class="close-box"><div class="label">Land here</div><p>"That is one of the areas MaaS360 can help with. Easier to walk through examples together. Does Tuesday at 2 work, or is Wednesday morning better?"</p></div>
-      </div>
-      <div class="tab-content" data-tab-group="discovery" id="tab-discovery-route">
-        <div class="script-card"><div class="step-label">Primary question</div>"Just so I do not waste anyone's time, who typically owns device management and endpoint security?"</div>
-        <div class="flow-grid">
-          <div class="flow-card"><h4>If they own it</h4><p>"Perfect, then you are exactly who I wanted to connect with."</p><div class="branch-line"><strong>Next:</strong> ask one pain question, then book.</div></div>
-          <div class="flow-card"><h4>If someone else owns it</h4><p>"Who else should be involved if we put something on the calendar?"</p><div class="branch-line"><strong>Next:</strong> ask if you can mention their name.</div></div>
-          <div class="flow-card"><h4>If they are unsure</h4><p>"Would that usually sit under IT Operations, Security, Infrastructure, or End User Computing?"</p><div class="branch-line"><strong>Next:</strong> route cleanly and log the account.</div></div>
-        </div>
-        <div class="close-box"><div class="label">Land here</div><p>"Would it be fair if I sent a quick note and copied you so we can get the right person included?"</p></div>
-      </div>
-    </section>
-
-    <section class="g-section" id="objections">
-      <h2 class="g-section-title">Objection responses</h2>
-      <div class="callout-tip"><span class="ic">🎯</span><div><strong>Objection formula</strong><p>Acknowledge, reframe, ask one useful question, then close. Do not argue. The goal is to keep the conversation moving or leave the door open cleanly.</p></div></div>
-      <div class="tabs" role="tablist" aria-label="Objection categories">
-        <button class="tab active" type="button" data-tab-group="objections" onclick="switchPanel('objections','brush',event)">Brush-offs</button>
-        <button class="tab" type="button" data-tab-group="objections" onclick="switchPanel('objections','fit',event)">Fit / budget</button>
-        <button class="tab" type="button" data-tab-group="objections" onclick="switchPanel('objections','route',event)">Timing / routing</button>
-      </div>
-      <div class="tab-content active" data-tab-group="objections" id="tab-objections-brush">
-        <div class="obj-grid">
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"What's this about?"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">clarify</span><span class="micro-tag">short</span></div><div class="talk-track">"Fair question. MaaS360 helps companies manage and secure phones, laptops, tablets, and other endpoints from one place. I reached out to see if device security or admin workload is on your radar this year."</div><div class="why"><strong>Then ask:</strong> "Is that something you own, or is there someone else closer to it?"</div><span class="obj-then">→ Clarify owner, then two times</span></div></div>
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Just send an email"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">turn into discovery</span></div><div class="talk-track">"Happy to. So I send something relevant, are you using a device management tool today, or is that mostly handled manually?"</div><div class="why"><strong>If they answer:</strong> "Perfect, I will tailor it around that. Usually teams look at security gaps, admin overhead, or tool consolidation. Which one is most relevant?"</div><span class="obj-then">→ Get one data point, then two times</span></div></div>
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Not interested" / "We're good"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">respectful</span><span class="micro-tag">learn</span></div><div class="talk-track">"Totally fair. Usually when I hear that, it means timing is off, you already have something that works, or I have the wrong person. Which one is it?"</div><div class="why"><strong>If they engage:</strong> respond to that path. <strong>If they do not:</strong> "No worries, appreciate you taking the call. Would it be okay if I checked back later in the year?"</div><span class="obj-then">→ Learn why or exit cleanly</span></div></div>
-        </div>
-      </div>
-      <div class="tab-content" data-tab-group="objections" id="tab-objections-fit">
-        <div class="obj-grid">
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"We already have something" / "We use [competitor]"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">no rip and replace</span></div><div class="talk-track">"Honestly, I would be surprised if you did not. Most teams already have something in place."</div><div class="why"><strong>Then ask:</strong> "If you could change one thing about the current setup, what would it be?"</div><span class="obj-then">→ Surface gap, then two times</span></div></div>
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"No budget"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">timing</span><span class="micro-tag">education</span></div><div class="talk-track">"Makes sense. Most first conversations are not budget conversations anyway. They are usually just a way to understand options before timing becomes urgent."</div><div class="why"><strong>Then ask:</strong> "Would it be useful to spend 10 minutes seeing what is out there so you are not starting from scratch later?"</div><span class="obj-then">→ Future-state meeting</span></div></div>
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"How much does it cost?"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">do not quote blind</span></div><div class="talk-track">"It depends on the device count, needed capabilities, and setup, so I do not want to throw out a number that is not useful."</div><div class="why"><strong>Then ask:</strong> "Roughly how many users or devices would this apply to? Once I know that, we can make the next conversation practical."</div><span class="obj-then">→ Qualify size, then two times</span></div></div>
-        </div>
-      </div>
-      <div class="tab-content" data-tab-group="objections" id="tab-objections-route">
-        <div class="obj-grid">
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Wrong person" / "I don't handle that"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">route</span><span class="micro-tag">warm handoff</span></div><div class="talk-track">"No worries at all. Who usually owns device management or endpoint security on your side?"</div><div class="why"><strong>Then ask:</strong> "Would it be okay if I mention you pointed me in the right direction?"</div><span class="obj-then">→ Get name, title, permission</span></div></div>
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Bad time" / "I'm busy"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">respect time</span></div><div class="talk-track">"Of course, I caught you in the middle of something. I can be brief."</div><div class="why"><strong>Then ask:</strong> "Is later this afternoon better, or should I try you tomorrow morning?"</div><span class="obj-then">→ Specific callback window</span></div></div>
-          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Please don't call again"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">stop</span><span class="micro-tag">protect brand</span></div><div class="talk-track">"Understood. I will make a note and will not call again. Appreciate your time today."</div><div class="why"><strong>Then actually stop:</strong> log it, suppress follow-up, and do not try to save the call.</div><span class="obj-then">→ Close cleanly</span></div></div>
+        <div>
+          <div class="script-card" id="s-email"><strong>Follow-up email</strong><br><br><strong>Subject:</strong> quick question on devices<br><br>Hey [Name],<br><br>[Your Name] with IBM here. Tried you by phone but figured email might be easier. Curious how [Company] is handling device management and mobile security today, especially across phones, tablets, laptops, or BYOD.<br><br>Most teams already have something in place but still hit gaps around manual work or keeping data secure. Worth a quick 10-15 minutes to compare notes?<br><br>[Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]<div class="script-note">Short, casual, and tied to the same curiosity from the call.</div></div>
         </div>
       </div>
     </section>
 
-    <section class="g-section" id="value">
-      <h2 class="g-section-title">MaaS360 value snapshot</h2>
-      <div class="list-item">Use this only when someone asks, "What does MaaS360 actually do?" Pick one benefit, connect it to their role, then return to the meeting ask.</div>
+    <!-- Cadence / Research / Tonality / Flags -->
+    <section class="cc-sec full-guide" id="s-cadence">
+      <div class="cc-sec-title">Cadence, Research &amp; Tonality</div>
+      <div class="trio">
+        <div id="s-research">
+          <div class="list-item"><strong>Cadence · Attempt 1</strong>Call, leave the short voicemail, send the follow-up email.</div>
+          <div class="list-item"><strong>Attempt 2</strong>Call 2-3 days later. Don't repeat the same voicemail.</div>
+          <div class="list-item"><strong>Attempt 3</strong>Call ~1 week later. If no answer, move to nurture or wait for a trigger.</div>
+        </div>
+        <div>
+          <div class="list-item"><strong>Reason to call</strong>Hiring, growth, new locations, remote work, compliance, or device-heavy teams.</div>
+          <div class="list-item"><strong>Likely persona</strong>IT Director, Security, Ops, Infrastructure, EUC, Help Desk, or CIO.</div>
+          <div class="list-item"><strong>Don't over-research</strong>30-60 seconds is enough before a dial.</div>
+        </div>
+        <div id="s-tonality">
+          <div class="list-item"><strong>Say less</strong>The shorter the opener, the more confident it sounds.</div>
+          <div class="list-item"><strong>Talk like yourself</strong>If you wouldn't say it to a coworker, don't say it to a prospect.</div>
+          <div class="list-item"><strong>Real pauses</strong>Ask the question, then stop talking.</div>
+          <div class="list-item"><strong>Match their pace</strong>Busy = get to the point. Engaged = slow down.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flags -->
+    <section class="cc-sec full-guide" id="s-flags">
+      <div class="cc-sec-title">Red Flags vs. Green Flags</div>
       <div class="two-col">
-        <div class="method-card"><h4>Unified endpoint management</h4><p>Manage and secure phones, tablets, laptops, and other endpoints from one place instead of juggling separate tools.</p></div>
-        <div class="method-card"><h4>Mobile threat defense</h4><p>Help protect users, devices, apps, and data from threats like malware, phishing, and risky networks.</p></div>
-        <div class="method-card"><h4>Less manual IT work</h4><p>Support enrollment, configuration, app access, lockouts, and device support with fewer repetitive tasks.</p></div>
-        <div class="method-card"><h4>BYOD boundaries</h4><p>Separate corporate data from personal data so employees keep privacy while IT protects the business side.</p></div>
-        <div class="method-card"><h4>Compliance visibility</h4><p>Apply policies, monitor posture, and support audit readiness across employees, devices, and locations.</p></div>
-        <div class="method-card"><h4>IBM enterprise backing</h4><p>Enterprise-grade platform, security credibility, and support for organizations that need scale and trust.</p></div>
-      </div>
-      <div class="script-note">Do not read this whole section on a cold call. One value point is enough. If they ask for more, use that interest to book the meeting.</div>
-    </section>
-
-    <section class="g-section" id="close">
-<h2 class="g-section-title">Closing playbook</h2>
-<div class="tabs">
-<button class="tab active" data-tab-group="close" onclick="switchPanel('close','standard',event)">Standard</button>
-<button class="tab" data-tab-group="close" onclick="switchPanel('close','it',event)">IT/Security</button>
-<button class="tab" data-tab-group="close" onclick="switchPanel('close','exec',event)">Executive</button>
-<button class="tab" data-tab-group="close" onclick="switchPanel('close','budget',event)">Budget</button>
-<button class="tab" data-tab-group="close" onclick="switchPanel('close','soft',event)">Soft No</button>
-<button class="tab" data-tab-group="close" onclick="switchPanel('close','lock',event)">Calendar Lock</button>
-</div>
-<div class="tab-content active" data-tab-group="close" id="tab-close-standard"><div class="script-card"><div class="tag-row"><span class="micro-tag">default</span><span class="micro-tag">consultative</span></div>Based on what you shared, it sounds like it's worth a deeper look.<br><br><strong>Does Tuesday at 2 work, or is Wednesday morning better?</strong></div></div>
-<div class="tab-content" data-tab-group="close" id="tab-close-it"><div class="script-card">I hear similar themes from IT teams around visibility, device sprawl, support workload, and security oversight.<br><br>It might be useful to compare notes and see how you're approaching it.<br><br><strong>Does Tuesday at 2 work, or is Wednesday morning better?</strong></div></div>
-<div class="tab-content" data-tab-group="close" id="tab-close-exec"><div class="script-card">This may not even turn into a project.<br><br>But if there's an opportunity to reduce risk and save the team time, it's probably worth a brief conversation.<br><br><strong>Would Tuesday or Wednesday be better?</strong></div></div>
-<div class="tab-content" data-tab-group="close" id="tab-close-budget"><div class="script-card">I'm not asking you to buy anything.<br><br>The goal is to show you what's available so you're not starting from scratch later.<br><br><strong>Worth ten minutes next week?</strong></div></div>
-<div class="tab-content" data-tab-group="close" id="tab-close-soft"><div class="script-card">Happy to follow up.<br><br><strong>Just so I make the follow-up useful, what would need to happen for this to become a priority?</strong><br><br>Then schedule a specific follow-up date.</div></div>
-<div class="tab-content" data-tab-group="close" id="tab-close-lock"><div class="script-card"><strong>Meeting agreed?</strong><br><br>Perfect. I have Tuesday at 2 PM.<br><br>What's the best email for the invite?<br><br>I'll send it while we're on the phone.</div></div>
-<div class="checklist-box"><h4>Meeting Locked Checklist</h4><div>✅ Meeting date</div><div>✅ Meeting time</div><div>✅ Correct email</div><div>✅ Stakeholders identified</div><div>✅ Invite sent</div><div>✅ Next step confirmed</div></div>
-<div class="two-col"><div class="method-card flag-col red"><h4>Weak closes to avoid</h4><div class="list-item">Would you maybe be interested?</div><div class="list-item">Can I send some information?</div><div class="list-item">Do you have time sometime?</div></div><div class="method-card flag-col green"><h4>Strong closes</h4><div class="list-item">Does Tuesday at 2 work, or is Wednesday morning better?</div><div class="list-item">Who else should be included?</div><div class="list-item">What's the best email for the invite?</div><div class="list-item">I'll send it while we're on the phone.</div></div></div>
-</section><section class="g-section" id="voicemail">
-      <h2 class="g-section-title">Voicemail script</h2>
-      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. We help companies manage and secure devices from one place without adding more work for IT, and I wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
-        <div class="script-note">Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
-      </div>
-    </section>
-
-    <section class="g-section" id="gatekeeper">
-      <h2 class="g-section-title">Gatekeeper script</h2>
-      <div class="script-card">"Hey, this is [Your Name] with IBM — I'm trying to reach [Decision Maker Name]. Are they available?"
-        <div class="script-note">Sound like you already have a relationship. Don't over-explain. If they ask what it's about: "It's regarding their mobile device security setup — they'll know what it's about."</div>
-      </div>
-      <div class="list-item"><strong>If they push back:</strong> "I understand — I'm the MaaS360 [AE/POC] for [Company Name] and I just wanted to introduce myself. Would it be better if I sent an email first?"</div>
-    </section>
-
-    <section class="g-section" id="email">
-      <h2 class="g-section-title">Follow-up email template</h2>
-      <div class="script-card">
-        <strong>Subject:</strong> Quick intro — MaaS360 for [Company Name]<br><br>
-        Hey [Name],<br><br>
-        [Your Name] here — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-        We help companies manage and secure phones, tablets, laptops, and other endpoints from one place, without adding overhead for the team.<br><br>
-        Worth a quick 10-minute call to see if there's a fit? I can work around your schedule.<br><br>
-        [Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]
-        <div class="script-note">Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
-      </div>
-    </section>
-
-    <section class="g-section" id="cadence">
-      <h2 class="g-section-title">Cadence — if no answer</h2>
-      <div class="list-item"><strong>Attempt 1:</strong> Call. No answer → leave voicemail, then send the follow-up email same day.</div>
-      <div class="list-item"><strong>Attempt 2 (2-3 days later):</strong> Call again. No voicemail this time — you already left one. If no answer, a short LinkedIn connection request referencing the voicemail is optional here.</div>
-      <div class="list-item"><strong>Attempt 3 (about a week later):</strong> Call one more time. If still no answer, this is the point to leave it — don't leave a second voicemail; it reads as pushy rather than persistent.</div>
-      <div class="list-item"><strong>After attempt 3:</strong> Move to a longer-cycle nurture — quarterly check-in, or triggered by news (funding, leadership change, security incident) rather than a fixed calendar date.</div>
-    </section>
-
-    <section class="g-section" id="research">
-      <h2 class="g-section-title">Quick company research (30 seconds)</h2>
-      <div class="list-item"><strong>LinkedIn:</strong> Check their profile — tenure, recent posts, mutual connections</div>
-      <div class="list-item"><strong>Company news:</strong> Search "[Company Name] news" — recent funding, expansion, leadership changes</div>
-      <div class="list-item"><strong>Company website:</strong> About page, recent blog posts, press releases</div>
-      <div class="list-item"><strong>Industry:</strong> Know 1-2 similar companies you've worked with in their space</div>
-      <div class="list-item"><strong>Size/scale:</strong> Employee count, number of locations (helps tailor your pitch)</div>
-    </section>
-
-    <section class="g-section" id="tonality">
-      <h2 class="g-section-title">Tonality and delivery</h2>
-      <div class="list-item"><strong>Pace:</strong> Slower than you think. Rushing reads as nervous. Confident people don't rush.</div>
-      <div class="list-item"><strong>Pauses:</strong> After your intro, pause 1-2 seconds. Let it land. Don't fill the silence.</div>
-      <div class="list-item"><strong>Energy:</strong> Match their energy. If they're high-energy, match it. If they're calm, stay calm.</div>
-      <div class="list-item"><strong>Smile:</strong> They can hear it. Smile while you talk — it changes your tone.</div>
-      <div class="list-item"><strong>Confidence:</strong> Sound like you expected them to pick up. You're not interrupting — you're offering value.</div>
-    </section>
-
-    <section class="g-section" id="flags">
-      <h2 class="g-section-title">Red flags vs. green flags</h2>
-      <div class="two-col">
-        <div class="method-card flag-col green">
-          <h4>Green flags (they're interested)</h4>
-          <div class="list-item">They ask questions about MaaS360</div>
-          <div class="list-item">They mention current pain points</div>
-          <div class="list-item">They offer specific times to meet</div>
-          <div class="list-item">They ask about pricing/timeline</div>
-          <div class="list-item">They mention upcoming projects/changes</div>
+        <div class="method-card green"><h4>Green flags</h4>
+          <div class="list-item">They name the current tool</div>
+          <div class="list-item">They mention a pain point</div>
+          <div class="list-item">They ask what MaaS360 does</div>
+          <div class="list-item">They give a stakeholder name</div>
+          <div class="list-item">They pick a time</div>
         </div>
-        <div class="method-card flag-col red">
-          <h4>Red flags (just being polite)</h4>
-          <div class="list-item">Vague responses: "Maybe later"</div>
-          <div class="list-item">"Send me some info" with no follow-up</div>
-          <div class="list-item">They don't ask any questions</div>
-          <div class="list-item">They're distracted/multitasking</div>
-          <div class="list-item">"We're all set" without details</div>
+        <div class="method-card red"><h4>Red flags</h4>
+          <div class="list-item">They only say "send info" and give nothing else</div>
+          <div class="list-item">They won't identify an owner</div>
+          <div class="list-item">They're clearly trying to end the call</div>
+          <div class="list-item">They ask not to be called again</div>
         </div>
       </div>
     </section>
-
   </main>
 
+  <!-- Floating live-call rail -->
+  <aside class="rail" id="rail" aria-label="Live call flow">
+    <button class="rail-close" id="railClose" aria-label="Hide">×</button>
+    <div class="rail-head">📞 LIVE CALL</div>
+    <a href="#s-flow">1 · Open <span class="rail-tag" id="railOpen">Recommended</span></a>
+    <div class="ar">↓</div>
+    <a href="#s-flow">2 · Discover</a>
+    <div class="ar">↓</div>
+    <a href="#s-flow">3 · Curiosity</a>
+    <div class="ar">↓</div>
+    <a href="#s-ask">4 · Ask</a>
+    <div class="rail-stop">STOP TALKING</div>
+  </aside>
+
   <script>
-    function switchPanel(group,id,event){
-      document.querySelectorAll('.tab[data-tab-group="'+group+'"]').forEach(function(t){t.classList.remove('active');});
-      document.querySelectorAll('.tab-content[data-tab-group="'+group+'"]').forEach(function(c){c.classList.remove('active');});
-      event.target.classList.add('active');
-      var panel=document.getElementById('tab-'+group+'-'+id);
-      if(panel){panel.classList.add('active');}
-    }
-    function switchTab(tabId, event){
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('tab-'+tabId).classList.add('active');
-    }
-    function toggleObj(item){
-      const response=item.querySelector('.obj-response');
-      const wasOpen=item.classList.contains('open');
-      document.querySelectorAll('.obj-item').forEach(obj=>{obj.classList.remove('open');obj.querySelector('.obj-response').classList.remove('visible');});
-      if(!wasOpen){item.classList.add('open');response.classList.add('visible');}
-    }
+    // Tap cards — "what did they say" (one open at a time)
+    document.querySelectorAll('[data-say]').forEach(function(card){
+      card.addEventListener('click',function(){
+        var wasOpen=card.classList.contains('open');
+        document.querySelectorAll('[data-say]').forEach(function(c){c.classList.remove('open');});
+        if(!wasOpen){card.classList.add('open');}
+      });
+    });
+    // Objection cards (one open at a time)
+    document.querySelectorAll('[data-obj]').forEach(function(card){
+      card.addEventListener('click',function(){
+        var wasOpen=card.classList.contains('open');
+        document.querySelectorAll('[data-obj]').forEach(function(c){c.classList.remove('open');});
+        if(!wasOpen){card.classList.add('open');}
+      });
+    });
+    // Tabs (persona / starters / interrupts / close)
+    document.querySelectorAll('.tab').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var group=btn.getAttribute('data-group'), id=btn.getAttribute('data-id');
+        document.querySelectorAll('.tab[data-group="'+group+'"]').forEach(function(t){t.classList.remove('active');});
+        document.querySelectorAll('.tab-content[data-group="'+group+'"]').forEach(function(c){c.classList.remove('active');});
+        btn.classList.add('active');
+        var panel=document.querySelector('.tab-content[data-group="'+group+'"][data-id="'+id+'"]');
+        if(panel){panel.classList.add('active');}
+      });
+    });
+    // Opener switcher — swaps step 1 of the flow (works in Live Mode)
     (function(){
-      var links=[].slice.call(document.querySelectorAll('.g-toc a')),map={};
-      links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
-      var obs=new IntersectionObserver(function(es){es.forEach(function(e){
-        if(e.isIntersecting){links.forEach(function(a){a.classList.remove('here');});if(map[e.target.id])map[e.target.id].classList.add('here');}
-      });},{rootMargin:'-45% 0px -50% 0px',threshold:0});
-      document.querySelectorAll('.g-section[id]').forEach(function(s){obs.observe(s);});
+      var openers={
+        rec:{tag:'Recommended', role:'Open · Recommended', cue:'then stop talking →',
+          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I\'m catching you out of the blue, so I\'ll be quick. When it comes to company devices, what\'s usually the biggest headache for your team these days?"',
+          discRole:'Discover', discLine:'"Got it. How are you handling that today?"',
+          curiRole:'Create curiosity', curiLine:'"Makes sense. One thing I hear a lot is teams already have a tool, but still deal with manual work, mobile security, or support issues. Has any of that come up on your side?"',
+          askRole:'Ask for the meeting', askLine:'"Interesting. That\'s really why I called. I don\'t know if MaaS360 is relevant yet, but it might be worth <b>10-15 minutes</b> to compare notes. Would that be unreasonable?"'},
+        soft:{tag:'Soft', role:'Open · Soft — lowest pressure', cue:'if they stall → "Are you even the right person for device stuff, or is that someone else?"',
+          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know you weren\'t expecting my call, so I\'ll keep it short. This might not even be relevant for you, but how\'s your team handling company devices these days?"',
+          discRole:'Discover', discLine:'"Got it. Has that been pretty smooth, or is there a part that still bugs the team?"',
+          curiRole:'Create curiosity', curiLine:'"Yeah, that comes up a lot. Even teams that have a tool still deal with manual work, mobile security, or support headaches. Sound familiar at all?"',
+          askRole:'Ask for the meeting', askLine:'"No pressure either way, but it might be worth a quick <b>10-15 minutes</b> to compare notes. Would that be unreasonable?"'},
+        direct:{tag:'Direct', role:'Open · Direct — for busy people', cue:'then keep it moving →',
+          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I\'ll be quick, I promise. When it comes to managing all your company\'s phones and laptops, what usually eats up the most time for your team?"',
+          discRole:'Discover', discLine:'"Yeah, I hear that a lot. Is that more on IT, or does it hit your users too?"',
+          curiRole:'Create curiosity', curiLine:'"Makes sense. Usually the time sink is manual setup, mobile security, or support tickets. That the case for you guys?"',
+          askRole:'Ask for the meeting', askLine:'"That\'s actually why I called. Worth <b>10-15 minutes</b> to compare notes and see if we can take some of that off your plate?"'},
+        casual:{tag:'Casual', role:'Open · Casual — most human', cue:'if right person →',
+          line:'"Hey <b>[Name]</b>? It\'s <b>[Your Name]</b> calling from IBM. Total cold call, full transparency. Real quick though, are you the person who deals with device management and security over there, or is that somebody else?"',
+          discRole:'Discover', discLine:'"Perfect. So how are you guys handling all that today?"',
+          curiRole:'Create curiosity', curiLine:'"Gotcha. Funny thing is most teams already have something, they just still run into manual work, mobile security, or support stuff. Any of that ring true?"',
+          askRole:'Ask for the meeting', askLine:'"Honestly that\'s why I called. Not sure we\'re even a fit yet, but might be worth <b>10-15 minutes</b> to compare notes. Crazy idea?"'}
+      };
+      var roleEl=document.getElementById('openRole'), lineEl=document.getElementById('openLine'), cueEl=document.getElementById('openCue'), railEl=document.getElementById('railOpen');
+      var discRoleEl=document.getElementById('discRole'), discLineEl=document.getElementById('discLine');
+      var curiRoleEl=document.getElementById('curiRole'), curiLineEl=document.getElementById('curiLine');
+      var askRoleEl=document.getElementById('askRole'), askLineEl=document.getElementById('askLine');
+      document.querySelectorAll('#openerPills .op-pill').forEach(function(p){
+        p.addEventListener('click',function(){
+          document.querySelectorAll('#openerPills .op-pill').forEach(function(x){x.classList.remove('active');});
+          p.classList.add('active');
+          var o=openers[p.getAttribute('data-open')];
+          if(!o) return;
+          roleEl.textContent=o.role; lineEl.innerHTML=o.line; cueEl.innerHTML=o.cue;
+          discRoleEl.textContent=o.discRole; discLineEl.innerHTML=o.discLine;
+          curiRoleEl.textContent=o.curiRole; curiLineEl.innerHTML=o.curiLine;
+          askRoleEl.textContent=o.askRole; askLineEl.innerHTML=o.askLine;
+          if(railEl){railEl.textContent=o.tag;}
+        });
+      });
     })();
+    // Hide rail
+    document.getElementById('railClose').addEventListener('click',function(){
+      document.getElementById('rail').style.display='none';
+    });
+    // Live Mode (L to toggle) — collapses to the 4 in-call sections
+    (function(){
+      var body=document.body, btn=document.getElementById('liveBtn'), lbl=document.getElementById('liveLbl');
+      function apply(on){ body.classList.toggle('live',on); lbl.textContent=on?'Exit Live':'Live Mode'; btn.setAttribute('aria-pressed',on?'true':'false'); if(on){window.scrollTo({top:0,behavior:'smooth'});} }
+      btn.addEventListener('click',function(){ apply(!body.classList.contains('live')); });
+      document.addEventListener('keydown',function(e){
+        var t=e.target.tagName; if(t==='INPUT'||t==='TEXTAREA') return;
+        if((e.key==='l'||e.key==='L') && !e.metaKey && !e.ctrlKey && !e.altKey){ apply(!body.classList.contains('live')); }
+      });
+    })();
+    // Theme is handled by the shared carbon-theme.js (binds to .theme-toggle).
   </script>
 </body>
 </html>
