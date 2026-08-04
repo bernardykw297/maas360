@@ -52,6 +52,17 @@
     .script-card.blue{border-left-color:var(--primary);}
     .script-card em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--acc-fg);background:var(--acc-bg);padding:2px 7px;}
     .script-note{font-size:13px;color:var(--text-dim);margin-top:12px;padding:10px 12px;background:var(--panel-2);border-left:3px solid var(--primary);}
+    .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;}
+    .micro-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--acc-fg);background:var(--acc-bg);padding:4px 8px;border:1px solid var(--line);}
+    .flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:12px 0;}
+    .flow-card{background:var(--panel);padding:16px 18px;min-height:130px;}
+    .flow-card h4{font-size:14px;color:var(--text);margin:0 0 8px;font-weight:600;}
+    .flow-card p{font-size:13px;color:var(--text-dim);line-height:1.6;margin:0;}
+    .step-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--link);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;}
+    .branch-line{background:var(--panel-2);border-left:3px solid var(--primary);padding:12px 14px;margin-top:10px;font-size:14px;color:var(--text-dim);line-height:1.6;}
+    .branch-line strong{color:var(--text);display:block;margin-bottom:4px;}
+    .obj-response .talk-track{background:var(--panel);border-left:3px solid var(--acc);padding:10px 12px;margin:9px 0;}
+    .obj-response .why{font-size:13px;color:var(--text-dim);background:var(--panel);padding:9px 11px;margin-top:8px;border:1px solid var(--line);}
 
     .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
     .obj-item{background:var(--panel);padding:16px 18px;cursor:pointer;transition:background .11s;}
@@ -120,7 +131,7 @@
       <div class="g-eyebrow">Section 2</div>
       <h1 class="g-h1">Cold call cheat sheet</h1>
       <p class="g-lede">What to say when they pick up. One opening script that flexes by persona, a response for every objection, and the voicemail, gatekeeper, email, and cadence to back it up.</p>
-      <div class="g-meta">Updated Jul 27, 2026 · 9 objections · one script, persona swap-ins</div>
+      <div class="g-meta">Updated Aug 4, 2026 · opening tabs · discovery flow · objection windows · value snapshot</div>
     </header>
   </div>
 
@@ -130,7 +141,9 @@
       <a href="#delivery">Delivery</a>
       <a href="#mindset">Mindset</a>
       <a href="#script">Opening script</a>
+      <a href="#discovery">Discovery flow</a>
       <a href="#objections">Objections</a>
+      <a href="#value">MaaS360 value</a>
       <a href="#close">Always close</a>
       <a href="#voicemail">Voicemail</a>
       <a href="#gatekeeper">Gatekeeper</a>
@@ -167,6 +180,12 @@
           <p>Skip the small talk. Go straight to the ask. Respect their time by being efficient.</p>
           <div class="method-example">"Are you open to a 10-minute call to see if we're a fit?"</div>
         </div>
+        <div class="method-card">
+          <h4>Permission method</h4>
+          <p><strong>Best for:</strong> Guarded prospects and busy leaders</p>
+          <p>Name the interruption first, ask for 20 seconds, then let them choose. This feels more human than forcing a pitch.</p>
+          <div class="method-example">"You weren't expecting my call. Can I take 20 seconds to tell you why I reached out, and you can tell me if it's off base?"</div>
+        </div>
       </div>
     </section>
 
@@ -197,59 +216,133 @@
 
     <section class="g-section" id="script">
       <h2 class="g-section-title">Opening script</h2>
-      <div class="script-card">"Hey [Name], <em>[pause and wait for reply]</em><br><br>
-        This is [Your Name] — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-        <em>[if you've got a trigger]</em> Saw [trigger — new locations, funding, leadership change, security news] and figured it was a good time to reach out.<br><br>
-        We just helped [similar company in their industry] [specific outcome — e.g. cut device provisioning time by 40%, closed a compliance gap in a quarter], and figured it was worth a quick call to see if it's relevant for you too."
-        <div class="script-note">Two upgrades from the old version: (1) the trigger line, when you've got one from your 30-second research, beats any generic opener — it proves the call isn't mass-dialed. (2) The credibility hook needs a real outcome attached, not just a name-drop — "cut provisioning time by 40%" does far more work than "we just closed a deal." Fill in the bracket every time; don't let it go out blank.<br><br>Dropped entirely: "I know this is a long shot." It undercuts everything above it — you're handing them the exit before you've made the ask. Own the call instead.</div>
+      <div class="script-card">"Hey [Name]... <em>[pause and wait for reply]</em><br><br>
+        This is [Your Name], the MaaS360 specialist with IBM for [Company Name].<br><br>
+        You weren't expecting my call, so can I take 20 seconds to tell you why I reached out, and you can tell me if it's off base?<br><br>
+        <em>[they say yes]</em><br><br>
+        Select the persona tab below, read one value line, then close for time:<br><br>
+        <strong>Does Tuesday at 2 work, or is Wednesday morning better?</strong>"
+        <div class="script-note">Keep this opener light. The cold call is not the demo. It is ownership, permission, one relevant value line, then a meeting ask.</div>
       </div>
 
-      <div class="list-item"><strong>Swap the outcome line based on who picks up:</strong> Same script skeleton — just swap what comes after "cut provisioning time by 40%" to match how each persona hears value.</div>
-      <div class="list-item"><strong>IT/security:</strong> "...cuts down admin overhead and tightens up security — happy to compare notes on your setup." <em>Peer-to-peer framing, not a pitch.</em></div>
-      <div class="list-item"><strong>Executive:</strong> "...saves time and reduces risk company-wide." <em>Outcome only — don't go deeper than one breath until the meeting.</em></div>
-      <div class="list-item"><strong>Operations:</strong> "...cuts friction in day-to-day device management without adding overhead for the team." <em>Practical and workflow-focused.</em></div>
+      <div class="list-item"><strong>Persona value window:</strong> Pick the tab that fits who answered. If you are not sure, use Unknown persona. Do not read more than one value line.</div>
+      <div class="tabs" role="tablist" aria-label="Opening value lines">
+        <button class="tab active" type="button" data-tab-group="opening" onclick="switchPanel('opening','it',event)">IT / Security</button>
+        <button class="tab" type="button" data-tab-group="opening" onclick="switchPanel('opening','exec',event)">Executive</button>
+        <button class="tab" type="button" data-tab-group="opening" onclick="switchPanel('opening','ops',event)">Operations</button>
+        <button class="tab" type="button" data-tab-group="opening" onclick="switchPanel('opening','unknown',event)">Unknown persona</button>
+      </div>
+      <div class="tab-content active" data-tab-group="opening" id="tab-opening-it">
+        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">credibility</span><span class="micro-tag">setup</span><span class="micro-tag">no rip and replace</span></div>
+          "We help IT teams manage and secure phones, laptops, tablets, and other endpoints from one place, while reducing manual admin work and closing device security gaps. I am not looking to rip and replace anything today, just compare notes on your setup."</div>
+      </div>
+      <div class="tab-content" data-tab-group="opening" id="tab-opening-exec">
+        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">risk</span><span class="micro-tag">time</span><span class="micro-tag">visibility</span></div>
+          "We help companies lower device risk, simplify endpoint oversight, and free up IT time without adding more operational drag. I thought it was worth a quick look for [Company Name]."</div>
+      </div>
+      <div class="tab-content" data-tab-group="opening" id="tab-opening-ops">
+        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">friction</span><span class="micro-tag">support</span><span class="micro-tag">onboarding</span></div>
+          "We help teams take manual device work off their plate, so people are not chasing setups, lockouts, lost devices, or app access all day. I wanted to see if that kind of friction shows up for your team too."</div>
+      </div>
+      <div class="tab-content" data-tab-group="opening" id="tab-opening-unknown">
+        <div class="script-card blue"><div class="tag-row"><span class="micro-tag">safe default</span><span class="micro-tag">simple</span><span class="micro-tag">broad value</span></div>
+          "We help companies get every device managed and secured from one place, without piling more work on IT. I figured it was worth 10 minutes to see if the same thing is useful for [Company Name]."</div>
+      </div>
+    </section>
+
+    <section class="g-section" id="discovery">
+      <h2 class="g-section-title">Discovery flow</h2>
+      <div class="callout-tip">
+        <span class="ic">✅</span>
+        <div><strong>Think branch, not question bank</strong><p>Ask one primary question. Based on their answer, use one follow-up. Then route to the meeting. If they say yes to a meeting, do not keep qualifying them on the cold call.</p></div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Discovery flows">
+        <button class="tab active" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','it',event)">IT / Security</button>
+        <button class="tab" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','exec',event)">Executive</button>
+        <button class="tab" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','ops',event)">Operations</button>
+        <button class="tab" type="button" data-tab-group="discovery" onclick="switchPanel('discovery','route',event)">Wrong person / route</button>
+      </div>
+      <div class="tab-content active" data-tab-group="discovery" id="tab-discovery-it">
+        <div class="script-card"><div class="step-label">Primary question</div>"Out of curiosity, how are you handling device management and security today?"</div>
+        <div class="flow-grid">
+          <div class="flow-card"><h4>If they use Intune, Workspace ONE, Jamf, etc.</h4><p>"Makes sense. What made you choose that platform originally?"</p><div class="branch-line"><strong>Follow-up:</strong> "If you could improve one part of the current setup, what would it be?"</div></div>
+          <div class="flow-card"><h4>If they say it works fine</h4><p>"Good to hear. Most teams I talk to already have something in place."</p><div class="branch-line"><strong>Follow-up:</strong> "Any areas where it still creates extra work for IT?"</div></div>
+          <div class="flow-card"><h4>If they mention a pain</h4><p>"That makes sense. How are you handling that today?"</p><div class="branch-line"><strong>Transition:</strong> "That is probably easier to show than explain over the phone."</div></div>
+        </div>
+        <div class="close-box"><div class="label">Land here</div><p>"Based on that, it is probably worth a quick look. Does Tuesday at 2 work, or is Wednesday morning better?"</p></div>
+      </div>
+      <div class="tab-content" data-tab-group="discovery" id="tab-discovery-exec">
+        <div class="script-card"><div class="step-label">Primary question</div>"When you think about endpoint management, what is the bigger priority right now: reducing risk, reducing IT workload, or supporting growth?"</div>
+        <div class="flow-grid">
+          <div class="flow-card"><h4>If risk</h4><p>"Is that being driven by compliance, cyber insurance, or overall security posture?"</p><div class="branch-line"><strong>Then:</strong> tie it to visibility and policy control.</div></div>
+          <div class="flow-card"><h4>If efficiency</h4><p>"Where is the team spending the most manual effort today?"</p><div class="branch-line"><strong>Then:</strong> tie it to admin workload and consolidation.</div></div>
+          <div class="flow-card"><h4>If growth</h4><p>"What is changing: more employees, more devices, more locations, or more remote work?"</p><div class="branch-line"><strong>Then:</strong> tie it to scale and consistency.</div></div>
+        </div>
+        <div class="close-box"><div class="label">Land here</div><p>"Got it. Sounds like it is worth a deeper conversation. Does Tuesday at 2 work, or is Wednesday morning better?"</p></div>
+      </div>
+      <div class="tab-content" data-tab-group="discovery" id="tab-discovery-ops">
+        <div class="script-card"><div class="step-label">Primary question</div>"Where do device issues create the most friction for your team today?"</div>
+        <div class="flow-grid">
+          <div class="flow-card"><h4>If onboarding</h4><p>"How much of that process is still manual?"</p><div class="branch-line"><strong>Then:</strong> tie it to faster provisioning and fewer handoffs.</div></div>
+          <div class="flow-card"><h4>If support tickets</h4><p>"What generates the majority of those tickets?"</p><div class="branch-line"><strong>Then:</strong> tie it to fewer repetitive issues.</div></div>
+          <div class="flow-card"><h4>If remote users</h4><p>"Has supporting remote users made things harder, or is it pretty streamlined now?"</p><div class="branch-line"><strong>Then:</strong> tie it to secure support from anywhere.</div></div>
+        </div>
+        <div class="close-box"><div class="label">Land here</div><p>"That is one of the areas MaaS360 can help with. Easier to walk through examples together. Does Tuesday at 2 work, or is Wednesday morning better?"</p></div>
+      </div>
+      <div class="tab-content" data-tab-group="discovery" id="tab-discovery-route">
+        <div class="script-card"><div class="step-label">Primary question</div>"Just so I do not waste anyone's time, who typically owns device management and endpoint security?"</div>
+        <div class="flow-grid">
+          <div class="flow-card"><h4>If they own it</h4><p>"Perfect, then you are exactly who I wanted to connect with."</p><div class="branch-line"><strong>Next:</strong> ask one pain question, then book.</div></div>
+          <div class="flow-card"><h4>If someone else owns it</h4><p>"Who else should be involved if we put something on the calendar?"</p><div class="branch-line"><strong>Next:</strong> ask if you can mention their name.</div></div>
+          <div class="flow-card"><h4>If they are unsure</h4><p>"Would that usually sit under IT Operations, Security, Infrastructure, or End User Computing?"</p><div class="branch-line"><strong>Next:</strong> route cleanly and log the account.</div></div>
+        </div>
+        <div class="close-box"><div class="label">Land here</div><p>"Would it be fair if I sent a quick note and copied you so we can get the right person included?"</p></div>
+      </div>
     </section>
 
     <section class="g-section" id="objections">
       <h2 class="g-section-title">Objection responses</h2>
-      <div class="obj-grid">
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"What's this about?" / "Can you explain more?"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"Yeah for sure — it's really just a quick call about how we help companies deal with mobile security and device management. I'm not trying to sell you anything today, just see if there's something worth exploring. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"Just send an email" / "Email me the details"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"Happy to — though it's a lot easier to make sense of in a quick call so I can tailor it to your setup. Give me 10 minutes and if it's not relevant, I'll just send you the info and leave you alone. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"Wrong person" / "I don't handle that"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"No worries at all — do you know offhand who does handle the device or security side of things? Would it be okay if I mention your name when I reach out to them?"<span class="obj-then">→ Get name + warm handoff</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"Already have something" / "We use [competitor]"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"That makes sense — most folks I talk to already have something. I'm not here to rip and replace, just curious if there are any gaps or headaches with what you've got. Worth 10 minutes to compare?"<span class="obj-then">→ Two times</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"No budget" / "Budget's tight right now"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"Totally get it — I'm not asking for anything today. Just a quick call so that if timing changes, you already know what's out there. Worth a chat?"<span class="obj-then">→ Two times</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"Bad time" / "I'm in a meeting / busy"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"Of course — sorry to catch you at a bad time. When's better? I can work around your schedule, even next week is fine."<span class="obj-then">→ Get specific time</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"How much does it cost?" / "What's the price?"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"It really depends on your size and setup — which is why I'd love a quick call first. Once I know what you're working with I can give you something that actually makes sense. Tuesday or Wednesday work?"<span class="obj-then">→ Two times</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"Not interested" / "We're good, thanks"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"Fair enough — appreciate you picking up. Things change sometimes though — new devices, people going remote, security stuff comes up. Would it be alright if I checked back in a few months?"<span class="obj-then">→ Leave door open</span></div>
-        </div>
-        <div class="obj-item" onclick="toggleObj(this)">
-          <div class="obj-header"><div class="obj-trigger">"Please don't call again"</div><div class="obj-chevron">▾</div></div>
-          <div class="obj-response">"Understood — I'll take you off my list and won't call again. Appreciate your time today." Then actually stop: no follow-up email, no next-quarter check-in. Log it so the account isn't touched again for a while — burning the contact costs more than one meeting is worth.<span class="obj-then">→ Close the door cleanly</span></div>
+      <div class="callout-tip"><span class="ic">🎯</span><div><strong>Objection formula</strong><p>Acknowledge, reframe, ask one useful question, then close. Do not argue. The goal is to keep the conversation moving or leave the door open cleanly.</p></div></div>
+      <div class="tabs" role="tablist" aria-label="Objection categories">
+        <button class="tab active" type="button" data-tab-group="objections" onclick="switchPanel('objections','brush',event)">Brush-offs</button>
+        <button class="tab" type="button" data-tab-group="objections" onclick="switchPanel('objections','fit',event)">Fit / budget</button>
+        <button class="tab" type="button" data-tab-group="objections" onclick="switchPanel('objections','route',event)">Timing / routing</button>
+      </div>
+      <div class="tab-content active" data-tab-group="objections" id="tab-objections-brush">
+        <div class="obj-grid">
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"What's this about?"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">clarify</span><span class="micro-tag">short</span></div><div class="talk-track">"Fair question. MaaS360 helps companies manage and secure phones, laptops, tablets, and other endpoints from one place. I reached out to see if device security or admin workload is on your radar this year."</div><div class="why"><strong>Then ask:</strong> "Is that something you own, or is there someone else closer to it?"</div><span class="obj-then">→ Clarify owner, then two times</span></div></div>
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Just send an email"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">turn into discovery</span></div><div class="talk-track">"Happy to. So I send something relevant, are you using a device management tool today, or is that mostly handled manually?"</div><div class="why"><strong>If they answer:</strong> "Perfect, I will tailor it around that. Usually teams look at security gaps, admin overhead, or tool consolidation. Which one is most relevant?"</div><span class="obj-then">→ Get one data point, then two times</span></div></div>
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Not interested" / "We're good"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">respectful</span><span class="micro-tag">learn</span></div><div class="talk-track">"Totally fair. Usually when I hear that, it means timing is off, you already have something that works, or I have the wrong person. Which one is it?"</div><div class="why"><strong>If they engage:</strong> respond to that path. <strong>If they do not:</strong> "No worries, appreciate you taking the call. Would it be okay if I checked back later in the year?"</div><span class="obj-then">→ Learn why or exit cleanly</span></div></div>
         </div>
       </div>
+      <div class="tab-content" data-tab-group="objections" id="tab-objections-fit">
+        <div class="obj-grid">
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"We already have something" / "We use [competitor]"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">no rip and replace</span></div><div class="talk-track">"Honestly, I would be surprised if you did not. Most teams already have something in place."</div><div class="why"><strong>Then ask:</strong> "If you could change one thing about the current setup, what would it be?"</div><span class="obj-then">→ Surface gap, then two times</span></div></div>
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"No budget"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">timing</span><span class="micro-tag">education</span></div><div class="talk-track">"Makes sense. Most first conversations are not budget conversations anyway. They are usually just a way to understand options before timing becomes urgent."</div><div class="why"><strong>Then ask:</strong> "Would it be useful to spend 10 minutes seeing what is out there so you are not starting from scratch later?"</div><span class="obj-then">→ Future-state meeting</span></div></div>
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"How much does it cost?"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">do not quote blind</span></div><div class="talk-track">"It depends on the device count, needed capabilities, and setup, so I do not want to throw out a number that is not useful."</div><div class="why"><strong>Then ask:</strong> "Roughly how many users or devices would this apply to? Once I know that, we can make the next conversation practical."</div><span class="obj-then">→ Qualify size, then two times</span></div></div>
+        </div>
+      </div>
+      <div class="tab-content" data-tab-group="objections" id="tab-objections-route">
+        <div class="obj-grid">
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Wrong person" / "I don't handle that"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">route</span><span class="micro-tag">warm handoff</span></div><div class="talk-track">"No worries at all. Who usually owns device management or endpoint security on your side?"</div><div class="why"><strong>Then ask:</strong> "Would it be okay if I mention you pointed me in the right direction?"</div><span class="obj-then">→ Get name, title, permission</span></div></div>
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Bad time" / "I'm busy"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">respect time</span></div><div class="talk-track">"Of course, I caught you in the middle of something. I can be brief."</div><div class="why"><strong>Then ask:</strong> "Is later this afternoon better, or should I try you tomorrow morning?"</div><span class="obj-then">→ Specific callback window</span></div></div>
+          <div class="obj-item" onclick="toggleObj(this)"><div class="obj-header"><div class="obj-trigger">"Please don't call again"</div><div class="obj-chevron">▾</div></div><div class="obj-response"><div class="tag-row"><span class="micro-tag">stop</span><span class="micro-tag">protect brand</span></div><div class="talk-track">"Understood. I will make a note and will not call again. Appreciate your time today."</div><div class="why"><strong>Then actually stop:</strong> log it, suppress follow-up, and do not try to save the call.</div><span class="obj-then">→ Close cleanly</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="g-section" id="value">
+      <h2 class="g-section-title">MaaS360 value snapshot</h2>
+      <div class="list-item">Use this only when someone asks, "What does MaaS360 actually do?" Pick one benefit, connect it to their role, then return to the meeting ask.</div>
+      <div class="two-col">
+        <div class="method-card"><h4>Unified endpoint management</h4><p>Manage and secure phones, tablets, laptops, and other endpoints from one place instead of juggling separate tools.</p></div>
+        <div class="method-card"><h4>Mobile threat defense</h4><p>Help protect users, devices, apps, and data from threats like malware, phishing, and risky networks.</p></div>
+        <div class="method-card"><h4>Less manual IT work</h4><p>Support enrollment, configuration, app access, lockouts, and device support with fewer repetitive tasks.</p></div>
+        <div class="method-card"><h4>BYOD boundaries</h4><p>Separate corporate data from personal data so employees keep privacy while IT protects the business side.</p></div>
+        <div class="method-card"><h4>Compliance visibility</h4><p>Apply policies, monitor posture, and support audit readiness across employees, devices, and locations.</p></div>
+        <div class="method-card"><h4>IBM enterprise backing</h4><p>Enterprise-grade platform, security credibility, and support for organizations that need scale and trust.</p></div>
+      </div>
+      <div class="script-note">Do not read this whole section on a cold call. One value point is enough. If they ask for more, use that interest to book the meeting.</div>
     </section>
 
     <section class="g-section" id="close">
@@ -270,7 +363,7 @@
 
     <section class="g-section" id="voicemail">
       <h2 class="g-section-title">Voicemail script</h2>
-      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. Just helped [similar company] [specific outcome] and wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
+      <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. We help companies manage and secure devices from one place without adding more work for IT, and I wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
         <div class="script-note">Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
       </div>
     </section>
@@ -289,7 +382,7 @@
         <strong>Subject:</strong> Quick intro — MaaS360 for [Company Name]<br><br>
         Hey [Name],<br><br>
         [Your Name] here — I'm the MaaS360 [AE/POC] with IBM for [Company Name].<br><br>
-        We just wrapped up a project with [similar company] helping them manage and secure their mobile devices without adding overhead for their team.<br><br>
+        We help companies manage and secure phones, tablets, laptops, and other endpoints from one place, without adding overhead for the team.<br><br>
         Worth a quick 10-minute call to see if there's a fit? I can work around your schedule.<br><br>
         [Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]
         <div class="script-note">Keep it short. No attachments. Make it easy to say yes with a clear ask.</div>
@@ -347,6 +440,13 @@
   </main>
 
   <script>
+    function switchPanel(group,id,event){
+      document.querySelectorAll('.tab[data-tab-group="'+group+'"]').forEach(function(t){t.classList.remove('active');});
+      document.querySelectorAll('.tab-content[data-tab-group="'+group+'"]').forEach(function(c){c.classList.remove('active');});
+      event.target.classList.add('active');
+      var panel=document.getElementById('tab-'+group+'-'+id);
+      if(panel){panel.classList.add('active');}
+    }
     function switchTab(tabId, event){
       document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
