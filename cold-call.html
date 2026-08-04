@@ -62,7 +62,7 @@
     .branch-line{background:var(--panel-2);border-left:3px solid var(--primary);padding:12px 14px;margin-top:10px;font-size:14px;color:var(--text-dim);line-height:1.6;}
     .branch-line strong{color:var(--text);display:block;margin-bottom:4px;}
     .obj-response .talk-track{background:var(--panel);border-left:3px solid var(--acc);padding:10px 12px;margin:9px 0;}
-    .obj-response .why{font-size:13px;color:var(--text-dim);background:var(--panel);padding:9px 11px;margin-top:8px;border:1px solid var(--line);}
+    .obj-response .why{font-size:13px;color:var(--text-dim);background:var(--panel);padding:9px 11px;margin-top:8px;border:1px solid var(--line);} .checklist-box{background:var(--panel);border:1px solid var(--line);padding:16px;margin:12px 0;} .checklist-box div{padding:6px 0;}
 
     .obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
     .obj-item{background:var(--panel);padding:16px 18px;cursor:pointer;transition:background .11s;}
@@ -346,22 +346,24 @@
     </section>
 
     <section class="g-section" id="close">
-      <h2 class="g-section-title">Always close with this</h2>
-      <div class="close-box">
-        <div class="label">After any objection, land here</div>
-        <p>"Does Tuesday at 2 work, or is Wednesday morning better for you?"</p>
-      </div>
-      <div class="script-card">
-        <strong>If they won't commit to either time:</strong><br><br>
-        "No worries — what's your calendar usually look like, mornings or afternoons?" Get a general window, then follow up by email to lock the exact time. Some people will book a meeting but won't pick from two fixed options on the spot — don't let the call end without at least a window.
-      </div>
-      <div class="script-card blue">
-        <strong>If they ask what MaaS360 does:</strong><br><br>
-        "It's IBM's platform for managing and securing mobile devices and endpoints — takes a lot of the manual IT work off your plate while keeping everything locked down. Easier to show you with a real example than explain it over the phone — that's why I want the 10 minutes."
-      </div>
-    </section>
-
-    <section class="g-section" id="voicemail">
+<h2 class="g-section-title">Closing playbook</h2>
+<div class="tabs">
+<button class="tab active" data-tab-group="close" onclick="switchPanel('close','standard',event)">Standard</button>
+<button class="tab" data-tab-group="close" onclick="switchPanel('close','it',event)">IT/Security</button>
+<button class="tab" data-tab-group="close" onclick="switchPanel('close','exec',event)">Executive</button>
+<button class="tab" data-tab-group="close" onclick="switchPanel('close','budget',event)">Budget</button>
+<button class="tab" data-tab-group="close" onclick="switchPanel('close','soft',event)">Soft No</button>
+<button class="tab" data-tab-group="close" onclick="switchPanel('close','lock',event)">Calendar Lock</button>
+</div>
+<div class="tab-content active" data-tab-group="close" id="tab-close-standard"><div class="script-card"><div class="tag-row"><span class="micro-tag">default</span><span class="micro-tag">consultative</span></div>Based on what you shared, it sounds like it's worth a deeper look.<br><br><strong>Does Tuesday at 2 work, or is Wednesday morning better?</strong></div></div>
+<div class="tab-content" data-tab-group="close" id="tab-close-it"><div class="script-card">I hear similar themes from IT teams around visibility, device sprawl, support workload, and security oversight.<br><br>It might be useful to compare notes and see how you're approaching it.<br><br><strong>Does Tuesday at 2 work, or is Wednesday morning better?</strong></div></div>
+<div class="tab-content" data-tab-group="close" id="tab-close-exec"><div class="script-card">This may not even turn into a project.<br><br>But if there's an opportunity to reduce risk and save the team time, it's probably worth a brief conversation.<br><br><strong>Would Tuesday or Wednesday be better?</strong></div></div>
+<div class="tab-content" data-tab-group="close" id="tab-close-budget"><div class="script-card">I'm not asking you to buy anything.<br><br>The goal is to show you what's available so you're not starting from scratch later.<br><br><strong>Worth ten minutes next week?</strong></div></div>
+<div class="tab-content" data-tab-group="close" id="tab-close-soft"><div class="script-card">Happy to follow up.<br><br><strong>Just so I make the follow-up useful, what would need to happen for this to become a priority?</strong><br><br>Then schedule a specific follow-up date.</div></div>
+<div class="tab-content" data-tab-group="close" id="tab-close-lock"><div class="script-card"><strong>Meeting agreed?</strong><br><br>Perfect. I have Tuesday at 2 PM.<br><br>What's the best email for the invite?<br><br>I'll send it while we're on the phone.</div></div>
+<div class="checklist-box"><h4>Meeting Locked Checklist</h4><div>✅ Meeting date</div><div>✅ Meeting time</div><div>✅ Correct email</div><div>✅ Stakeholders identified</div><div>✅ Invite sent</div><div>✅ Next step confirmed</div></div>
+<div class="two-col"><div class="method-card flag-col red"><h4>Weak closes to avoid</h4><div class="list-item">Would you maybe be interested?</div><div class="list-item">Can I send some information?</div><div class="list-item">Do you have time sometime?</div></div><div class="method-card flag-col green"><h4>Strong closes</h4><div class="list-item">Does Tuesday at 2 work, or is Wednesday morning better?</div><div class="list-item">Who else should be included?</div><div class="list-item">What's the best email for the invite?</div><div class="list-item">I'll send it while we're on the phone.</div></div></div>
+</section><section class="g-section" id="voicemail">
       <h2 class="g-section-title">Voicemail script</h2>
       <div class="script-card">"Hey [Name], this is [Your Name] with IBM — I'm the MaaS360 [AE/POC] for [Company Name]. We help companies manage and secure devices from one place without adding more work for IT, and I wanted to see if it made sense for us to connect. I'll send you an email, but if you want to chat sooner, my number is [Your Number]."
         <div class="script-note">Keep it under 20 seconds. Sound confident, not desperate. Always mention you'll follow up with email.</div>
