@@ -89,6 +89,11 @@
     .spoken-head .ic{font-size:15px;}
     .spoken-head .ttl{font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--text);}
     .spoken-head .sub{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim);}
+    .spoken-tabs{display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--line); background:var(--panel-2);}
+    .sp-tab{flex:1 1 auto; min-width:90px; padding:11px 14px; background:transparent; color:var(--link); font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; border:none; border-right:1px solid var(--line); border-bottom:2px solid transparent; transition:background .11s,color .11s,border-color .11s;}
+    .sp-tab:last-child{border-right:none;}
+    .sp-tab:hover{background:var(--panel);}
+    .sp-tab.active{background:var(--panel); color:var(--support-success); border-bottom-color:var(--support-success);}
     .spoken-body{padding:8px 0 20px;}
     .spoken-beat{padding:16px 22px; border-bottom:1px solid var(--line);}
     .spoken-beat:last-of-type{border-bottom:none;}
@@ -336,7 +341,7 @@
         <div class="flow-step">
           <span class="num">1</span>
           <div class="role" id="openRole">Open · Recommended</div>
-          <p class="line" id="openLine">"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I'm catching you out of the blue, so I'll be quick. When it comes to company devices, what's usually the biggest headache for your team these days?"</p>
+          <p class="line" id="openLine">"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I'm catching you out of the blue, so I'll be quick. When it comes to company devices, what's usually the biggest headache for your team these days? The security side, the manual setup work, or supporting people when something breaks?"</p>
           <span class="cue" id="openCue">then stop talking →</span>
         </div>
         <div class="flow-arrow">↓</div>
@@ -365,10 +370,16 @@
           <span class="ttl">Say It Out Loud</span>
           <span class="sub" id="spokenTag">verbatim · Recommended</span>
         </div>
+        <div class="spoken-tabs" id="spokenTabs" role="tablist" aria-label="Choose spoken style">
+          <button class="sp-tab active" type="button" data-open="rec">Recommended</button>
+          <button class="sp-tab" type="button" data-open="soft">Soft</button>
+          <button class="sp-tab" type="button" data-open="direct">Direct</button>
+          <button class="sp-tab" type="button" data-open="casual">Casual</button>
+        </div>
         <div class="spoken-body">
           <div class="spoken-beat">
             <div class="beat-label"><span class="n">1</span> Open</div>
-            <p class="say" id="spokenLine">"Hey&hellip; is this <b>[Name]</b>?" <span class="cue-inline">let them answer</span> "Awesome. Hey, so full honesty, you don't know me&mdash;this is a bit of a cold call, so I'll be super quick." <span class="cue-inline">smile, slow down</span> "I'm actually just curious&hellip; when it comes to all your company devices, the phones, laptops, all that stuff&hellip; what's usually the biggest headache for your team right now?" <span class="cue-inline">then zip it &mdash; let them talk</span></p>
+            <p class="say" id="spokenLine">"Hey&hellip; is this <b>[Name]</b>?" <span class="cue-inline">let them answer</span> "Hey [Name], this is Bernard&mdash;I'm on the device management and security side over at IBM. I'll keep this quick, I promise." <span class="cue-inline">smile, slow down</span> "I'm actually just curious&hellip; when it comes to all your company devices, the phones, laptops, all that stuff&hellip; what's usually the biggest headache for your team right now? Is it more the security side, the manual setup work, or supporting people when something breaks?" <span class="cue-inline">then zip it &mdash; let them pick a lane</span></p>
           </div>
           <div class="spoken-beat">
             <div class="beat-label"><span class="n">2</span> Discover</div>
@@ -727,11 +738,11 @@
     (function(){
       var openers={
         rec:{tag:'Recommended', role:'Open · Recommended', cue:'then stop talking →',
-          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I\'m catching you out of the blue, so I\'ll be quick. When it comes to company devices, what\'s usually the biggest headache for your team these days?"',
+          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I\'m catching you out of the blue, so I\'ll be quick. When it comes to company devices, what\'s usually the biggest headache for your team these days? The security side, the manual setup work, or supporting people when something breaks?"',
           discRole:'Discover', discLine:'"Got it. How are you handling that today?"',
           curiRole:'Create curiosity', curiLine:'"Makes sense. One thing I hear a lot is teams already have a tool, but still deal with manual work, mobile security, or support issues. Has any of that come up on your side?"',
           askRole:'Ask for the meeting', askLine:'"Interesting. That\'s really why I called. I don\'t know if MaaS360 is relevant yet, but it might be worth <b>10-15 minutes</b> to compare notes. Would that be unreasonable?"',
-          spoken:'"Hey&hellip; is this <b>[Name]</b>?" <span class=\"cue-inline\">let them answer</span> "Awesome. Hey, so full honesty, you don\'t know me&mdash;this is a bit of a cold call, so I\'ll be super quick." <span class=\"cue-inline\">smile, slow down</span> "I\'m actually just curious&hellip; when it comes to all your company devices, the phones, laptops, all that stuff&hellip; what\'s usually the biggest headache for your team right now?" <span class=\"cue-inline\">then zip it &mdash; let them talk</span>',
+          spoken:'"Hey&hellip; is this <b>[Name]</b>?" <span class=\"cue-inline\">let them answer</span> "Hey [Name], this is Bernard&mdash;I\'m on the device management and security side over at IBM. I\'ll keep this quick, I promise." <span class=\"cue-inline\">smile, slow down</span> "I\'m actually just curious&hellip; when it comes to all your company devices, the phones, laptops, all that stuff&hellip; what\'s usually the biggest headache for your team right now? Is it more the security side, the manual setup work, or supporting people when something breaks?" <span class=\"cue-inline\">then zip it &mdash; let them pick a lane</span>',
           spokenDisc:'"Yeah\u2026 okay, that makes total sense." <span class=\"cue-inline\">react first, genuine</span> "So how are you guys handling that today?" <span class=\"cue-inline\">let them explain</span> "Gotcha. And is that mostly a headache for you and IT, or is it starting to hit your users too?" <span class=\"cue-inline\">one follow-up, then listen</span> ',
           spokenCuri:'"Yeah, I hear that a lot honestly." <span class=\"cue-inline\">normalize it</span> "Funny thing is, most teams already have some tool in place\u2026 they just still get stuck on the manual work, or the mobile security side, or all the support tickets." <span class=\"cue-inline\">light, not pitchy</span> "Does any of that sound familiar on your end?" <span class=\"cue-inline\">pause</span> ',
           spokenAsk:'"Okay, that\'s actually why I called." <span class=\"cue-inline\">warm, low pressure</span> "Look, I honestly don\'t even know if MaaS360 is a fit for you yet\u2026 but based on what you just said, it might be worth a quick <b>10 or 15 minutes</b> to compare notes." <span class=\"cue-inline\">slow down here</span> "Would that be unreasonable?" <span class=\"cue-inline\">stop \u2014 let them answer</span> '},
@@ -740,16 +751,16 @@
           discRole:'Discover', discLine:'"Got it. Has that been pretty smooth, or is there a part that still bugs the team?"',
           curiRole:'Create curiosity', curiLine:'"Yeah, that comes up a lot. Even teams that have a tool still deal with manual work, mobile security, or support headaches. Sound familiar at all?"',
           askRole:'Ask for the meeting', askLine:'"No pressure either way, but it might be worth a quick <b>10-15 minutes</b> to compare notes. Would that be unreasonable?"',
-          spoken:'"Hey, is this <b>[Name]</b>?" <span class=\"cue-inline\">let them answer</span> "Hey [Name], it\'s Bernard with IBM. I know you weren\'t expecting my call, so I\'ll keep this really short." <span class=\"cue-inline\">easy tone</span> "Honestly this might not even be relevant for you&hellip; but I was just curious how your team\'s handling company devices these days?" <span class=\"cue-inline\">soft landing, wait</span>',
+          spoken:'"Hey, is this <b>[Name]</b>?" <span class=\"cue-inline\">let them answer</span> "Hey [Name], it\'s Bernard&mdash;I\'m on the device management and security side at IBM. I know you weren\'t expecting my call, so I\'ll keep this really short." <span class=\"cue-inline\">easy tone</span> "Honestly this might not even be relevant for you&hellip; but I was just curious how your team\'s handling company devices these days?" <span class=\"cue-inline\">soft landing, wait</span>',
           spokenDisc:'"Got it\u2026 no, that\'s helpful." <span class=\"cue-inline\">gentle</span> "Has that been pretty smooth for you, or is there a part that still kind of bugs the team?" <span class=\"cue-inline\">let them vent a little</span> ',
           spokenCuri:'"Yeah, that comes up a lot actually." <span class=\"cue-inline\">easy tone</span> "Even teams that have a tool still run into the manual stuff, or mobile security, or support headaches." <span class=\"cue-inline\">soft, not salesy</span> "Sound familiar at all?" <span class=\"cue-inline\">wait</span> ',
           spokenAsk:'"No pressure either way here, honestly." <span class=\"cue-inline\">reassure</span> "But it might be worth a quick <b>10 or 15 minutes</b> just to compare notes and see if there\'s anything useful." <span class=\"cue-inline\">soft landing</span> "Would that be unreasonable?" <span class=\"cue-inline\">stop, let them answer</span> '},
         direct:{tag:'Direct', role:'Open · Direct — for busy people', cue:'then keep it moving →',
-          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I\'ll be quick, I promise. When it comes to managing all your company\'s phones and laptops, what usually eats up the most time for your team?"',
+          line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I\'ll be quick, I promise. When it comes to managing all your company\'s phones and laptops, what usually eats up the most time for your team? The security side, the manual setup, or supporting people when something breaks?"',
           discRole:'Discover', discLine:'"Yeah, I hear that a lot. Is that more on IT, or does it hit your users too?"',
           curiRole:'Create curiosity', curiLine:'"Makes sense. Usually the time sink is manual setup, mobile security, or support tickets. That the case for you guys?"',
           askRole:'Ask for the meeting', askLine:'"That\'s actually why I called. Worth <b>10-15 minutes</b> to compare notes and see if we can take some of that off your plate?"',
-          spoken:'"Hey [Name]? It\'s Bernard over at IBM&mdash;I\'ll be quick, I promise." <span class=\"cue-inline\">confident, brisk</span> "When it comes to managing all your company\'s phones and laptops, what usually eats up the most time for your team?" <span class=\"cue-inline\">stop, let them answer</span>',
+          spoken:'"Hey [Name]? It\'s Bernard over at IBM&mdash;I\'ll be quick, I promise." <span class=\"cue-inline\">confident, brisk</span> "When it comes to managing all your company\'s phones and laptops, what usually eats up the most time for your team? The security side, the manual setup, or supporting people when something breaks?" <span class=\"cue-inline\">stop, let them pick a lane</span>',
           spokenDisc:'"Yeah, I hear that a lot." <span class=\"cue-inline\">quick, confident</span> "Is that more on you and IT, or does it hit your users too?" <span class=\"cue-inline\">let them answer</span> ',
           spokenCuri:'"Makes sense." <span class=\"cue-inline\">brisk</span> "Usually the time sink is manual setup, mobile security, or support tickets. That the case for you guys too?" <span class=\"cue-inline\">pause</span> ',
           spokenAsk:'"That\'s actually why I called." <span class=\"cue-inline\">get to it</span> "Worth a quick <b>10 or 15 minutes</b> to compare notes and see if we can take some of that off your plate?" <span class=\"cue-inline\">stop, let them answer</span> '},
@@ -769,23 +780,30 @@
       var askRoleEl=document.getElementById('askRole'), askLineEl=document.getElementById('askLine');
       var spokenLineEl=document.getElementById('spokenLine'), spokenTagEl=document.getElementById('spokenTag');
       var spokenDiscEl=document.getElementById('spokenDisc'), spokenCuriEl=document.getElementById('spokenCuri'), spokenAskEl=document.getElementById('spokenAsk');
-      document.querySelectorAll('#openerPills .op-pill').forEach(function(p){
-        p.addEventListener('click',function(){
-          document.querySelectorAll('#openerPills .op-pill').forEach(function(x){x.classList.remove('active');});
-          p.classList.add('active');
-          var o=openers[p.getAttribute('data-open')];
-          if(!o) return;
-          roleEl.textContent=o.role; lineEl.innerHTML=o.line; cueEl.innerHTML=o.cue;
-          discRoleEl.textContent=o.discRole; discLineEl.innerHTML=o.discLine;
-          curiRoleEl.textContent=o.curiRole; curiLineEl.innerHTML=o.curiLine;
-          askRoleEl.textContent=o.askRole; askLineEl.innerHTML=o.askLine;
-          if(spokenLineEl&&o.spoken){spokenLineEl.innerHTML=o.spoken;}
-          if(spokenDiscEl&&o.spokenDisc){spokenDiscEl.innerHTML=o.spokenDisc;}
-          if(spokenCuriEl&&o.spokenCuri){spokenCuriEl.innerHTML=o.spokenCuri;}
-          if(spokenAskEl&&o.spokenAsk){spokenAskEl.innerHTML=o.spokenAsk;}
-          if(spokenTagEl){spokenTagEl.textContent='verbatim · '+o.tag;}
-          if(railEl){railEl.textContent=o.tag;}
-        });
+      // Shared updater — drives the flow steps AND the spoken teleprompter,
+      // and keeps both control sets (opener pills + spoken tabs) in sync.
+      function applyOpener(key){
+        var o=openers[key];
+        if(!o) return;
+        // Flow steps
+        roleEl.textContent=o.role; lineEl.innerHTML=o.line; cueEl.innerHTML=o.cue;
+        discRoleEl.textContent=o.discRole; discLineEl.innerHTML=o.discLine;
+        curiRoleEl.textContent=o.curiRole; curiLineEl.innerHTML=o.curiLine;
+        askRoleEl.textContent=o.askRole; askLineEl.innerHTML=o.askLine;
+        // Spoken teleprompter
+        if(spokenLineEl&&o.spoken){spokenLineEl.innerHTML=o.spoken;}
+        if(spokenDiscEl&&o.spokenDisc){spokenDiscEl.innerHTML=o.spokenDisc;}
+        if(spokenCuriEl&&o.spokenCuri){spokenCuriEl.innerHTML=o.spokenCuri;}
+        if(spokenAskEl&&o.spokenAsk){spokenAskEl.innerHTML=o.spokenAsk;}
+        if(spokenTagEl){spokenTagEl.textContent='verbatim · '+o.tag;}
+        if(railEl){railEl.textContent=o.tag;}
+        // Sync active states on BOTH control sets
+        document.querySelectorAll('#openerPills .op-pill').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open')===key);});
+        document.querySelectorAll('#spokenTabs .sp-tab').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open')===key);});
+      }
+      // Wire both the opener pills and the spoken tabs to the shared updater
+      document.querySelectorAll('#openerPills .op-pill, #spokenTabs .sp-tab').forEach(function(btn){
+        btn.addEventListener('click',function(){ applyOpener(btn.getAttribute('data-open')); });
       });
     })();
     // Hide rail
