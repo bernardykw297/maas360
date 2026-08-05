@@ -15,9 +15,12 @@
   <link rel="stylesheet" href="maas-styles.css">
   <style>
   .table-container {
-    overflow-x: auto;
-    overflow-y: auto;
-    max-height: calc(100vh - 320px);
+    overflow-x: auto;          /* horizontal scroll only — no height clipping */
+  }
+  #dataTable thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 </style>
   <script src="carbon-theme.js"></script>
