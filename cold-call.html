@@ -1123,5 +1123,272 @@
     })();
     // Theme is handled by the shared carbon-theme.js (binds to .theme-toggle).
   </script>
+
+  <script>
+    /* ===== 2026-08 Update: focused opener set + sector-aware scripts for every opener ===== */
+    (function(){
+      var activeOpener = 'proof';
+      var activeSector = 'government';
+      var openerPills = document.getElementById('openerPills');
+      var spokenTabs = document.getElementById('spokenTabs');
+      var sectorStrip = document.getElementById('sectorStrip');
+      var roleEl = document.getElementById('openRole');
+      var lineEl = document.getElementById('openLine');
+      var cueEl = document.getElementById('openCue');
+      var discRoleEl = document.getElementById('discRole');
+      var discLineEl = document.getElementById('discLine');
+      var curiRoleEl = document.getElementById('curiRole');
+      var curiLineEl = document.getElementById('curiLine');
+      var askRoleEl = document.getElementById('askRole');
+      var askLineEl = document.getElementById('askLine');
+      var spokenLineEl = document.getElementById('spokenLine');
+      var spokenDiscEl = document.getElementById('spokenDisc');
+      var spokenCuriEl = document.getElementById('spokenCuri');
+      var spokenAskEl = document.getElementById('spokenAsk');
+      var spokenTagEl = document.getElementById('spokenTag');
+      var railEl = document.getElementById('railOpen');
+      var sectorStatEl = document.getElementById('sectorStat');
+      var sectorExamplesEl = document.getElementById('sectorExamples');
+      var obsChipsEl = document.getElementById('obsChips');
+
+      var openerLabels = {
+        proof: 'Proof',
+        benchmark: 'Proof + Benchmark',
+        best: 'Permission',
+        direct: 'Direct'
+      };
+
+      var sectorData = {
+        general: {
+          label: 'General',
+          similar: 'another organization pretty similar to you guys',
+          proof: 'had some good success simplifying how they manage and secure devices',
+          value: 'setup, security, and support may be quietly eating IT time',
+          deviceQuestion: 'device management',
+          handleQuestion: 'How are you handling device management today?',
+          lanes: 'setup, security, compliance, or support',
+          examples: 'Fits: mixed/unknown IT shops - <b>Comporium, Vector Security, Daktronics, Deluxe</b>',
+          stat: '<b>Angle:</b> similar organization, similar device workload. <b>Best proof:</b> less manual setup, fewer support tickets, tighter security.',
+          obs: ['hybrid work is basically the norm','work and personal devices are more mixed now','device counts just keep climbing','IT teams are being asked to do more with less']
+        },
+        school: {
+          label: 'Education',
+          similar: 'another school system pretty similar to you guys',
+          proof: 'cut down a lot of device setup and support headaches',
+          value: 'getting devices into students and staff hands quickly without burying IT',
+          deviceQuestion: 'devices across students and staff',
+          handleQuestion: 'How are you handling devices across students and staff today?',
+          lanes: 'setup, support tickets, security, or the next device cycle',
+          examples: 'Fits: universities & districts - <b>UNL, LSU, Tulane, Creighton, Lincoln Public Schools</b>',
+          stat: '<b>Angle:</b> school systems have recurring device cycles. <b>Best proof:</b> faster setup and fewer support headaches.',
+          obs: ['back-to-school season ramping up','the device refresh cycle','how many devices schools juggle now','students and staff both needing support']
+        },
+        healthcare: {
+          label: 'Healthcare',
+          similar: 'another healthcare team',
+          proof: 'kept devices secure and compliant without creating more work for staff',
+          value: 'securing devices without slowing clinicians or staff down',
+          deviceQuestion: 'device security and compliance',
+          handleQuestion: 'How are you handling device security today?',
+          lanes: 'security, compliance, shared devices, or staff support',
+          examples: 'Fits: hospitals & health systems - <b>Oklahoma Heart, FMOLHS, North Memorial, Magellan Health</b>',
+          stat: '<b>Angle:</b> healthcare balances security and staff productivity. <b>Best proof:</b> secure devices without adding workflow friction.',
+          obs: ['how many shared devices you all run','compliance is always front and center','staff is leaning on mobile more than ever','patient data lives on so many devices now']
+        },
+        industrial: {
+          label: 'Manufacturing',
+          similar: 'another manufacturer pretty similar to you guys',
+          proof: 'cut down a lot of the device support work that was eating up time',
+          value: 'keeping floor, field, and off-desk devices running without constant IT touch',
+          deviceQuestion: 'device management across floor and field teams',
+          handleQuestion: 'How are you handling device management across the floor or field today?',
+          lanes: 'updates, support, security, or keeping devices running in the field',
+          examples: 'Fits: manufacturing & field ops - <b>Vermeer, Ziegler CAT, Japs-Olson, Stuller</b>',
+          stat: '<b>Angle:</b> off-desk teams create steady device support load. <b>Best proof:</b> less support work pulling IT away.',
+          obs: ['how many folks are off-desk','devices out on the floor take a beating','shift work makes support tricky','operations basically run around the clock']
+        },
+        government: {
+          label: 'Government',
+          similar: 'another government IT team',
+          proof: 'got device setup from about <b>45 minutes down to 5</b>',
+          value: 'doing more with the same staff while keeping devices secure and compliant',
+          deviceQuestion: 'devices across the agency',
+          handleQuestion: 'How are you handling devices across the agency today?',
+          lanes: 'issuing devices, support, security, or compliance',
+          examples: 'Fits: agencies & public sector - <b>City of New Orleans, Sedgwick County, Oakland</b>',
+          stat: '<b>Angle:</b> government IT is often doing more with the same staff. <b>Best proof:</b> 45 minutes down to 5 for setup.',
+          obs: ['budget season is probably on the radar','doing more with tight staffing','compliance is always part of the conversation','device security keeps getting scrutiny']
+        },
+        retail: {
+          label: 'Retail / Field',
+          similar: 'another organization with a similar footprint',
+          proof: 'reduced device support issues across multiple locations',
+          value: 'keeping devices consistent across locations without creating a ton of small support fires',
+          deviceQuestion: 'devices across your locations',
+          handleQuestion: 'How are you handling devices across your locations today?',
+          lanes: 'updates across sites, support, security, or seasonal device turnover',
+          examples: 'Fits: multi-location & stores - <b>Caribou Coffee, Living Spaces, Restaurant Technologies</b>',
+          stat: '<b>Angle:</b> distributed teams create lots of small device issues. <b>Best proof:</b> fewer support problems across locations.',
+          obs: ['the seasonal ramp','how many locations are involved','high device turnover on the floor','support across sites gets messy fast']
+        },
+        finance: {
+          label: 'Finance / Banking',
+          similar: 'another financial institution pretty similar to you guys',
+          proof: 'made device security and audit prep a lot easier',
+          value: 'locking devices down and making security easier to prove when it matters',
+          deviceQuestion: 'device security',
+          handleQuestion: 'How are you handling device security today?',
+          lanes: 'security, audit prep, branch devices, or remote staff',
+          examples: 'Fits: banks, insurance, lending - <b>Arvest, BancFirst, Tinker FCU, Lockton, LoanDepot, QBE/NAU</b>',
+          stat: '<b>Angle:</b> finance needs device controls to be provable. <b>Best proof:</b> easier security and audit prep.',
+          obs: ['exams and audits are always looming','customer data sits on a lot of devices','branches plus remote staff add complexity','security scrutiny keeps climbing']
+        },
+        legal: {
+          label: 'Legal',
+          similar: 'another law firm pretty similar to you guys',
+          proof: 'better secured client data across laptops and mobile devices',
+          value: 'protecting client data without slowing attorneys down',
+          deviceQuestion: 'client data across laptops and mobile devices',
+          handleQuestion: 'How are you handling that across laptops and mobile devices today?',
+          lanes: 'client data, attorney mobility, security, or support',
+          examples: 'Fits: law firms - <b>Polsinelli, Husch Blackwell, Fish & Richardson</b>',
+          stat: '<b>Angle:</b> law firms need security with low friction. <b>Best proof:</b> protect client data across mobile and laptops.',
+          obs: ['client data lives on devices','attorneys are always moving','confidentiality is everything','billable time is too precious for IT hassles']
+        },
+        profservices: {
+          label: 'Professional Services',
+          similar: 'another professional services firm pretty similar to you guys',
+          proof: 'improved device security while reducing support overhead',
+          value: 'securing client data across a mobile workforce without adding IT drag',
+          deviceQuestion: 'device management for a mobile workforce',
+          handleQuestion: 'How are you handling device management today?',
+          lanes: 'client data, support overhead, security, or people moving between sites',
+          examples: 'Fits: consulting & accounting - <b>EisnerAmper, Eide Bailly, Augeo, Colle & McVoy</b>',
+          stat: '<b>Angle:</b> client data moves with the employee. <b>Best proof:</b> better security with less support overhead.',
+          obs: ['your people are on the road a lot','client data travels everywhere','utilization time is precious','growth usually means devices multiply fast']
+        }
+      };
+
+      function setControls(){
+        if(openerPills){
+          openerPills.innerHTML = '<button class="op-pill active" type="button" data-open="proof">Proof</button><button class="op-pill" type="button" data-open="benchmark">Proof + Benchmark</button><button class="op-pill" type="button" data-open="best">Permission</button><button class="op-pill" type="button" data-open="direct">Direct</button>';
+        }
+        if(spokenTabs){
+          spokenTabs.innerHTML = '<button class="sp-tab active" type="button" data-open="proof">Proof</button><button class="sp-tab" type="button" data-open="benchmark">Proof + Benchmark</button><button class="sp-tab" type="button" data-open="best">Permission</button><button class="sp-tab" type="button" data-open="direct">Direct</button>';
+        }
+        document.querySelectorAll('#openerPills .op-pill, #spokenTabs .sp-tab').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            activeOpener = btn.getAttribute('data-open') || 'proof';
+            applySectorScript(activeOpener, activeSector);
+          });
+        });
+      }
+
+      function openerCopy(kind, s){
+        var d = sectorData[s] || sectorData.general;
+        var copy = {
+          proof: {
+            tag: 'Proof', role: 'Open · Proof', cue: 'proof first → one question',
+            open: '"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with '+d.similar+' and '+d.proof+'. That is actually why I wanted to give you a call. '+d.handleQuestion+'"',
+            disc: '"Got it. Where does most of the effort go today - '+d.lanes+'?"',
+            curi: '"Yeah, that makes sense. That is pretty similar to what we hear from a lot of '+d.label.toLowerCase()+' teams. Most already have something in place, they are usually just trying to clean up the gaps around '+d.value+'."',
+            ask: '"That is why I reached out. Might be worth a quick <b>10 or 15 minutes</b> to compare what you are doing today against where we usually help. If it is not relevant, totally fair. Open to it?"'
+          },
+          benchmark: {
+            tag: 'Proof + Benchmark', role: 'Open · Proof + Benchmark', cue: 'proof → no-cost benchmark → one question',
+            open: '"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with '+d.similar+' and '+d.proof+'. Because of that, I have been offering a few teams a quick, no-cost <b>15-minute benchmark conversation</b> where we compare what they are doing today against what we are seeing work elsewhere. Did not know if it would make sense for you, but I figured it was worth reaching out. '+d.handleQuestion+'"',
+            disc: '"Got it. For you, where would a benchmark be most useful - '+d.lanes+'?"',
+            curi: '"That is exactly why the benchmark is useful. It is not a hard pitch, it is a quick way to see where your current approach is strong and where teams like yours usually save time or reduce risk."',
+            ask: '"Would it be crazy to spend <b>15 minutes</b> comparing your current approach against what we are seeing work elsewhere? If nothing else, you would walk away with a benchmark of where you stand."'
+          },
+          best: {
+            tag: 'Permission', role: 'Open · Permission', cue: 'ask for 30 seconds → proof → question',
+            open: '"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. We have never spoken, so full honesty, this is a cold call. Can I take 30 seconds to tell you why I called, and then you can tell me if I am way off? <span class="cue-inline">wait</span> Appreciate it. I was looking at <b>[Company]</b>, and we recently worked with '+d.similar+' that was focused on '+d.value+'. We '+d.proof+'. Did not know if that is on your radar, or if you have it handled?"',
+            disc: '"Right, okay. Is that landing mostly on you, or is there a broader team on it? And is fixing it a priority this year, or more of a later thing?"',
+            curi: '"Yeah, that is the pattern I keep running into. Teams usually have tools already, but the gaps show up around '+d.lanes+'. Is any of that a worry on your end?"',
+            ask: '"That is really why I called. Might be worth a quick <b>10 or 15 minutes</b> to compare what you do today with where we usually help. If it is not a fit, you tell me. Fair?"'
+          },
+          direct: {
+            tag: 'Direct', role: 'Open · Direct', cue: 'short proof → direct question',
+            open: '"Hey <b>[Name]</b>? Bernard with IBM. I will get right to it. We have been helping '+d.label.toLowerCase()+' teams simplify '+d.deviceQuestion+', and we recently helped '+d.similar+' '+d.proof+'. What is eating the most time for your team around devices right now?"',
+            disc: '"Yeah, I hear that a lot. Roughly how much time is that eating in a given week? And is it steady, or does it spike during onboarding, offboarding, audits, or support issues?"',
+            curi: '"Makes sense. The teams that actually fix this usually claw back time and stop chasing the same device problems over and over. Is that the kind of thing that would move the needle for you?"',
+            ask: '"Worth a quick <b>10 or 15 minutes</b> to compare notes and see if we can take some of that off your plate?"'
+          }
+        };
+        return copy[kind] || copy.proof;
+      }
+
+      function spokenFrom(c){
+        return {
+          open: c.open.replace('"Hey','"Hey...').replace('"', '"') + ' <span class="cue-inline">then stop</span>',
+          disc: c.disc + ' <span class="cue-inline">let them pick a lane</span>',
+          curi: c.curi + ' <span class="cue-inline">keep it calm, no pitch voice</span>',
+          ask: c.ask + ' <span class="cue-inline">stop talking here</span>'
+        };
+      }
+
+      function renderObs(sec){
+        var d = sectorData[sec] || sectorData.general;
+        if(!obsChipsEl) return;
+        obsChipsEl.innerHTML = '';
+        d.obs.forEach(function(t){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'obs-chip';
+          b.textContent = t;
+          b.addEventListener('click', function(){
+            document.querySelectorAll('#obsChips .obs-chip').forEach(function(x){x.classList.remove('active');});
+            b.classList.add('active');
+          });
+          obsChipsEl.appendChild(b);
+        });
+      }
+
+      function applySectorScript(kind, sec){
+        activeOpener = kind || activeOpener;
+        activeSector = sec || activeSector;
+        var d = sectorData[activeSector] || sectorData.general;
+        var c = openerCopy(activeOpener, activeSector);
+        var sp = spokenFrom(c);
+        if(roleEl) roleEl.textContent = c.role;
+        if(lineEl) lineEl.innerHTML = c.open;
+        if(cueEl) cueEl.innerHTML = c.cue;
+        if(discRoleEl) discRoleEl.textContent = 'Discover';
+        if(discLineEl) discLineEl.innerHTML = c.disc;
+        if(curiRoleEl) curiRoleEl.textContent = 'Create curiosity';
+        if(curiLineEl) curiLineEl.innerHTML = c.curi;
+        if(askRoleEl) askRoleEl.textContent = 'Ask for the meeting';
+        if(askLineEl) askLineEl.innerHTML = c.ask;
+        if(spokenLineEl) spokenLineEl.innerHTML = sp.open;
+        if(spokenDiscEl) spokenDiscEl.innerHTML = sp.disc;
+        if(spokenCuriEl) spokenCuriEl.innerHTML = sp.curi;
+        if(spokenAskEl) spokenAskEl.innerHTML = sp.ask;
+        if(spokenTagEl) spokenTagEl.textContent = 'verbatim · '+c.tag+' · '+d.label;
+        if(railEl) railEl.textContent = c.tag;
+        if(sectorStrip) sectorStrip.style.display = 'block';
+        if(sectorExamplesEl) sectorExamplesEl.innerHTML = d.examples;
+        if(sectorStatEl) sectorStatEl.innerHTML = d.stat;
+        renderObs(activeSector);
+        document.querySelectorAll('#openerPills .op-pill').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open') === activeOpener);});
+        document.querySelectorAll('#spokenTabs .sp-tab').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open') === activeOpener);});
+        document.querySelectorAll('#sectorPills .sec-pill').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-sec') === activeSector);});
+      }
+
+      setControls();
+      document.querySelectorAll('#sectorPills .sec-pill').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          applySectorScript(activeOpener, btn.getAttribute('data-sec') || 'general');
+        });
+      });
+
+      var headerNote = document.querySelector('#s-flow .snapshot p');
+      if(headerNote){
+        headerNote.innerHTML = '<b>Use Proof as the default.</b> Pick the sector first, then choose your opener: <b>Proof</b> for most calls, <b>Proof + Benchmark</b> when you want the no-cost 15-minute meeting angle, <b>Permission</b> when they sound guarded, and <b>Direct</b> when they sound busy. Keep it short, ask one question, then stop talking.';
+      }
+      applySectorScript('proof', 'government');
+    })();
+  </script>
+
 </body>
 </html>
