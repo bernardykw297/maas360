@@ -43,6 +43,10 @@
     .cc-head p.sub b{color:var(--text);}
     .live-hint{display:none; font-size:12.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; margin-top:10px;}
     .live-hint b{color:var(--text);}
+    /* "Press L" hint — visible only when NOT in Live Mode */
+    .press-l{display:inline-flex; align-items:center; gap:8px; margin-top:12px; font-size:12.5px; font-family:'IBM Plex Mono',monospace; color:var(--text-dim); background:var(--panel-2); border:1px solid var(--line); border-left:3px solid var(--primary); padding:7px 12px;}
+    .press-l kbd{font-family:inherit; font-weight:600; color:var(--on-primary); background:var(--primary); padding:1px 8px; border:1px solid var(--primary); border-radius:2px;}
+    .press-l b{color:var(--text);}
 
     /* Jump bar (full-guide only) */
     .jump{display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 26px; padding:12px; background:var(--panel); border:1px solid var(--line);}
@@ -268,9 +272,14 @@
     /* In Live Mode, hide everything except the 4 in-call sections. */
     body.live .full-guide,
     body.live .cc-head p.sub,
+    body.live .press-l,
     body.live .jump{display:none;}
     body.live .live-hint{display:block;}
     body.live .cc-sec-title .badge{opacity:.65;}
+    /* Live Mode: drop the flow-step script + duplicate opener pills so only the
+       verbatim "Say It Out Loud" teleprompter shows — no two scripts side by side. */
+    body.live #s-flow .flow,
+    body.live #s-flow .opener-pills{display:none;}
 
     /* ===================== PRINT ===================== */
     @media print{
@@ -337,7 +346,8 @@
       <div class="cc-eyebrow">IBM MaaS360 · Live-Call Cockpit</div>
       <h1>Cold Call Cockpit</h1>
       <p class="sub"><b>One job:</b> start a conversation, uncover a challenge, and earn a 10 to 15 minute discovery meeting. Flip <b>Live Mode</b> on for the call, off to study the full guide.</p>
-      <p class="live-hint">Live Mode on — showing only <b>Flow</b>, <b>What Did They Say</b>, <b>Ask</b>, and <b>Objections</b>. Press <b>L</b> or the button to exit.</p>
+      <p class="press-l">Press <kbd>L</kbd> to jump into <b>Live Mode</b> for the call &mdash; strips it down to just your talk track.</p>
+      <p class="live-hint">Live Mode on — showing only the <b>verbatim talk track</b>, <b>What Did They Say</b>, <b>Ask</b>, and <b>Objections</b>. Press <b>L</b> or the button to exit.</p>
     </div>
 
     <!-- Jump bar (hidden in Live Mode) -->
@@ -374,24 +384,24 @@
 
     <!-- ============ 1. IN-CALL: HERO FLOW ============ -->
     <section class="cc-sec" id="s-flow">
-      <div class="cc-sec-title">Recommended Call Flow <span class="badge">say this</span></div>
+      <div class="cc-sec-title">Your Call Flow <span class="badge">say this</span></div>
       <div class="snapshot" style="border-left-color:var(--support-success); margin-bottom:14px;">
-        <p><b>Raw cold call? Start here.</b> &nbsp;&#9733; <b>Best</b> is the default &mdash; permission opener, highest engagement. &nbsp;&#8226; <b>Proof</b> if you have a real customer + result to name. &nbsp;&#8226; <b>Direct</b> if they sound busy or rushed. &nbsp;&#8226; <b>Plain</b> if you can't tell who picked up.</p>
+        <p><b>Raw cold call? Start here.</b> &nbsp;<b>Proof</b> is the default &mdash; sounds like a researched call, not a cold one: pick the sector below, then read the script. &nbsp;&#9733; <b>Permission</b> for the highest engagement &mdash; ask for 30 seconds, then give your reason. &nbsp;&#8226; <b>General</b> if you want simple and it works on anyone. &nbsp;&#8226; Situational: Direct if rushed, Plain if you can't tell who picked up.</p>
         <span class="hint">pick the one you can say naturally &mdash; delivery beats the "perfect" script</span>
       </div>
       <div class="opener-pills" id="openerPills" role="tablist" aria-label="Choose your opener">
-        <button class="op-pill active" type="button" data-open="rec">Recommended</button>
+        <button class="op-pill" type="button" data-open="rec">General</button>
+        <button class="op-pill" type="button" data-open="best">Permission &#9733;</button>
+        <button class="op-pill active" type="button" data-open="proof">Proof</button>
         <button class="op-pill" type="button" data-open="soft">Soft</button>
         <button class="op-pill" type="button" data-open="direct">Direct</button>
         <button class="op-pill" type="button" data-open="casual">Casual</button>
         <button class="op-pill" type="button" data-open="plain">Plain</button>
-        <button class="op-pill" type="button" data-open="proof">Proof</button>
-        <button class="op-pill" type="button" data-open="best">Best &#9733;</button>
       </div>
       <div class="flow">
         <div class="flow-step">
           <span class="num">1</span>
-          <div class="role" id="openRole">Open · Recommended</div>
+          <div class="role" id="openRole">Open · General</div>
           <p class="line" id="openLine">"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I'm catching you out of the blue, so I'll be quick. When it comes to company devices, what's usually the biggest headache for your team these days? The security side, the manual setup work, or supporting people when something breaks?"</p>
           <span class="cue" id="openCue">then stop talking →</span>
         </div>
@@ -442,16 +452,16 @@
         <div class="spoken-head">
           <span class="ic">&#127897;&#65039;</span>
           <span class="ttl">Say It Out Loud</span>
-          <span class="sub" id="spokenTag">verbatim &middot; Recommended</span>
+          <span class="sub" id="spokenTag">verbatim &middot; General</span>
         </div>
         <div class="spoken-tabs" id="spokenTabs" role="tablist" aria-label="Choose spoken style">
-          <button class="sp-tab active" type="button" data-open="rec">Recommended</button>
+          <button class="sp-tab" type="button" data-open="rec">General</button>
+          <button class="sp-tab" type="button" data-open="best">Permission &#9733;</button>
+          <button class="sp-tab active" type="button" data-open="proof">Proof</button>
           <button class="sp-tab" type="button" data-open="soft">Soft</button>
           <button class="sp-tab" type="button" data-open="direct">Direct</button>
           <button class="sp-tab" type="button" data-open="casual">Casual</button>
           <button class="sp-tab" type="button" data-open="plain">Plain</button>
-          <button class="sp-tab" type="button" data-open="proof">Proof</button>
-          <button class="sp-tab" type="button" data-open="best">Best &#9733;</button>
         </div>
         <div class="spoken-body">
           <div class="spoken-beat">
@@ -898,7 +908,7 @@
   <aside class="rail" id="rail" aria-label="Live call flow">
     <button class="rail-close" id="railClose" aria-label="Hide">×</button>
     <div class="rail-head">📞 LIVE CALL</div>
-    <a href="#s-flow">1 · Open <span class="rail-tag" id="railOpen">Recommended</span></a>
+    <a href="#s-flow">1 · Open <span class="rail-tag" id="railOpen">General</span></a>
     <div class="ar">↓</div>
     <a href="#s-flow">2 · Discover</a>
     <div class="ar">↓</div>
@@ -939,7 +949,7 @@
     // Opener switcher — swaps step 1 of the flow (works in Live Mode)
     (function(){
       var openers={
-        rec:{tag:'Recommended', role:'Open \u00b7 Recommended', cue:'then stop talking \u2192',
+        rec:{tag:'General', role:'Open \u00b7 General', cue:'then stop talking \u2192',
           line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I\'m catching you out of the blue, so I\'ll be quick. When it comes to company devices, what\'s usually the biggest headache for your team these days? The security side, the manual setup work, or supporting people when something breaks?"',
           discRole:'Discover', discLine:'"Got it. How are you handling that today? And when it flares up, is it eating your time, IT\'s, or your users\' too?"',
           curiRole:'Create curiosity', curiLine:'"Makes sense. One thing I hear a lot is teams already have a tool, but still deal with manual work, mobile security, or support issues. Has any of that come up on your side?"',
@@ -993,7 +1003,7 @@
           spokenDisc:'"Yeah, makes sense &mdash; that\'s helpful." <span class="cue-inline">react genuine</span> "Where\'s the gap for you honestly &mdash; is it more the rollout and getting people set up, or locking everything down and keeping it secure after?" <span class="cue-inline">two lanes, not three</span> "And how far off is that from where you\'d actually want it to be?" <span class="cue-inline">frame it against the result you named &mdash; then listen</span>',
           spokenCuri:'"Yeah, that\'s exactly what that customer was wrestling with too honestly." <span class="cue-inline">confident, not salesy</span> "And the reason it actually worked &mdash; we didn\'t rip anything out on them, we just closed the gaps around what they already had running." <span class="cue-inline">tie it straight back to the result you named</span> "Does that line up with how your setup looks?" <span class="cue-inline">pause</span>',
           spokenAsk:'"That\'s really why I gave you a call." <span class="cue-inline">warm</span> "Might be worth a quick <b>10 or 15 minutes</b> just to compare what you\'re doing today against where we usually help. If it\'s not relevant, you tell me and we\'re done." <span class="cue-inline">low pressure, honest</span> "Open to it?" <span class="cue-inline">stop &mdash; let them answer</span>'},
-        best:{tag:'Best \u2605', role:'Open \u00b7 Best \u2014 permission + reason', cue:'get the yes \u2192 give the reason \u2192 one question',
+        best:{tag:'Permission \u2605', role:'Open \u00b7 Permission \u2014 ask first, then your reason', cue:'get the yes \u2192 give the reason \u2192 one question',
           line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. We\'ve never spoken, so full honesty, this is a cold call. Can I have 30 seconds to tell you why I called, and then you can tell me to buzz off? [wait for yes] Appreciate it. The reason I called \u2014 teams your size keep telling me their work phones and laptops eat up way more time and risk than they should. We\'ve actually helped some cut new-device setup from 45 minutes down to about 5. Didn\'t know if that\'s on your radar, or if you\'ve got it handled?"',
           discRole:'Discover', discLine:'"Right, okay. Is that landing mostly on you, or is there a whole team on it? And honestly, is fixing it a priority this year, or more of a someday thing?"',
           curiRole:'Create curiosity', curiLine:'"Yeah, that\'s the pattern I keep running into. The part that bites people is usually the stuff you don\'t see coming, a device walks out the door, or you get asked to prove everything\'s locked down and it\'s a scramble. That ever a worry on your end?"',
@@ -1094,6 +1104,8 @@
       document.querySelectorAll('#openerPills .op-pill, #spokenTabs .sp-tab').forEach(function(btn){
         btn.addEventListener('click',function(){ applyOpener(btn.getAttribute('data-open')); });
       });
+      // Default opener on load — Proof (shows the sector strip + researched-call script)
+      applyOpener('proof');
     })();
     // Hide rail
     document.getElementById('railClose').addEventListener('click',function(){
