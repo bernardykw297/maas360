@@ -43,10 +43,6 @@
     .cc-head p.sub b{color:var(--text);}
     .live-hint{display:none; font-size:12.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; margin-top:10px;}
     .live-hint b{color:var(--text);}
-    /* "Press L" hint — visible only when NOT in Live Mode */
-    .press-l{display:inline-flex; align-items:center; gap:8px; margin-top:12px; font-size:12.5px; font-family:'IBM Plex Mono',monospace; color:var(--text-dim); background:var(--panel-2); border:1px solid var(--line); border-left:3px solid var(--primary); padding:7px 12px;}
-    .press-l kbd{font-family:inherit; font-weight:600; color:var(--on-primary); background:var(--primary); padding:1px 8px; border:1px solid var(--primary); border-radius:2px;}
-    .press-l b{color:var(--text);}
 
     /* Jump bar (full-guide only) */
     .jump{display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 26px; padding:12px; background:var(--panel); border:1px solid var(--line);}
@@ -76,28 +72,6 @@
       background:var(--panel); color:var(--text-dim); border:1px solid var(--line); transition:all .12s;}
     .op-pill:hover{border-color:var(--primary); color:var(--text);}
     .op-pill.active{background:var(--primary); color:var(--on-primary); border-color:var(--primary);}
-    /* Researched Proof mode */
-    .sector-strip{margin:14px 0 14px; padding:12px 14px; background:var(--acc-bg); border:1px solid var(--line); border-left:3px solid var(--support-success);} 
-    .sector-strip .sector-label{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--support-success); margin-bottom:9px;}
-    .sector-pills,.email-pills{display:flex; flex-wrap:wrap; gap:7px;}
-    .sec-pill,.em-pill{font-family:inherit; font-size:12.5px; font-weight:600; padding:7px 13px; cursor:pointer; background:var(--panel); color:var(--text-dim); border:1px solid var(--line); transition:all .12s;}
-    .sec-pill:hover,.em-pill:hover{border-color:var(--support-success); color:var(--text);}
-    .sec-pill.active,.em-pill.active{background:var(--support-success); color:#fff; border-color:var(--support-success);}
-    .sector-stat{margin-top:10px; padding:9px 12px; background:var(--panel); border-left:3px solid var(--support-success); font-size:12.5px; line-height:1.5; color:var(--text-dim);}
-    
-    .sector-examples{margin-top:8px; font-size:11.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace;}
-    .sector-examples b{color:var(--text); font-weight:600;}
-    /* Quick "what you noticed" observation chips — grab one in <5s, click drops it into the script */
-    .obs-strip{margin-top:12px; padding-top:11px; border-top:1px dashed var(--line);}
-    .obs-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--support-success); margin-bottom:8px;}
-    .obs-chips{display:flex; flex-wrap:wrap; gap:7px;}
-    .obs-chip{font-family:inherit; font-size:12.5px; font-weight:500; padding:7px 12px; cursor:pointer; background:var(--panel); color:var(--text); border:1px solid var(--line); border-left:3px solid var(--support-success); transition:all .12s; text-align:left;}
-    .obs-chip:hover{background:var(--panel-2); border-left-color:var(--primary);}
-    .obs-chip.active{background:var(--support-success); color:#fff; border-left-color:var(--support-success);}
-    .obs-hint{margin-top:7px; font-size:11px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace;}
-.sector-stat b,#emailBody b{color:var(--text);} 
-    .sect-ref{margin-top:16px;}.sect-ref-label{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--support-success); margin-bottom:10px;}
-    .sect-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px;}.sect-card{background:var(--panel); border:1px solid var(--line); border-left:3px solid #009d9a; padding:13px 15px;}.sect-card.default{border-left-color:var(--support-success);}.sect-card h5{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:#009d9a; margin:0 0 7px; font-weight:600;}.sect-card.default h5{color:var(--support-success);}.sect-card .hook{font-size:13.5px; line-height:1.55; color:var(--text); margin:0 0 8px;}.sect-card .hook b{color:var(--primary);}.sect-card .nums{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--acc-fg); background:var(--acc-bg); padding:3px 8px; display:inline-block;}
 
     /* HERO call flow */
     .flow{background:var(--panel); border:1px solid var(--line); border-top:4px solid var(--primary); padding:8px;}
@@ -120,14 +94,14 @@
     .sp-tab:last-child{border-right:none;}
     .sp-tab:hover{background:var(--panel);}
     .sp-tab.active{background:var(--panel); color:var(--support-success); border-bottom-color:var(--support-success);}
-    .spoken-body{padding:6px 0 14px;}
-    .spoken-beat{padding:12px 18px; border-bottom:1px solid var(--line);}
+    .spoken-body{padding:8px 0 20px;}
+    .spoken-beat{padding:16px 22px; border-bottom:1px solid var(--line);}
     .spoken-beat:last-of-type{border-bottom:none;}
     .spoken-beat .beat-label{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--support-success); margin-bottom:9px; display:flex; align-items:center; gap:8px;}
     .spoken-beat .beat-label .n{width:20px; height:20px; background:var(--acc-bg); color:var(--support-success); display:flex; align-items:center; justify-content:center; font-size:11px; flex:0 0 auto;}
-    .spoken-body p.say{font-size:17px; line-height:1.55; color:var(--text); font-weight:400; margin:0;}
+    .spoken-body p.say{font-size:20px; line-height:1.7; color:var(--text); font-weight:400; margin:0;}
     .spoken-body p.say b{color:var(--primary); font-weight:600;}
-    .cue-inline{display:inline; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; color:var(--support-success); background:var(--acc-bg); padding:1px 6px; margin:0 2px; white-space:nowrap;}
+    .cue-inline{display:inline; font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:500; color:var(--support-success); background:var(--acc-bg); padding:1px 7px; margin:0 2px; white-space:nowrap;}
     .spoken-tips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 22px 0; padding-top:14px; border-top:1px solid var(--line);}
     .spoken-tips .st{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--text-dim); background:var(--panel-2); border:1px solid var(--line); padding:5px 10px;}
     /* Best-only jump button inside the spoken card */
@@ -272,14 +246,9 @@
     /* In Live Mode, hide everything except the 4 in-call sections. */
     body.live .full-guide,
     body.live .cc-head p.sub,
-    body.live .press-l,
     body.live .jump{display:none;}
     body.live .live-hint{display:block;}
     body.live .cc-sec-title .badge{opacity:.65;}
-    /* Live Mode: drop the flow-step script + duplicate opener pills so only the
-       verbatim "Say It Out Loud" teleprompter shows — no two scripts side by side. */
-    body.live #s-flow .flow,
-    body.live #s-flow .opener-pills{display:none;}
 
     /* ===================== PRINT ===================== */
     @media print{
@@ -346,8 +315,7 @@
       <div class="cc-eyebrow">IBM MaaS360 · Live-Call Cockpit</div>
       <h1>Cold Call Cockpit</h1>
       <p class="sub"><b>One job:</b> start a conversation, uncover a challenge, and earn a 10 to 15 minute discovery meeting. Flip <b>Live Mode</b> on for the call, off to study the full guide.</p>
-      <p class="press-l">Press <kbd>L</kbd> to jump into <b>Live Mode</b> for the call &mdash; strips it down to just your talk track.</p>
-      <p class="live-hint">Live Mode on — showing only the <b>verbatim talk track</b>, <b>What Did They Say</b>, <b>Ask</b>, and <b>Objections</b>. Press <b>L</b> or the button to exit.</p>
+      <p class="live-hint">Live Mode on — showing only <b>Flow</b>, <b>What Did They Say</b>, <b>Ask</b>, and <b>Objections</b>. Press <b>L</b> or the button to exit.</p>
     </div>
 
     <!-- Jump bar (hidden in Live Mode) -->
@@ -355,6 +323,7 @@
       <a href="#s-flow">Flow</a>
       <a href="#s-say">What They Said</a>
       <a href="#s-ask">Meeting Ask</a>
+      <a href="#s-consult">Consultation</a>
       <a href="#s-proof">Proof Points</a>
       <a href="#s-obj">Objections</a>
       <a href="#s-no">When They Say No</a>
@@ -384,24 +353,25 @@
 
     <!-- ============ 1. IN-CALL: HERO FLOW ============ -->
     <section class="cc-sec" id="s-flow">
-      <div class="cc-sec-title">Your Call Flow <span class="badge">say this</span></div>
+      <div class="cc-sec-title">Recommended Call Flow <span class="badge">say this</span></div>
       <div class="snapshot" style="border-left-color:var(--support-success); margin-bottom:14px;">
-        <p><b>Raw cold call? Start here.</b> &nbsp;<b>Proof</b> is the default &mdash; sounds like a researched call, not a cold one: pick the sector below, then read the script. &nbsp;&#9733; <b>Permission</b> for the highest engagement &mdash; ask for 30 seconds, then give your reason. &nbsp;&#8226; <b>General</b> if you want simple and it works on anyone. &nbsp;&#8226; Situational: Direct if rushed, Plain if you can't tell who picked up.</p>
+        <p><b>Raw cold call? Start here.</b> &nbsp;&#9733; <b>Consultation</b> is the default &mdash; the confident "complimentary review" invite that asks for the meeting early. &nbsp;&#9733; <b>Permission</b> for highest engagement &mdash; ask for 30 seconds, then your reason. &nbsp;&#8226; <b>Recommended</b> works on anyone. &nbsp;&#8226; <b>Proof</b> if you have a real customer + result to name. &nbsp;&#8226; <b>Direct</b> if they sound rushed, <b>Plain</b> if you can't tell who picked up.</p>
         <span class="hint">pick the one you can say naturally &mdash; delivery beats the "perfect" script</span>
       </div>
       <div class="opener-pills" id="openerPills" role="tablist" aria-label="Choose your opener">
-        <button class="op-pill" type="button" data-open="rec">General</button>
-        <button class="op-pill" type="button" data-open="best">Permission &#9733;</button>
-        <button class="op-pill active" type="button" data-open="proof">Proof</button>
+        <button class="op-pill active" type="button" data-open="rec">Recommended</button>
+        <button class="op-pill" type="button" data-open="consult">Consultation &#9733;</button>
         <button class="op-pill" type="button" data-open="soft">Soft</button>
         <button class="op-pill" type="button" data-open="direct">Direct</button>
         <button class="op-pill" type="button" data-open="casual">Casual</button>
         <button class="op-pill" type="button" data-open="plain">Plain</button>
+        <button class="op-pill" type="button" data-open="proof">Proof</button>
+        <button class="op-pill" type="button" data-open="best">Permission &#9733;</button>
       </div>
       <div class="flow">
         <div class="flow-step">
           <span class="num">1</span>
-          <div class="role" id="openRole">Open · General</div>
+          <div class="role" id="openRole">Open · Recommended</div>
           <p class="line" id="openLine">"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I'm catching you out of the blue, so I'll be quick. When it comes to company devices, what's usually the biggest headache for your team these days? The security side, the manual setup work, or supporting people when something breaks?"</p>
           <span class="cue" id="openCue">then stop talking →</span>
         </div>
@@ -424,44 +394,22 @@
           <p class="line" id="askLine">"Interesting. That's really why I called. I don't know if MaaS360 is relevant yet, but it might be worth <b>10-15 minutes</b> to compare notes. Would that be unreasonable?"</p>
         </div>
       </div>
-
-      <!-- Proof-only: researched-call angle + sector proof story -->
-      <div class="sector-strip" id="sectorStrip" style="display:none;">
-        <div class="sector-label">&#127919; What You Noticed &mdash; choose this before reading the verbatim script</div>
-        <div class="sector-pills" id="sectorPills" role="tablist" aria-label="Choose what you noticed">
-          <button class="sec-pill active" type="button" data-sec="government">Government</button>
-          <button class="sec-pill" type="button" data-sec="school">Education</button>
-          <button class="sec-pill" type="button" data-sec="finance">Finance / Banking</button>
-          <button class="sec-pill" type="button" data-sec="healthcare">Healthcare</button>
-          <button class="sec-pill" type="button" data-sec="industrial">Manufacturing</button>
-          <button class="sec-pill" type="button" data-sec="retail">Retail / Field</button>
-          <button class="sec-pill" type="button" data-sec="legal">Legal</button>
-          <button class="sec-pill" type="button" data-sec="profservices">Prof. Services</button>
-          <button class="sec-pill" type="button" data-sec="general">General</button>
-        </div>
-        <div class="sector-examples" id="sectorExamples"></div>
-        <div class="obs-strip" id="obsStrip">
-          <div class="obs-label">&#128064; Safe "what I noticed" &mdash; true even if you don't know them yet</div>
-          <div class="obs-chips" id="obsChips"></div>
-          <div class="obs-hint">Don't know the account? Tap any of these &mdash; they're safe bets for the whole sector. Fills the <b>[quick observation]</b> line.</div>
-        </div>
-        <div class="sector-stat" id="sectorStat"></div>
-      </div>
       <!-- Say It Out Loud — verbatim teleprompter, synced to the opener pills -->
       <div class="spoken-wrap">
         <div class="spoken-head">
           <span class="ic">&#127897;&#65039;</span>
           <span class="ttl">Say It Out Loud</span>
-          <span class="sub" id="spokenTag">verbatim &middot; General</span>
+          <span class="sub" id="spokenTag">verbatim &middot; Recommended</span>
         </div>
         <div class="spoken-tabs" id="spokenTabs" role="tablist" aria-label="Choose spoken style">
-          <button class="sp-tab" type="button" data-open="rec">General</button>
-          <button class="sp-tab" type="button" data-open="best">Permission &#9733;</button>
-          <button class="sp-tab active" type="button" data-open="proof">Proof</button>
+          <button class="sp-tab active" type="button" data-open="rec">Recommended</button>
+          <button class="sp-tab" type="button" data-open="consult">Consultation &#9733;</button>
           <button class="sp-tab" type="button" data-open="soft">Soft</button>
           <button class="sp-tab" type="button" data-open="direct">Direct</button>
           <button class="sp-tab" type="button" data-open="casual">Casual</button>
           <button class="sp-tab" type="button" data-open="plain">Plain</button>
+          <button class="sp-tab" type="button" data-open="proof">Proof</button>
+          <button class="sp-tab" type="button" data-open="best">Permission &#9733;</button>
         </div>
         <div class="spoken-body">
           <div class="spoken-beat">
@@ -543,6 +491,145 @@
       </div>
     </section>
 
+    <!-- ============ 3.25 IN-CALL: CONSULTATION OPENER ============ -->
+    <section class="cc-sec" id="s-consult">
+      <div class="cc-sec-title">Consultation Opener <span class="badge">verbatim &middot; say this</span></div>
+      <div class="snapshot" style="border-left-color:var(--support-success); margin-bottom:14px;">
+        <p><b>Confident "complimentary review" invite.</b> Frames the call as an IBM review you're setting aside time for, not a generic pitch. It's about improving <em>their</em> company, and it asks for the meeting early. Say the beats, pause on "your team stood out," then ask.</p>
+        <span class="hint">confident open &rarr; the invite &rarr; the ask &mdash; ~20 seconds, one breath per beat</span>
+      </div>
+      <!-- Say It Out Loud — verbatim teleprompter -->
+      <div class="spoken-wrap">
+        <div class="spoken-head">
+          <span class="ic">&#127897;&#65039;</span>
+          <span class="ttl">Say It Out Loud</span>
+          <span class="sub">verbatim &middot; Consultation</span>
+        </div>
+        <div class="spoken-body">
+          <div class="spoken-beat">
+            <div class="beat-label"><span class="n">1</span> Open</div>
+            <p class="say">"Hey, is this <b>[Name]</b>?" <span class="cue-inline">let them answer</span> "Hey [Name], Bernard with IBM. I'll keep this quick." <span class="cue-inline">let them say okay</span></p>
+          </div>
+          <div class="spoken-beat">
+            <div class="beat-label"><span class="n">2</span> Why you called</div>
+            <p class="say">"So I looked into your company before I called, and <b>I'm confident we can bring some real value here</b>." <span class="cue-inline">say it like you mean it, don't rush</span></p>
+          </div>
+          <div class="spoken-beat">
+            <div class="beat-label"><span class="n">3</span> The invite</div>
+            <p class="say">"We're setting aside time for a small group of organizations to run a complimentary device management and cybersecurity review, and <b>your team stood out</b>." <span class="cue-inline">slow down here &mdash; let it land</span></p>
+          </div>
+          <div class="spoken-beat">
+            <div class="beat-label"><span class="n">4</span> What it is</div>
+            <p class="say">"It's 15 minutes. We learn your setup, show you what's working for teams like yours, and pinpoint where you can <b>tighten security and take work off IT</b>." <span class="cue-inline">pause</span></p>
+          </div>
+          <div class="spoken-beat">
+            <div class="beat-label"><span class="n">5</span> The ask</div>
+            <p class="say">"Worth grabbing time next week?" <span class="cue-inline">stop &mdash; let them answer</span></p>
+          </div>
+          <div class="spoken-tips">
+            <span class="st">Three beats, then stop</span>
+            <span class="st">Confident, not hopeful</span>
+            <span class="st">Pause on "your team stood out"</span>
+          </div>
+          <a class="sp-jump" href="#s-no"><span>&#128721; They pushed back or said no? Jump to the No playbook</span><span class="arr">&rarr;</span></a>
+        </div>
+      </div>
+      <!-- Even harder open (optional swap) -->
+      <div class="script-card blue" style="margin-top:14px;">
+        <strong>Want to open even harder? Swap beat 2 for this:</strong><br><br>
+        "So I did my homework on your company before I called, and <b>I know this is exactly the kind of thing we help teams with</b>."
+        <div class="script-note">Same idea, more assertive. "I'm confident / I know" beats "I thought there was a chance" every time.</div>
+      </div>
+      <!-- Consultation-specific objection handling -->
+      <div class="cc-sec-title" style="margin-top:22px;">Handle the Pushback <span class="badge">tap a card</span></div>
+      <div class="snapshot" style="border-left-color:var(--primary); margin-bottom:14px;">
+        <p>These are the objections that come up <b>specifically</b> when you offer a free review. The move is always the same: <b>agree fast, reframe the review as low-risk and about them, then re-ask for the 15 minutes.</b></p>
+      </div>
+      <div class="obj-grid">
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"What's the catch? Why free?"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"No catch, honestly. We do a handful of these because it's the easiest way to show a team where we can actually help. If there's a fit, great, we keep talking. If not, you still walk away knowing where you stand. No cost either way."</p>
+            <span class="then">then &rarr; "So &mdash; worth 15 minutes next week?"</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Is this just a sales pitch?"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"Fair to ask. It's not a pitch, it's a review. First 15 minutes is us learning how you handle devices today. If there's something worth exploring, I'll say so. If there's not, I'll tell you that too. Either way you get value out of it."</p>
+            <span class="then">then &rarr; "That fair?"</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"We already have this handled"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"Makes sense, most teams I talk to do. That's actually who the review is best for &mdash; not to rip anything out, just a second set of eyes on where the gaps might be. Out of curiosity, what are you running today?"</p>
+            <span class="then">then &rarr; "What's the one thing the team still gripes about?"</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Just send me some info"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"Happy to. So I don't send you a generic overview though &mdash; what's the one area you'd actually want to see? Security, setup time, or support load? The review's basically that, just live and quicker."</p>
+            <span class="then">then &rarr; "Honestly might be faster to grab 15 minutes. Worth it?"</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"I don't have time for a meeting"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"Totally get it. That's why I kept it to 15 minutes, not an hour. If it's not useful in the first five, you can kick me off the call. When's usually calmer for you, mornings or later in the week?"</p>
+            <span class="then">then &rarr; get a specific window</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"We're not looking to change anything"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"Totally fair, and the review isn't about switching anything. It's just a snapshot of where you're strong and where there might be some easy wins. No pressure to do a thing with it. Worth a look while it's free?"</p>
+            <span class="then">then &rarr; if still no, get a follow-up date</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Why us? How'd you find me?"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"Honest answer &mdash; I look at teams around your size and industry that tend to deal with a lot of device and security work, and yours stood out. That's the whole reason I picked up the phone."</p>
+            <span class="then">then &rarr; back to the ask: "That's why I figured the 15 minutes was worth it."</span>
+          </div>
+        </div>
+        <div class="obj-card" data-obj>
+          <div class="obj-head"><span class="q">"Not the right person"</span><span class="chev">&#9662;</span></div>
+          <div class="obj-body">
+            <p>"No worries at all. Who usually owns device management or security on your side? I'll bring the review to them &mdash; and would it be weird if I mentioned you pointed me their way?"</p>
+            <span class="then">then &rarr; get the name + warm intro</span>
+          </div>
+        </div>
+      </div>
+      <!-- Lock the meeting + voicemail -->
+      <div class="cc-sec-title" style="margin-top:22px;">Lock It &amp; Voicemail <span class="badge">close the loop</span></div>
+      <div class="trio">
+        <div class="script-card blue">
+          <strong>They said yes &mdash; lock it live</strong><br><br>
+          "Perfect. Mornings or afternoons easier for you next week?"<br><br>
+          Then: "What's the best email for the invite? I'll send it while we're on the phone so it doesn't slip."<br><br>
+          Then: "Anyone else on your side who should sit in if we're talking devices and security?"
+          <div class="script-note">Send the invite while you're still on the call. Don't leave it as "I'll follow up."</div>
+        </div>
+        <div class="script-card">
+          <strong>Voicemail</strong> <em>under 20 seconds</em><br><br>
+          "Hey [Name], Bernard with IBM. I looked into your company and I'm confident we can bring some real value. We're doing a few complimentary device management and cybersecurity reviews for teams that stood out, and yours was one. I'll shoot you a short email too. If it's easier, reach me at [Your Number]."
+          <div class="script-note">Same confident angle as the call, so the voicemail and email line up.</div>
+        </div>
+        <div class="script-card">
+          <strong>Follow-up email</strong><br><br>
+          <strong>Subject:</strong> the review I mentioned<br><br>
+          Hey [Name],<br><br>
+          Bernard with IBM, tried you by phone. Quick recap: we're running a few complimentary device management and cybersecurity reviews for teams that stood out, and yours was one.<br><br>
+          It's 15 minutes, all focused on where you can tighten security and take work off IT. Worth grabbing time next week?<br><br>
+          [Your Name] | IBM MaaS360 | [Phone]
+          <div class="script-note">Keep it short and tied to the same "your team stood out" hook.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ 3.5 IN-CALL: PROOF-POINT CHEAT STRIP ============ -->
     <section class="cc-sec" id="s-proof">
       <div class="cc-sec-title">Proof Points <span class="badge">grab one mid-call</span></div>
@@ -579,20 +666,6 @@
         </div>
       </div>
       <div class="proof-note"><b>Rule of thumb:</b> quote the Forrester numbers as hard fact. Frame the $36K / 60% / 45-min stats as "we've seen teams..." &mdash; they're real estimates from your briefs, not guarantees. Pick <b>one</b> stat that matches their pain, then go back to the ask.</div>
-      <div class="sect-ref">
-        <div class="sect-ref-label">&#127919; Researched proof lines &middot; what you noticed, per sector</div>
-        <div class="sect-grid">
-          <div class="sect-card default"><h5>General / Default</h5><p class="hook">"One-line: setup, security, and support may be quietly eating IT time."</p><span class="nums">~50 hrs/mo &middot; 45 min &rarr; 5</span></div>
-          <div class="sect-card"><h5>Education</h5><p class="hook">"Devices into students/staff hands fast, especially start of year."</p><span class="nums">less setup &middot; fewer tickets</span></div>
-          <div class="sect-card"><h5>Healthcare</h5><p class="hook">"Secure shared + personal devices without adding clinician work."</p><span class="nums">locked down &middot; audit-ready</span></div>
-          <div class="sect-card"><h5>Manufacturing</h5><p class="hook">"People off-desk; device updates and support go manual."</p><span class="nums">~60% fewer tickets</span></div>
-          <div class="sect-card"><h5>Government</h5><p class="hook">"More work, same staff; device work eats hours."</p><span class="nums">45 min &rarr; 5 &middot; ~$36K/yr</span></div>
-          <div class="sect-card"><h5>Retail / Field</h5><p class="hook">"Devices across many sites = lots of small daily problems."</p><span class="nums">~60% fewer tickets</span></div>
-          <div class="sect-card"><h5>Finance / Banking</h5><p class="hook">"Branches + remote staff + exam scrutiny = heavy lift."</p><span class="nums">audit-ready &middot; less exam scramble</span></div>
-          <div class="sect-card"><h5>Legal</h5><p class="hook">"Protect client data across traveling attorneys, no friction."</p><span class="nums">secure BYOD &middot; less IT load</span></div>
-          <div class="sect-card"><h5>Professional Services</h5><p class="hook">"Client data everywhere; people always on the road."</p><span class="nums">secured devices &middot; less manual work</span></div>
-        </div>
-      </div>
     </section>
 
     <!-- ============ 4. IN-CALL: OBJECTIONS ============ -->
@@ -841,21 +914,7 @@
           <div class="script-card"><strong>Gatekeeper</strong><br><br>"Hey, this is [Your Name] with IBM. I was trying to reach [Decision Maker]. Are they around?"<div class="script-note">If asked what it's about: "Quick question on who handles device management and mobile security there."</div></div>
         </div>
         <div>
-          <div class="script-card" id="s-email"><strong>Follow-up email</strong>
-            <div class="email-pills" id="emailPills" role="tablist" aria-label="Match email to sector" style="margin-top:10px;">
-              <button class="em-pill active" type="button" data-em="government">Government</button>
-              <button class="em-pill" type="button" data-em="school">Education</button>
-              <button class="em-pill" type="button" data-em="finance">Finance / Banking</button>
-              <button class="em-pill" type="button" data-em="healthcare">Healthcare</button>
-              <button class="em-pill" type="button" data-em="industrial">Manufacturing</button>
-              <button class="em-pill" type="button" data-em="retail">Retail / Field</button>
-              <button class="em-pill" type="button" data-em="legal">Legal</button>
-              <button class="em-pill" type="button" data-em="profservices">Prof. Services</button>
-              <button class="em-pill" type="button" data-em="general">General</button>
-        </div>
-            <div id="emailBody"></div>
-            <div class="script-note">Use this when they say "send me info." It matches the researched proof angle from the call, so the email does not feel generic.</div>
-          </div>
+          <div class="script-card" id="s-email"><strong>Follow-up email</strong><br><br><strong>Subject:</strong> quick question on devices<br><br>Hey [Name],<br><br>[Your Name] with IBM here. Tried you by phone but figured email might be easier. Curious how [Company] is handling device management and mobile security today, especially across phones, tablets, laptops, or BYOD.<br><br>Most teams already have something in place but still hit gaps around manual work or keeping data secure. Worth a quick 10-15 minutes to compare notes?<br><br>[Your Name]<br>[Title] | IBM MaaS360<br>[Phone] | [Email]<div class="script-note">Short, casual, and tied to the same curiosity from the call.</div></div>
         </div>
       </div>
     </section>
@@ -908,7 +967,7 @@
   <aside class="rail" id="rail" aria-label="Live call flow">
     <button class="rail-close" id="railClose" aria-label="Hide">×</button>
     <div class="rail-head">📞 LIVE CALL</div>
-    <a href="#s-flow">1 · Open <span class="rail-tag" id="railOpen">General</span></a>
+    <a href="#s-flow">1 · Open <span class="rail-tag" id="railOpen">Recommended</span></a>
     <div class="ar">↓</div>
     <a href="#s-flow">2 · Discover</a>
     <div class="ar">↓</div>
@@ -949,7 +1008,7 @@
     // Opener switcher — swaps step 1 of the flow (works in Live Mode)
     (function(){
       var openers={
-        rec:{tag:'General', role:'Open \u00b7 General', cue:'then stop talking \u2192',
+        rec:{tag:'Recommended', role:'Open \u00b7 Recommended', cue:'then stop talking \u2192',
           line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know I\'m catching you out of the blue, so I\'ll be quick. When it comes to company devices, what\'s usually the biggest headache for your team these days? The security side, the manual setup work, or supporting people when something breaks?"',
           discRole:'Discover', discLine:'"Got it. How are you handling that today? And when it flares up, is it eating your time, IT\'s, or your users\' too?"',
           curiRole:'Create curiosity', curiLine:'"Makes sense. One thing I hear a lot is teams already have a tool, but still deal with manual work, mobile security, or support issues. Has any of that come up on your side?"',
@@ -958,6 +1017,15 @@
           spokenDisc:'"Yeah&hellip; okay, that makes total sense." <span class="cue-inline">react first, genuine</span> "So how are you handling that today?" <span class="cue-inline">let them explain</span> "Gotcha. And when it flares up, is that eating your time and IT\'s, or is it actually slowing your users down too?" <span class="cue-inline">dig into who it hurts</span> "How often are you running into it?" <span class="cue-inline">quantify &mdash; then really listen</span>',
           spokenCuri:'"Yeah, I hear that a lot honestly." <span class="cue-inline">normalize it</span> "The funny thing is, most teams already have some tool in place&hellip; they just still end up stuck on the manual work, or the mobile security side, or all the support tickets." <span class="cue-inline">light, not pitchy</span> "Does any of that sound familiar on your end?" <span class="cue-inline">pause</span>',
           spokenAsk:'"Okay, that\'s actually why I called." <span class="cue-inline">warm, low pressure</span> "Look, I honestly don\'t even know if MaaS360 is a fit for you yet&hellip; but based on what you just said, it might be worth a quick <b>10 or 15 minutes</b> to compare notes." <span class="cue-inline">slow down here</span> "Would that be unreasonable?" <span class="cue-inline">stop &mdash; let them answer</span>'},
+        consult:{tag:'Consultation \u2605', role:'Open \u00b7 Consultation \u2014 confident complimentary review', cue:'confident open \u2192 the invite \u2192 the ask',
+          line:'"Hey, is this <b>[Name]</b>? <b>[Your Name]</b> with IBM, I\'ll keep this quick. So I looked into <b>[Company]</b> before I called, and <b>I\'m confident we can bring some real value here</b>. We\'re setting aside time for a small group of organizations to run a complimentary device management and cybersecurity review, and <b>your team stood out</b>."',
+          discRole:'If they push back', discLine:'"Totally fair, most teams already have something. Out of curiosity, what are you running today?" <span style="color:var(--text-dim);">then &rarr; "What\'s the one thing your team still gripes about?"</span>',
+          curiRole:'What the review is', curiLine:'"Honestly it\'s simple. It\'s 15 minutes. We learn your setup, show you what\'s working for teams like yours, and pinpoint where you can tighten security and take work off IT."',
+          askRole:'Ask for the meeting', askLine:'"Worth grabbing time next week? Mornings or afternoons easier for you?"',
+          spoken:'"Hey, is this <b>[Name]</b>?" <span class="cue-inline">let them answer</span> "Hey [Name], Bernard with IBM. I\'ll keep this quick." <span class="cue-inline">let them say okay</span> "So I looked into <b>[Company]</b> before I called, and <b>I\'m confident we can bring some real value here</b>." <span class="cue-inline">say it like you mean it, don\'t rush</span> "We\'re setting aside time for a small group of organizations to run a complimentary device management and cybersecurity review, and <b>your team stood out</b>." <span class="cue-inline">slow down &mdash; let it land</span> "It\'s 15 minutes. We learn your setup, show you what\'s working for teams like yours, and pinpoint where you can tighten security and take work off IT." <span class="cue-inline">pause</span> "Worth grabbing time next week?" <span class="cue-inline">stop &mdash; let them answer</span>',
+          spokenDisc:'"Totally fair &mdash; most teams already have something." <span class="cue-inline">agree fast, no push</span> "Out of curiosity, what are you running today?" <span class="cue-inline">get them talking</span> "Gotcha. What\'s the one thing your team still gripes about with it?" <span class="cue-inline">find the gap, then listen</span>',
+          spokenCuri:'"Honestly it\'s simple." <span class="cue-inline">low pressure</span> "It\'s 15 minutes. We learn how you\'re handling devices today, show you what\'s working for teams like yours, and pin down where there\'s room to tighten security and take work off IT." <span class="cue-inline">it\'s about them, not the product</span> "If it\'s useful, great. If not, no harm." <span class="cue-inline">pause</span>',
+          spokenAsk:'"So &mdash; worth grabbing 15 minutes next week?" <span class="cue-inline">confident, easy</span> "Mornings or afternoons usually easier for you?" <span class="cue-inline">stop &mdash; let them pick</span>'},
         soft:{tag:'Soft', role:'Open \u00b7 Soft \u2014 lowest pressure', cue:'if they stall \u2192 "Are you even the right person for device stuff, or is that someone else?"',
           line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I know you weren\'t expecting my call, so I\'ll keep it short. This might not even be relevant for you, but how\'s your team handling company devices these days?"',
           discRole:'Discover', discLine:'"Got it. Has that been pretty smooth, or is there one part that still bugs the team? And are you looking to change anything, or just living with it for now?"',
@@ -1003,7 +1071,7 @@
           spokenDisc:'"Yeah, makes sense &mdash; that\'s helpful." <span class="cue-inline">react genuine</span> "Where\'s the gap for you honestly &mdash; is it more the rollout and getting people set up, or locking everything down and keeping it secure after?" <span class="cue-inline">two lanes, not three</span> "And how far off is that from where you\'d actually want it to be?" <span class="cue-inline">frame it against the result you named &mdash; then listen</span>',
           spokenCuri:'"Yeah, that\'s exactly what that customer was wrestling with too honestly." <span class="cue-inline">confident, not salesy</span> "And the reason it actually worked &mdash; we didn\'t rip anything out on them, we just closed the gaps around what they already had running." <span class="cue-inline">tie it straight back to the result you named</span> "Does that line up with how your setup looks?" <span class="cue-inline">pause</span>',
           spokenAsk:'"That\'s really why I gave you a call." <span class="cue-inline">warm</span> "Might be worth a quick <b>10 or 15 minutes</b> just to compare what you\'re doing today against where we usually help. If it\'s not relevant, you tell me and we\'re done." <span class="cue-inline">low pressure, honest</span> "Open to it?" <span class="cue-inline">stop &mdash; let them answer</span>'},
-        best:{tag:'Permission \u2605', role:'Open \u00b7 Permission \u2014 ask first, then your reason', cue:'get the yes \u2192 give the reason \u2192 one question',
+        best:{tag:'Best \u2605', role:'Open \u00b7 Best \u2014 permission + reason', cue:'get the yes \u2192 give the reason \u2192 one question',
           line:'"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. We\'ve never spoken, so full honesty, this is a cold call. Can I have 30 seconds to tell you why I called, and then you can tell me to buzz off? [wait for yes] Appreciate it. The reason I called \u2014 teams your size keep telling me their work phones and laptops eat up way more time and risk than they should. We\'ve actually helped some cut new-device setup from 45 minutes down to about 5. Didn\'t know if that\'s on your radar, or if you\'ve got it handled?"',
           discRole:'Discover', discLine:'"Right, okay. Is that landing mostly on you, or is there a whole team on it? And honestly, is fixing it a priority this year, or more of a someday thing?"',
           curiRole:'Create curiosity', curiLine:'"Yeah, that\'s the pattern I keep running into. The part that bites people is usually the stuff you don\'t see coming, a device walks out the door, or you get asked to prove everything\'s locked down and it\'s a scramble. That ever a worry on your end?"',
@@ -1013,9 +1081,7 @@
           spokenCuri:'"Yeah, honestly that\'s the pattern I keep running into." <span class="cue-inline">calm, not salesy</span> "The part that usually bites people is the stuff they don\'t see coming &mdash; a device walks out the door with someone, or they get asked to prove everything\'s locked down and it turns into a scramble." <span class="cue-inline">name the risk they haven\'t said yet</span> "Is that ever a worry on your end?" <span class="cue-inline">pause</span>',
           spokenAsk:'"That\'s really why I gave you a call." <span class="cue-inline">low pressure</span> "Might be worth a quick <b>10 or 15 minutes</b> just to compare what you\'re doing today against where we usually help. And if it\'s not a fit, you tell me and we\'re done, no weirdness." <span class="cue-inline">honest, easy</span> "Fair enough?" <span class="cue-inline">stop &mdash; let them answer</span>'}
       };
-      var proofSectors={"general": {"tag": "General", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another organization pretty similar to you guys and had some good success simplifying how they manage and secure devices. That's actually why I wanted to give you a call. How are you guys handling device management today?\"", "disc": "\"Got it. Where does most of the time go today - setup, security, or support tickets?\"", "curi": "\"Yeah, that makes sense. Most teams already have something in place, but the device work still piles up in the background.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">normal tone</span> \"We recently worked with another organization pretty similar to you guys and had some good success simplifying how they manage and secure devices.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you guys handling device management today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it, that helps.\" <span class=\"cue-inline\">react first</span> \"Where does most of the time go today - setup, security, or support tickets?\" <span class=\"cue-inline\">let them pick a lane</span>", "spCuri": "\"Yeah, that makes sense.\" <span class=\"cue-inline\">connect it back</span> \"Most teams already have something in place, but the device work still piles up in the background.\" <span class=\"cue-inline\">keep it light</span>", "spAsk": "\"That is why I reached out.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful. If not, totally fair.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar organization, similar device workload. <b>Bridge:</b> that's why I wanted to call."}, "school": {"tag": "Education", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another school system pretty similar to you guys and helped cut down a lot of device setup and support headaches. That's actually why I wanted to give you a call. How are you handling devices today?\"", "disc": "\"How has the device side been for you this year? More of a setup headache, or more of a support ticket headache?\"", "curi": "\"Yeah, that tracks. Schools usually have a ton of devices moving at once, and IT ends up carrying most of that load.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful before the next device cycle.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">easy tone</span> \"We recently worked with another school system pretty similar to you guys and helped cut down a lot of device setup and support headaches.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling devices today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"How has the device side been for you this year? More setup, or more support tickets?\" <span class=\"cue-inline\">let them talk</span>", "spCuri": "\"Yeah, that tracks.\" <span class=\"cue-inline\">connect it</span> \"Schools usually have a ton of devices moving at once, and IT ends up carrying most of that load.\" <span class=\"cue-inline\">normalize</span>", "spAsk": "\"That is why I called.\" <span class=\"cue-inline\">warm</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful before the next device cycle.\" <span class=\"cue-inline\">low pressure</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar school system with recurring device load. <b>Bridge:</b> that's why I wanted to call."}, "healthcare": {"tag": "Healthcare", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another healthcare team that was trying to keep devices secure and compliant without creating more work for staff. That's actually why I wanted to give you a call. How are you handling device security today?\"", "disc": "\"Is the bigger challenge locking devices down, proving compliance, or just supporting staff day to day?\"", "curi": "\"Yeah, that is the balance I keep hearing about in healthcare - secure everything, but do not slow the staff down.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">soft, credible</span> \"We recently worked with another healthcare team that was trying to keep devices secure and compliant without creating more work for staff.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling device security today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"Is the bigger challenge locking devices down, proving compliance, or just supporting staff day to day?\" <span class=\"cue-inline\">let them pick</span>", "spCuri": "\"Yeah, that is the balance I keep hearing about in healthcare.\" <span class=\"cue-inline\">normalize</span> \"Secure everything, but do not slow the staff down.\" <span class=\"cue-inline\">simple</span>", "spAsk": "\"That is why I wanted to reach out.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> healthcare security and compliance without extra staff burden. <b>Bridge:</b> that's why I wanted to call."}, "industrial": {"tag": "Manufacturing", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another manufacturer pretty similar to you guys and helped cut down a lot of the device support work that was eating up time. That's actually why I wanted to give you a call. How are you handling device management today?\"", "disc": "\"Is the bigger headache keeping devices updated, or supporting people when something breaks out on the floor or in the field?\"", "curi": "\"Yeah, that is usually where it adds up - not one huge project, just a lot of little device issues that keep pulling IT away.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">natural</span> \"We recently worked with another manufacturer pretty similar to you guys and helped cut down a lot of the device support work that was eating up time.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling device management today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Gotcha.\" <span class=\"cue-inline\">react first</span> \"Is the bigger headache keeping devices updated, or supporting people when something breaks out on the floor or in the field?\" <span class=\"cue-inline\">let them answer</span>", "spCuri": "\"Yeah, that is usually where it adds up.\" <span class=\"cue-inline\">connect</span> \"Not one huge project, just a lot of little device issues that keep pulling IT away.\" <span class=\"cue-inline\">pause</span>", "spAsk": "\"That is why I called.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar manufacturer with device support eating time. <b>Bridge:</b> that's why I wanted to call."}, "government": {"tag": "Government", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another government IT team dealing with the same thing most agencies are - more work, same staff. We helped them get device setup from about 45 minutes down to 5. That's actually why I wanted to give you a call. How are you handling devices today?\"", "disc": "\"Where does device work eat the most time today - issuing them, supporting them, or keeping everything secure and compliant?\"", "curi": "\"Yeah, that is exactly why I thought of your team. Public-sector IT usually has to make every hour count.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">steady</span> \"We recently worked with another government IT team dealing with the same thing most agencies are - more work, same staff. We helped them get device setup from about <b>45 minutes down to 5</b>.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling devices today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"Where does device work eat the most time today - issuing them, supporting them, or keeping everything secure and compliant?\" <span class=\"cue-inline\">let them pick</span>", "spCuri": "\"Yeah, that is exactly why I thought of your team.\" <span class=\"cue-inline\">connect it</span> \"Public-sector IT usually has to make every hour count.\" <span class=\"cue-inline\">keep it simple</span>", "spAsk": "\"That is why I wanted to reach out.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> government IT doing more with the same staff. <b>Bridge:</b> that's why I wanted to call."}, "retail": {"tag": "Retail / Field", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another organization with a similar footprint and helped reduce device support issues across multiple locations. That's actually why I wanted to give you a call. How are you handling devices across your locations today?\"", "disc": "\"Is the bigger issue keeping devices updated across sites, or the support load when something breaks at one of them?\"", "curi": "\"Yeah, that is usually the hidden cost with distributed teams - a lot of small device problems across a lot of places.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">easy</span> \"We recently worked with another organization with a similar footprint and helped reduce device support issues across multiple locations.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling devices across your locations today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"Is the bigger issue keeping devices updated across sites, or the support load when something breaks at one of them?\" <span class=\"cue-inline\">let them answer</span>", "spCuri": "\"Yeah, that is usually the hidden cost with distributed teams.\" <span class=\"cue-inline\">normalize</span> \"A lot of small device problems across a lot of places.\" <span class=\"cue-inline\">pause</span>", "spAsk": "\"That is really why I reached out.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar footprint with device issues across locations. <b>Bridge:</b> that's why I wanted to call."}, "finance": {"tag": "Finance / Banking", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another financial institution pretty similar to you guys and helped make device security and audit prep a lot easier. That's actually why I wanted to give you a call. How are you handling device security today?\"", "disc": "\"Is the bigger pressure locking devices down, or proving everything when audit or exam time comes around?\"", "curi": "\"Yeah, that is exactly the kind of thing I was thinking of. In finance, the device work is not just support - it has to be provable.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">calm</span> \"We recently worked with another financial institution pretty similar to you guys and helped make device security and audit prep a lot easier.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling device security today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"Is the bigger pressure locking devices down, or proving everything when audit or exam time comes around?\" <span class=\"cue-inline\">let them pick</span>", "spCuri": "\"Yeah, that is exactly the kind of thing I was thinking of.\" <span class=\"cue-inline\">connect</span> \"In finance, the device work is not just support - it has to be provable.\" <span class=\"cue-inline\">pause</span>", "spAsk": "\"That is why I wanted to reach you.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar financial team with security and audit pressure. <b>Bridge:</b> that's why I wanted to call."}, "legal": {"tag": "Legal", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another law firm pretty similar to you guys and helped them better secure client data across laptops and mobile devices. That's actually why I wanted to give you a call. How are you handling that today?\"", "disc": "\"Is the bigger concern protecting client data, or supporting attorneys across laptops and phones without slowing them down?\"", "curi": "\"Yeah, that is the balance I hear from firms a lot - protect the data, but keep attorneys moving.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">natural</span> \"We recently worked with another law firm pretty similar to you guys and helped them better secure client data across laptops and mobile devices.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling that today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"Is the bigger concern protecting client data, or supporting attorneys across laptops and phones without slowing them down?\" <span class=\"cue-inline\">listen</span>", "spCuri": "\"Yeah, that is the balance I hear from firms a lot.\" <span class=\"cue-inline\">normalize</span> \"Protect the data, but keep attorneys moving.\" <span class=\"cue-inline\">simple</span>", "spAsk": "\"That is really why I reached out.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar law firm protecting client data across devices. <b>Bridge:</b> that's why I wanted to call."}, "profservices": {"tag": "Professional Services", "line": "\"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with another professional services firm pretty similar to you guys and helped improve device security while reducing support overhead. That's actually why I wanted to give you a call. How are you handling device management today?\"", "disc": "\"Is the bigger challenge keeping client data secure, or supporting people who are always moving between offices and client sites?\"", "curi": "\"Yeah, that is usually where it gets messy - client data everywhere, devices everywhere, and IT trying to keep it consistent.\"", "ask": "\"Might be worth <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\"", "spoken": "\"Hey, is this <b>[Name]</b>?\" <span class=\"cue-inline\">let them answer</span> \"Hey [Name], it is Bernard with IBM. I was looking at <b>[Company]</b> before I called.\" <span class=\"cue-inline\">easy tone</span> \"We recently worked with another professional services firm pretty similar to you guys and helped improve device security while reducing support overhead.\" <span class=\"cue-inline\">short proof</span> \"That's actually why I wanted to give you a call.\" <span class=\"cue-inline\">pause</span> \"Just curious, how are you handling device management today?\" <span class=\"cue-inline\">then stop</span>", "spDisc": "\"Got it.\" <span class=\"cue-inline\">react first</span> \"Is the bigger challenge keeping client data secure, or supporting people who are always moving between offices and client sites?\" <span class=\"cue-inline\">let them talk</span>", "spCuri": "\"Yeah, that is usually where it gets messy.\" <span class=\"cue-inline\">connect</span> \"Client data everywhere, devices everywhere, and IT trying to keep it consistent.\" <span class=\"cue-inline\">pause</span>", "spAsk": "\"That is why I reached out.\" <span class=\"cue-inline\">low pressure</span> \"Might be worth a quick <b>10 or 15 minutes</b> to compare notes and see if there is anything useful.\" <span class=\"cue-inline\">give the out</span> \"Fair enough?\" <span class=\"cue-inline\">stop</span>", "stat": "<b>Angle:</b> similar professional services firm with security and support overhead. <b>Bridge:</b> that's why I wanted to call."}};
       var roleEl=document.getElementById('openRole'), lineEl=document.getElementById('openLine'), cueEl=document.getElementById('openCue'), railEl=document.getElementById('railOpen');
-      var sectorStripEl=document.getElementById('sectorStrip'), sectorStatEl=document.getElementById('sectorStat'), activeSector='government';
       var discRoleEl=document.getElementById('discRole'), discLineEl=document.getElementById('discLine');
       var curiRoleEl=document.getElementById('curiRole'), curiLineEl=document.getElementById('curiLine');
       var askRoleEl=document.getElementById('askRole'), askLineEl=document.getElementById('askLine');
@@ -1037,75 +1103,12 @@
         if(railEl){railEl.textContent=o.tag;}
         document.querySelectorAll('#openerPills .op-pill').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open')===key);});
         document.querySelectorAll('#spokenTabs .sp-tab').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open')===key);});
-        if(sectorStripEl){ sectorStripEl.style.display=(key==='proof')?'block':'none'; if(key==='proof'){applySector(activeSector);renderObs(activeSector);} }
       }
-      var emailTemplates={"general": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at [Company] before I reached out. We recently worked with another organization pretty similar to you guys and had some good success simplifying how they manage and secure devices.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "school": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at your district/school before I reached out. We recently worked with another school system pretty similar to you guys and helped cut down a lot of device setup and support headaches.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "healthcare": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at your organization before I reached out. We recently worked with another healthcare team that was trying to keep devices secure and compliant without creating more work for staff.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "industrial": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at [Company] before I reached out. We recently worked with another manufacturer pretty similar to you guys and helped cut down a lot of device support work that was eating up time.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "government": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at your agency before I reached out. We recently worked with another government IT team dealing with the same thing most agencies are - more work, same staff. We helped them get device setup from about <b>45 minutes down to 5</b>.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "retail": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at [Company] before I reached out. We recently worked with another organization with a similar footprint and helped reduce device support issues across multiple locations.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "finance": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at [Company] before I reached out. We recently worked with another financial institution pretty similar to you guys and helped make device security and audit prep a lot easier.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "legal": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at your firm before I reached out. We recently worked with another law firm pretty similar to you guys and helped them better secure client data across laptops and mobile devices.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360", "profservices": "<strong>Subject:</strong> thought of your team<br><br>Hey [Name],<br><br>Bernard with IBM here. I tried you by phone, but figured email might be easier.<br><br>I was looking at [Company] before I reached out. We recently worked with another professional services firm pretty similar to you guys and helped improve device security while reducing support overhead.<br><br>That's why I wanted to reach out. Not sure if it is relevant, but would you be open to <b>10-15 minutes</b> to compare notes?<br><br>Bernard<br>IBM MaaS360"};
-      var sectorExamples={
-        general:'Fits: mixed/unknown IT shops \u2014 <b>Comporium, Vector Security, Daktronics, Deluxe</b>',
-        school:'Fits: universities & districts \u2014 <b>UNL, LSU, Tulane, Creighton, Lincoln Public Schools</b>',
-        healthcare:'Fits: hospitals & health systems \u2014 <b>Oklahoma Heart, FMOLHS, North Memorial, Magellan Health</b>',
-        industrial:'Fits: manufacturing & field ops \u2014 <b>Vermeer, Ziegler CAT, Japs-Olson, Stuller</b>',
-        government:'Fits: agencies & public sector \u2014 <b>City of New Orleans, Sedgwick County, Oakland</b>',
-        retail:'Fits: multi-location & stores \u2014 <b>Caribou Coffee, Living Spaces, Restaurant Technologies</b>',
-        finance:'Fits: banks, insurance, lending \u2014 <b>Arvest, BancFirst, Tinker FCU, Lockton, LoanDepot, QBE/NAU</b>',
-        legal:'Fits: law firms \u2014 <b>Polsinelli, Husch Blackwell, Fish & Richardson</b>',
-        profservices:'Fits: consulting & accounting \u2014 <b>EisnerAmper, Eide Bailly, Augeo, Colle & McVoy</b>'
-      };
-      var sectorExamplesEl=document.getElementById('sectorExamples');
-      // Quick, tappable "what I noticed" observations — pick one in under 5 seconds mid-call.
-      var sectorObs={
-        general:["how much every team runs on mobile now","hybrid work is basically the norm","work and personal devices all mixed together","device counts just keep climbing"],
-        school:["back-to-school season ramping up","the summer device refresh window","how many devices schools juggle now","end-of-year device collection coming"],
-        healthcare:["how many shared devices you all run","compliance is always front and center","staff leaning on mobile more than ever","patient data lives on so many devices now"],
-        industrial:["how many folks are off-desk","devices out on the floor take a beating","shift work makes support tricky","operations basically run around the clock"],
-        government:["you're likely heading into budget season","doing more with tight staffing","compliance is always on the radar","device security keeps getting scrutiny"],
-        retail:["the seasonal / holiday ramp","how many locations you're juggling","high device turnover on the floor","seasonal hiring spikes"],
-        finance:["exams and audits are always looming","how much customer data sits on devices","branches plus remote staff everywhere","security scrutiny keeps climbing"],
-        legal:["how much client data lives on devices","attorneys are always on the move","confidentiality is everything in your world","billable time's too precious for IT hassles"],
-        profservices:["how much your people are on the road","client data travels everywhere","utilization time is precious","growth usually means more devices fast"]
-      }
-      var obsChipsEl=document.getElementById('obsChips');
-      // Swap the [quick observation] placeholder in whatever's on screen with the chosen phrase.
-      function injectObs(text){
-        var tag='<b>['+text+']</b>';
-        [lineEl,spokenLineEl].forEach(function(el){
-          if(!el) return;
-          el.innerHTML=el.innerHTML.replace('<b>[quick observation]</b>',tag);
-        });
-      }
-      function renderObs(sec){
-        if(!obsChipsEl||!sectorObs[sec]) return;
-        obsChipsEl.innerHTML='';
-        sectorObs[sec].forEach(function(t){
-          var b=document.createElement('button');
-          b.type='button'; b.className='obs-chip'; b.textContent=t;
-          b.addEventListener('click',function(){
-            applySector(activeSector);
-            injectObs(t);
-            document.querySelectorAll('#obsChips .obs-chip').forEach(function(c){c.classList.remove('active');});
-            b.classList.add('active');
-          });
-          obsChipsEl.appendChild(b);
-        });
-      }
-      function applySector(sec){
-        var x=proofSectors[sec]; if(!x) return; activeSector=sec;
-        if(sectorExamplesEl&&sectorExamples[sec]){sectorExamplesEl.innerHTML=sectorExamples[sec];}
-        if(lineEl){lineEl.innerHTML=x.line;} if(discLineEl){discLineEl.innerHTML=x.disc;} if(curiLineEl){curiLineEl.innerHTML=x.curi;} if(askLineEl){askLineEl.innerHTML=x.ask;}
-        if(spokenLineEl){spokenLineEl.innerHTML=x.spoken;} if(spokenDiscEl){spokenDiscEl.innerHTML=x.spDisc;} if(spokenCuriEl){spokenCuriEl.innerHTML=x.spCuri;} if(spokenAskEl){spokenAskEl.innerHTML=x.spAsk;}
-        if(sectorStatEl){sectorStatEl.innerHTML=x.stat;} if(spokenTagEl){spokenTagEl.textContent='verbatim \u00b7 Proof \u00b7 '+x.tag;}
-        document.querySelectorAll('#sectorPills .sec-pill').forEach(function(btn){btn.classList.toggle('active',btn.getAttribute('data-sec')===sec);});
-      }
-      document.querySelectorAll('#sectorPills .sec-pill').forEach(function(btn){btn.addEventListener('click',function(){var s=btn.getAttribute('data-sec');applySector(s);renderObs(s);});});
-      var emailBodyEl=document.getElementById('emailBody');
-      function applyEmail(sec){if(!emailBodyEl||!emailTemplates[sec]) return; emailBodyEl.innerHTML='<br>'+emailTemplates[sec]; document.querySelectorAll('#emailPills .em-pill').forEach(function(btn){btn.classList.toggle('active',btn.getAttribute('data-em')===sec);});}
-      document.querySelectorAll('#emailPills .em-pill').forEach(function(btn){btn.addEventListener('click',function(){applyEmail(btn.getAttribute('data-em'));});});
-      if(emailBodyEl){applyEmail('government');}
       document.querySelectorAll('#openerPills .op-pill, #spokenTabs .sp-tab').forEach(function(btn){
         btn.addEventListener('click',function(){ applyOpener(btn.getAttribute('data-open')); });
       });
-      // Default opener on load — Proof (shows the sector strip + researched-call script)
-      applyOpener('proof');
+      // Default opener on load — Consultation
+      applyOpener('consult');
     })();
     // Hide rail
     document.getElementById('railClose').addEventListener('click',function(){
@@ -1123,272 +1126,5 @@
     })();
     // Theme is handled by the shared carbon-theme.js (binds to .theme-toggle).
   </script>
-
-  <script>
-    /* ===== 2026-08 Update: focused opener set + sector-aware scripts for every opener ===== */
-    (function(){
-      var activeOpener = 'proof';
-      var activeSector = 'government';
-      var openerPills = document.getElementById('openerPills');
-      var spokenTabs = document.getElementById('spokenTabs');
-      var sectorStrip = document.getElementById('sectorStrip');
-      var roleEl = document.getElementById('openRole');
-      var lineEl = document.getElementById('openLine');
-      var cueEl = document.getElementById('openCue');
-      var discRoleEl = document.getElementById('discRole');
-      var discLineEl = document.getElementById('discLine');
-      var curiRoleEl = document.getElementById('curiRole');
-      var curiLineEl = document.getElementById('curiLine');
-      var askRoleEl = document.getElementById('askRole');
-      var askLineEl = document.getElementById('askLine');
-      var spokenLineEl = document.getElementById('spokenLine');
-      var spokenDiscEl = document.getElementById('spokenDisc');
-      var spokenCuriEl = document.getElementById('spokenCuri');
-      var spokenAskEl = document.getElementById('spokenAsk');
-      var spokenTagEl = document.getElementById('spokenTag');
-      var railEl = document.getElementById('railOpen');
-      var sectorStatEl = document.getElementById('sectorStat');
-      var sectorExamplesEl = document.getElementById('sectorExamples');
-      var obsChipsEl = document.getElementById('obsChips');
-
-      var openerLabels = {
-        proof: 'Proof',
-        benchmark: 'Proof + Benchmark',
-        best: 'Permission',
-        direct: 'Direct'
-      };
-
-      var sectorData = {
-        general: {
-          label: 'General',
-          similar: 'another organization pretty similar to you guys',
-          proof: 'had some good success simplifying how they manage and secure devices',
-          value: 'setup, security, and support may be quietly eating IT time',
-          deviceQuestion: 'device management',
-          handleQuestion: 'How are you handling device management today?',
-          lanes: 'setup, security, compliance, or support',
-          examples: 'Fits: mixed/unknown IT shops - <b>Comporium, Vector Security, Daktronics, Deluxe</b>',
-          stat: '<b>Angle:</b> similar organization, similar device workload. <b>Best proof:</b> less manual setup, fewer support tickets, tighter security.',
-          obs: ['hybrid work is basically the norm','work and personal devices are more mixed now','device counts just keep climbing','IT teams are being asked to do more with less']
-        },
-        school: {
-          label: 'Education',
-          similar: 'another school system pretty similar to you guys',
-          proof: 'cut down a lot of device setup and support headaches',
-          value: 'getting devices into students and staff hands quickly without burying IT',
-          deviceQuestion: 'devices across students and staff',
-          handleQuestion: 'How are you handling devices across students and staff today?',
-          lanes: 'setup, support tickets, security, or the next device cycle',
-          examples: 'Fits: universities & districts - <b>UNL, LSU, Tulane, Creighton, Lincoln Public Schools</b>',
-          stat: '<b>Angle:</b> school systems have recurring device cycles. <b>Best proof:</b> faster setup and fewer support headaches.',
-          obs: ['back-to-school season ramping up','the device refresh cycle','how many devices schools juggle now','students and staff both needing support']
-        },
-        healthcare: {
-          label: 'Healthcare',
-          similar: 'another healthcare team',
-          proof: 'kept devices secure and compliant without creating more work for staff',
-          value: 'securing devices without slowing clinicians or staff down',
-          deviceQuestion: 'device security and compliance',
-          handleQuestion: 'How are you handling device security today?',
-          lanes: 'security, compliance, shared devices, or staff support',
-          examples: 'Fits: hospitals & health systems - <b>Oklahoma Heart, FMOLHS, North Memorial, Magellan Health</b>',
-          stat: '<b>Angle:</b> healthcare balances security and staff productivity. <b>Best proof:</b> secure devices without adding workflow friction.',
-          obs: ['how many shared devices you all run','compliance is always front and center','staff is leaning on mobile more than ever','patient data lives on so many devices now']
-        },
-        industrial: {
-          label: 'Manufacturing',
-          similar: 'another manufacturer pretty similar to you guys',
-          proof: 'cut down a lot of the device support work that was eating up time',
-          value: 'keeping floor, field, and off-desk devices running without constant IT touch',
-          deviceQuestion: 'device management across floor and field teams',
-          handleQuestion: 'How are you handling device management across the floor or field today?',
-          lanes: 'updates, support, security, or keeping devices running in the field',
-          examples: 'Fits: manufacturing & field ops - <b>Vermeer, Ziegler CAT, Japs-Olson, Stuller</b>',
-          stat: '<b>Angle:</b> off-desk teams create steady device support load. <b>Best proof:</b> less support work pulling IT away.',
-          obs: ['how many folks are off-desk','devices out on the floor take a beating','shift work makes support tricky','operations basically run around the clock']
-        },
-        government: {
-          label: 'Government',
-          similar: 'another government IT team',
-          proof: 'got device setup from about <b>45 minutes down to 5</b>',
-          value: 'doing more with the same staff while keeping devices secure and compliant',
-          deviceQuestion: 'devices across the agency',
-          handleQuestion: 'How are you handling devices across the agency today?',
-          lanes: 'issuing devices, support, security, or compliance',
-          examples: 'Fits: agencies & public sector - <b>City of New Orleans, Sedgwick County, Oakland</b>',
-          stat: '<b>Angle:</b> government IT is often doing more with the same staff. <b>Best proof:</b> 45 minutes down to 5 for setup.',
-          obs: ['budget season is probably on the radar','doing more with tight staffing','compliance is always part of the conversation','device security keeps getting scrutiny']
-        },
-        retail: {
-          label: 'Retail / Field',
-          similar: 'another organization with a similar footprint',
-          proof: 'reduced device support issues across multiple locations',
-          value: 'keeping devices consistent across locations without creating a ton of small support fires',
-          deviceQuestion: 'devices across your locations',
-          handleQuestion: 'How are you handling devices across your locations today?',
-          lanes: 'updates across sites, support, security, or seasonal device turnover',
-          examples: 'Fits: multi-location & stores - <b>Caribou Coffee, Living Spaces, Restaurant Technologies</b>',
-          stat: '<b>Angle:</b> distributed teams create lots of small device issues. <b>Best proof:</b> fewer support problems across locations.',
-          obs: ['the seasonal ramp','how many locations are involved','high device turnover on the floor','support across sites gets messy fast']
-        },
-        finance: {
-          label: 'Finance / Banking',
-          similar: 'another financial institution pretty similar to you guys',
-          proof: 'made device security and audit prep a lot easier',
-          value: 'locking devices down and making security easier to prove when it matters',
-          deviceQuestion: 'device security',
-          handleQuestion: 'How are you handling device security today?',
-          lanes: 'security, audit prep, branch devices, or remote staff',
-          examples: 'Fits: banks, insurance, lending - <b>Arvest, BancFirst, Tinker FCU, Lockton, LoanDepot, QBE/NAU</b>',
-          stat: '<b>Angle:</b> finance needs device controls to be provable. <b>Best proof:</b> easier security and audit prep.',
-          obs: ['exams and audits are always looming','customer data sits on a lot of devices','branches plus remote staff add complexity','security scrutiny keeps climbing']
-        },
-        legal: {
-          label: 'Legal',
-          similar: 'another law firm pretty similar to you guys',
-          proof: 'better secured client data across laptops and mobile devices',
-          value: 'protecting client data without slowing attorneys down',
-          deviceQuestion: 'client data across laptops and mobile devices',
-          handleQuestion: 'How are you handling that across laptops and mobile devices today?',
-          lanes: 'client data, attorney mobility, security, or support',
-          examples: 'Fits: law firms - <b>Polsinelli, Husch Blackwell, Fish & Richardson</b>',
-          stat: '<b>Angle:</b> law firms need security with low friction. <b>Best proof:</b> protect client data across mobile and laptops.',
-          obs: ['client data lives on devices','attorneys are always moving','confidentiality is everything','billable time is too precious for IT hassles']
-        },
-        profservices: {
-          label: 'Professional Services',
-          similar: 'another professional services firm pretty similar to you guys',
-          proof: 'improved device security while reducing support overhead',
-          value: 'securing client data across a mobile workforce without adding IT drag',
-          deviceQuestion: 'device management for a mobile workforce',
-          handleQuestion: 'How are you handling device management today?',
-          lanes: 'client data, support overhead, security, or people moving between sites',
-          examples: 'Fits: consulting & accounting - <b>EisnerAmper, Eide Bailly, Augeo, Colle & McVoy</b>',
-          stat: '<b>Angle:</b> client data moves with the employee. <b>Best proof:</b> better security with less support overhead.',
-          obs: ['your people are on the road a lot','client data travels everywhere','utilization time is precious','growth usually means devices multiply fast']
-        }
-      };
-
-      function setControls(){
-        if(openerPills){
-          openerPills.innerHTML = '<button class="op-pill active" type="button" data-open="proof">Proof</button><button class="op-pill" type="button" data-open="benchmark">Proof + Benchmark</button><button class="op-pill" type="button" data-open="best">Permission</button><button class="op-pill" type="button" data-open="direct">Direct</button>';
-        }
-        if(spokenTabs){
-          spokenTabs.innerHTML = '<button class="sp-tab active" type="button" data-open="proof">Proof</button><button class="sp-tab" type="button" data-open="benchmark">Proof + Benchmark</button><button class="sp-tab" type="button" data-open="best">Permission</button><button class="sp-tab" type="button" data-open="direct">Direct</button>';
-        }
-        document.querySelectorAll('#openerPills .op-pill, #spokenTabs .sp-tab').forEach(function(btn){
-          btn.addEventListener('click', function(){
-            activeOpener = btn.getAttribute('data-open') || 'proof';
-            applySectorScript(activeOpener, activeSector);
-          });
-        });
-      }
-
-      function openerCopy(kind, s){
-        var d = sectorData[s] || sectorData.general;
-        var copy = {
-          proof: {
-            tag: 'Proof', role: 'Open · Proof', cue: 'proof first → one question',
-            open: '"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with '+d.similar+' and '+d.proof+'. That is actually why I wanted to give you a call. '+d.handleQuestion+'"',
-            disc: '"Got it. Where does most of the effort go today - '+d.lanes+'?"',
-            curi: '"Yeah, that makes sense. That is pretty similar to what we hear from a lot of '+d.label.toLowerCase()+' teams. Most already have something in place, they are usually just trying to clean up the gaps around '+d.value+'."',
-            ask: '"That is why I reached out. Might be worth a quick <b>10 or 15 minutes</b> to compare what you are doing today against where we usually help. If it is not relevant, totally fair. Open to it?"'
-          },
-          benchmark: {
-            tag: 'Proof + Benchmark', role: 'Open · Proof + Benchmark', cue: 'proof → no-cost benchmark → one question',
-            open: '"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. I was looking at <b>[Company]</b> before I called. We recently worked with '+d.similar+' and '+d.proof+'. Because of that, I have been offering a few teams a quick, no-cost <b>15-minute benchmark conversation</b> where we compare what they are doing today against what we are seeing work elsewhere. Did not know if it would make sense for you, but I figured it was worth reaching out. '+d.handleQuestion+'"',
-            disc: '"Got it. For you, where would a benchmark be most useful - '+d.lanes+'?"',
-            curi: '"That is exactly why the benchmark is useful. It is not a hard pitch, it is a quick way to see where your current approach is strong and where teams like yours usually save time or reduce risk."',
-            ask: '"Would it be crazy to spend <b>15 minutes</b> comparing your current approach against what we are seeing work elsewhere? If nothing else, you would walk away with a benchmark of where you stand."'
-          },
-          best: {
-            tag: 'Permission', role: 'Open · Permission', cue: 'ask for 30 seconds → proof → question',
-            open: '"Hey <b>[Name]</b>? <b>[Your Name]</b> with IBM. We have never spoken, so full honesty, this is a cold call. Can I take 30 seconds to tell you why I called, and then you can tell me if I am way off? <span class="cue-inline">wait</span> Appreciate it. I was looking at <b>[Company]</b>, and we recently worked with '+d.similar+' that was focused on '+d.value+'. We '+d.proof+'. Did not know if that is on your radar, or if you have it handled?"',
-            disc: '"Right, okay. Is that landing mostly on you, or is there a broader team on it? And is fixing it a priority this year, or more of a later thing?"',
-            curi: '"Yeah, that is the pattern I keep running into. Teams usually have tools already, but the gaps show up around '+d.lanes+'. Is any of that a worry on your end?"',
-            ask: '"That is really why I called. Might be worth a quick <b>10 or 15 minutes</b> to compare what you do today with where we usually help. If it is not a fit, you tell me. Fair?"'
-          },
-          direct: {
-            tag: 'Direct', role: 'Open · Direct', cue: 'short proof → direct question',
-            open: '"Hey <b>[Name]</b>? Bernard with IBM. I will get right to it. We have been helping '+d.label.toLowerCase()+' teams simplify '+d.deviceQuestion+', and we recently helped '+d.similar+' '+d.proof+'. What is eating the most time for your team around devices right now?"',
-            disc: '"Yeah, I hear that a lot. Roughly how much time is that eating in a given week? And is it steady, or does it spike during onboarding, offboarding, audits, or support issues?"',
-            curi: '"Makes sense. The teams that actually fix this usually claw back time and stop chasing the same device problems over and over. Is that the kind of thing that would move the needle for you?"',
-            ask: '"Worth a quick <b>10 or 15 minutes</b> to compare notes and see if we can take some of that off your plate?"'
-          }
-        };
-        return copy[kind] || copy.proof;
-      }
-
-      function spokenFrom(c){
-        return {
-          open: c.open.replace('"Hey','"Hey...').replace('"', '"') + ' <span class="cue-inline">then stop</span>',
-          disc: c.disc + ' <span class="cue-inline">let them pick a lane</span>',
-          curi: c.curi + ' <span class="cue-inline">keep it calm, no pitch voice</span>',
-          ask: c.ask + ' <span class="cue-inline">stop talking here</span>'
-        };
-      }
-
-      function renderObs(sec){
-        var d = sectorData[sec] || sectorData.general;
-        if(!obsChipsEl) return;
-        obsChipsEl.innerHTML = '';
-        d.obs.forEach(function(t){
-          var b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'obs-chip';
-          b.textContent = t;
-          b.addEventListener('click', function(){
-            document.querySelectorAll('#obsChips .obs-chip').forEach(function(x){x.classList.remove('active');});
-            b.classList.add('active');
-          });
-          obsChipsEl.appendChild(b);
-        });
-      }
-
-      function applySectorScript(kind, sec){
-        activeOpener = kind || activeOpener;
-        activeSector = sec || activeSector;
-        var d = sectorData[activeSector] || sectorData.general;
-        var c = openerCopy(activeOpener, activeSector);
-        var sp = spokenFrom(c);
-        if(roleEl) roleEl.textContent = c.role;
-        if(lineEl) lineEl.innerHTML = c.open;
-        if(cueEl) cueEl.innerHTML = c.cue;
-        if(discRoleEl) discRoleEl.textContent = 'Discover';
-        if(discLineEl) discLineEl.innerHTML = c.disc;
-        if(curiRoleEl) curiRoleEl.textContent = 'Create curiosity';
-        if(curiLineEl) curiLineEl.innerHTML = c.curi;
-        if(askRoleEl) askRoleEl.textContent = 'Ask for the meeting';
-        if(askLineEl) askLineEl.innerHTML = c.ask;
-        if(spokenLineEl) spokenLineEl.innerHTML = sp.open;
-        if(spokenDiscEl) spokenDiscEl.innerHTML = sp.disc;
-        if(spokenCuriEl) spokenCuriEl.innerHTML = sp.curi;
-        if(spokenAskEl) spokenAskEl.innerHTML = sp.ask;
-        if(spokenTagEl) spokenTagEl.textContent = 'verbatim · '+c.tag+' · '+d.label;
-        if(railEl) railEl.textContent = c.tag;
-        if(sectorStrip) sectorStrip.style.display = 'block';
-        if(sectorExamplesEl) sectorExamplesEl.innerHTML = d.examples;
-        if(sectorStatEl) sectorStatEl.innerHTML = d.stat;
-        renderObs(activeSector);
-        document.querySelectorAll('#openerPills .op-pill').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open') === activeOpener);});
-        document.querySelectorAll('#spokenTabs .sp-tab').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-open') === activeOpener);});
-        document.querySelectorAll('#sectorPills .sec-pill').forEach(function(x){x.classList.toggle('active', x.getAttribute('data-sec') === activeSector);});
-      }
-
-      setControls();
-      document.querySelectorAll('#sectorPills .sec-pill').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          applySectorScript(activeOpener, btn.getAttribute('data-sec') || 'general');
-        });
-      });
-
-      var headerNote = document.querySelector('#s-flow .snapshot p');
-      if(headerNote){
-        headerNote.innerHTML = '<b>Use Proof as the default.</b> Pick the sector first, then choose your opener: <b>Proof</b> for most calls, <b>Proof + Benchmark</b> when you want the no-cost 15-minute meeting angle, <b>Permission</b> when they sound guarded, and <b>Direct</b> when they sound busy. Keep it short, ask one question, then stop talking.';
-      }
-      applySectorScript('proof', 'government');
-    })();
-  </script>
-
 </body>
 </html>
