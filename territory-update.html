@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--
+  Territory Update Tool — MaaS360 Sales Guide
+  Editable table of all US state rep assignments.
+  Edit any cell → click "Export us-map-data.js" → paste the downloaded file into the project.
+  No server needed. All data is embedded.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Territory Update Tool — MaaS360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="carbon.css">
+  <script src="carbon-theme.js"></script>
+  <style>
+    body { font-family: 'IBM Plex Sans', sans-serif; }
+
+    .tool-wrap { max-width: 1400px; margin: 0 auto; padding: 28px 20px 80px; }
+
+    .tool-header { margin-bottom: 24px; }
+    .tool-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+    .tool-header h1 { font-size: 26px; font-weight: 600; margin: 0 0 6px; color: var(--text); }
+    .tool-header p { font-size: 14px; color: var(--text-dim); margin: 0; max-width: 680px; line-height: 1.6; }
+
+    .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .toolbar input[type="text"] {
+      flex: 1 1 240px; max-width: 340px;
+      padding: 9px 12px; font-family: inherit; font-size: 13px;
+      border: 1px solid var(--line); background: var(--panel); color: var(--text);
+      outline: none;
+    }
+    .toolbar input[type="text"]:focus { border-color: var(--primary); }
+    .btn {
+      padding: 9px 18px; font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: 1px solid transparent; white-space: nowrap;
+    }
+    .btn-primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-secondary { background: var(--panel); color: var(--text); border-color: var(--line); }
+    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-danger { background: var(--support-error); color: #fff; border-color: var(--support-error); }
+    .btn-danger:hover { filter: brightness(1.1); }
+
+    .notice { padding: 10px 14px; background: var(--acc-bg); border-left: 3px solid var(--primary); font-size: 13px; color: var(--text-dim); margin-bottom: 16px; }
+    .notice b { color: var(--text); }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); }
+
+    table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+    thead tr { background: var(--panel); }
+    thead th {
+      padding: 9px 10px; text-align: left; white-space: nowrap;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim);
+      border-bottom: 2px solid var(--line); border-right: 1px solid var(--line);
+      position: sticky; top: 0; background: var(--panel); z-index: 2;
+    }
+    thead th:first-child { min-width: 44px; }
+    tbody tr:nth-child(even) { background: var(--panel); }
+    tbody tr:hover { background: var(--acc-bg); }
+    tbody td {
+      padding: 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    tbody td.state-cell {
+      padding: 7px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      font-weight: 600; color: var(--primary); white-space: nowrap; min-width: 44px;
+    }
+    tbody td input {
+      width: 100%; box-sizing: border-box;
+      padding: 7px 8px; font-family: inherit; font-size: 12.5px;
+      border: none; background: transparent; color: var(--text); outline: none;
+      min-width: 120px;
+    }
+    tbody td input:focus {
+      background: var(--acc-bg); outline: 2px solid var(--primary); outline-offset: -2px;
+    }
+    tbody td input.changed { background: #fffbe6; color: #333; }
+
+    .export-area { margin-top: 24px; }
+    .export-area textarea {
+      width: 100%; box-sizing: border-box; height: 260px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+      padding: 14px; border: 1px solid var(--line); background: var(--panel); color: var(--text);
+      resize: vertical; outline: none;
+    }
+    .export-area textarea:focus { border-color: var(--primary); }
+    .export-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); margin-bottom: 8px; }
+
+    .copy-status { font-size: 12.5px; color: var(--support-success); margin-left: 10px; opacity: 0; transition: opacity .3s; }
+    .copy-status.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a class="site-nav-brand" href="index.html" aria-label="MaaS360 Sales Guide — home">
+        <svg class="ibm-logo" viewBox="0 0 110 44" role="img" aria-label="IBM">
+          <defs><mask id="ibmbars">
+            <rect width="110" height="44" fill="#000"/>
+            <g fill="#fff">
+              <rect y="0" width="110" height="2.93"/><rect y="5.87" width="110" height="2.93"/>
+              <rect y="11.73" width="110" height="2.93"/><rect y="17.6" width="110" height="2.93"/>
+              <rect y="23.47" width="110" height="2.93"/><rect y="29.33" width="110" height="2.93"/>
+              <rect y="35.2" width="110" height="2.93"/><rect y="41.07" width="110" height="2.93"/>
+            </g>
+          </mask></defs>
+          <text x="0" y="36" font-family="'IBM Plex Sans','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="46" letter-spacing="-1" fill="currentColor" mask="url(#ibmbars)">IBM</text>
+        </svg>
+        <span class="product">MaaS360 Sales Guide</span>
+      </a>
+      <nav class="site-nav-links" aria-label="Guides">
+        <a href="index.html">Hub</a>
+        <a href="prospecting.html">Prospecting</a>
+        <a href="cold-call.html">Cold Call</a>
+        <a href="resources.html">Resources</a>
+        <a href="onboarding.html">Onboarding</a>
+        <a href="rep-alignment.html">Rep Alignment</a>
+        <a href="territory-map.html">Territory Map</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+        <svg class="tt-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.5A10.5 10.5 0 1 0 26.5 18.5 8.5 8.5 0 0 1 13.5 5.5z"/></svg>
+        <svg class="tt-sun" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 12a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM15 3h2v4h-2zM15 25h2v4h-2zM5.6 7l1.4-1.4 2.8 2.8L8.5 9.9zM22.1 23.5l1.4-1.4 2.9 2.8-1.5 1.5zM3 15h4v2H3zM25 15h4v2h-4zM7 26.4 5.6 25l2.8-2.9 1.5 1.5zM23.5 9.9l2.8-2.9L27.8 8.5 24.9 11.3z"/></svg>
+        <span class="tt-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="tool-wrap">
+    <div class="tool-header">
+      <div class="tool-eyebrow">Admin · Territory Map</div>
+      <h1>Territory Update Tool</h1>
+      <p>Edit any field below — click a cell and type. When done, hit <b>Generate us-map-data.js</b>, copy the output, and paste it into <code>us-map-data.js</code> in the project folder. That's it — the map updates automatically.</p>
+    </div>
+
+    <div class="notice">
+      <b>How to send to your team:</b> Open this file in a browser, make your edits, then use the export button. You can also email this <code>territory-update.html</code> file directly — it works completely offline.
+    </div>
+
+    <div class="toolbar">
+      <input type="text" id="filterInput" placeholder="Filter by state, rep, tech rep…">
+      <button class="btn btn-secondary" onclick="clearFilter()">Clear filter</button>
+      <button class="btn btn-primary" onclick="generateExport()">⬇ Generate us-map-data.js</button>
+      <button class="btn btn-secondary" onclick="copyOutput()">Copy to clipboard</button>
+      <span class="copy-status" id="copyStatus">✓ Copied!</span>
+    </div>
+
+    <div class="table-wrap">
+      <table id="stateTable">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>State Name</th>
+            <th>Rep</th>
+            <th>Rep Email</th>
+            <th>Rep Phone</th>
+            <th>Telco Specialist</th>
+            <th>Telco Email</th>
+            <th>Telco Phone</th>
+            <th>Tech Rep</th>
+            <th>Tech Rep Email</th>
+            <th>Tech Rep Phone</th>
+            <th>Manager</th>
+            <th>Manager Title</th>
+            <th>Manager Email</th>
+            <th>Manager Phone</th>
+            <th>Tech Manager</th>
+            <th>Tech Manager Email</th>
+            <th>Tech Manager Phone</th>
+            <th>AT&amp;T Specialist</th>
+            <th>AT&amp;T Email</th>
+            <th>AT&amp;T Phone</th>
+            <th>T-Mobile Specialist</th>
+            <th>T-Mobile Email</th>
+            <th>T-Mobile Phone</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="export-area" id="exportArea" style="display:none;">
+      <div class="export-label">Generated us-map-data.js — copy this entire block and replace your file</div>
+      <textarea id="exportOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <script>
+  // ── Embedded state data (mirrors us-map-data.js exactly) ──────────────────
+  const STATES = {
+    'ME': { name: 'Maine', rep: 'James Chavez', repEmail: 'James.Chavez@ibm.com', repPhone: '737-314-2537', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Josh Knowles', techRepEmail: 'jknowles@us.ibm.com', techRepPhone: '215-370-4706', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'NH': { name: 'New Hampshire', rep: 'James Chavez', repEmail: 'James.Chavez@ibm.com', repPhone: '737-314-2537', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Josh Knowles', techRepEmail: 'jknowles@us.ibm.com', techRepPhone: '215-370-4706', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'VT': { name: 'Vermont', rep: 'James Chavez', repEmail: 'James.Chavez@ibm.com', repPhone: '737-314-2537', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Josh Knowles', techRepEmail: 'jknowles@us.ibm.com', techRepPhone: '215-370-4706', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'MA': { name: 'Massachusetts', rep: 'James Chavez', repEmail: 'James.Chavez@ibm.com', repPhone: '737-314-2537', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Josh Knowles', techRepEmail: 'jknowles@us.ibm.com', techRepPhone: '215-370-4706', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'RI': { name: 'Rhode Island', rep: 'James Chavez', repEmail: 'James.Chavez@ibm.com', repPhone: '737-314-2537', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Josh Knowles', techRepEmail: 'jknowles@us.ibm.com', techRepPhone: '215-370-4706', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'CT': { name: 'Connecticut', rep: 'Asyah Jiron', repEmail: 'a.jiron@ibm.com', repPhone: '', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Marianne Johnston', techRepEmail: 'mjohnston@ibm.com', techRepPhone: '215-237-4767', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'NJ': { name: 'New Jersey', rep: 'Asyah Jiron', repEmail: 'a.jiron@ibm.com', repPhone: '', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Marianne Johnston', techRepEmail: 'mjohnston@ibm.com', techRepPhone: '215-237-4767', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'NY': { name: 'New York', rep: 'Steven St. Arnauld', repEmail: 'steven.st.Arnauld@ibm.com', repPhone: '737-320-7342', telcoSpecialist: 'Isabella Socarras', telcoEmail: 'Isabella.Socarras@ibm.com', telcoPhone: '', techRep: 'Marianne Johnston', techRepEmail: 'mjohnston@ibm.com', techRepPhone: '215-237-4767', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'PA': { name: 'Pennsylvania', rep: 'Robert Woessner', repEmail: 'Robert.Woessner@ibm.com', repPhone: '737-615-9712', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nate Alvin', techRepEmail: 'nathan.alvis@ibm.com', techRepPhone: '469-887-3565', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'OH': { name: 'Ohio', rep: 'Robert Woessner', repEmail: 'Robert.Woessner@ibm.com', repPhone: '737-615-9712', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Jason Sawyer + Fed', techRepEmail: 'Jason.sawyer@ibm.com', techRepPhone: '512-799-9592', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'WV': { name: 'West Virginia', rep: 'Andrew Williams', repEmail: 'Andrew.Williams.Jr@ibm.com', repPhone: '214-930-7274', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nate Alvin', techRepEmail: 'nathan.alvis@ibm.com', techRepPhone: '469-887-3565', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'VA': { name: 'Virginia', rep: 'Andrew Williams', repEmail: 'Andrew.Williams.Jr@ibm.com', repPhone: '214-930-7274', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nate Alvin', techRepEmail: 'nathan.alvis@ibm.com', techRepPhone: '469-887-3565', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'MD': { name: 'Maryland', rep: 'Andrew Williams', repEmail: 'Andrew.Williams.Jr@ibm.com', repPhone: '214-930-7274', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nate Alvin', techRepEmail: 'nathan.alvis@ibm.com', techRepPhone: '469-887-3565', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'DE': { name: 'Delaware', rep: 'Andrew Williams', repEmail: 'Andrew.Williams.Jr@ibm.com', repPhone: '214-930-7274', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nate Alvin', techRepEmail: 'nathan.alvis@ibm.com', techRepPhone: '469-887-3565', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'KY': { name: 'Kentucky', rep: 'Nick Riley', repEmail: 'Nicholas.Riley@ibm.com', repPhone: '817-691-6944', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'TN': { name: 'Tennessee', rep: 'Nick Riley', repEmail: 'Nicholas.Riley@ibm.com', repPhone: '817-691-6944', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'NC': { name: 'North Carolina', rep: 'Nick Riley', repEmail: 'Nicholas.Riley@ibm.com', repPhone: '817-691-6944', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'MS': { name: 'Mississippi', rep: 'Sierra Reynolds', repEmail: 'Sierra.Reynolds@ibm.com', repPhone: '949-282-7050', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'AL': { name: 'Alabama', rep: 'Sierra Reynolds', repEmail: 'Sierra.Reynolds@ibm.com', repPhone: '949-282-7050', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'GA': { name: 'Georgia', rep: 'Sierra Reynolds', repEmail: 'Sierra.Reynolds@ibm.com', repPhone: '949-282-7050', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'SC': { name: 'South Carolina', rep: 'Sierra Reynolds', repEmail: 'Sierra.Reynolds@ibm.com', repPhone: '949-282-7050', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Nathan Luu', techRepEmail: 'nathan.luu@ibm.com', techRepPhone: '956-953-1495', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'FL': { name: 'Florida', rep: "Mary Kate O'Neill", repEmail: 'marykate.oneill@ibm.com', repPhone: '445-895-7443', telcoSpecialist: 'Jake Neary', telcoEmail: 'Jake.Neary@ibm.com', telcoPhone: '215-870-2905', techRep: 'Valery Orellana', techRepEmail: 'valery.Orellana@ibm.com', techRepPhone: '512-673-8307', manager: 'Mike Dailey', managerTitle: 'Senior Manager', managerEmail: 'Michael.Dailey1@ibm.com', managerPhone: '215-983-4876', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Colby Smith', attEmail: 'Colby.Smith@ibm.com', attPhone: '', tmobileSpecialist: 'Open', tmobileEmail: '', tmobilePhone: '' },
+    'MI': { name: 'Michigan', rep: "Bill D'Arcy", repEmail: 'Bill.DArcy@ibm.com', repPhone: '215-965-6271', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Annika Harper', techRepEmail: 'Annika.harper@ibm.com', techRepPhone: '737-587-7126', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'IN': { name: 'Indiana', rep: "Bill D'Arcy", repEmail: 'Bill.DArcy@ibm.com', repPhone: '215-965-6271', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Annika Harper', techRepEmail: 'Annika.harper@ibm.com', techRepPhone: '737-587-7126', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'IL': { name: 'Illinois', rep: "Bill D'Arcy", repEmail: 'Bill.DArcy@ibm.com', repPhone: '215-965-6271', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Annika Harper', techRepEmail: 'Annika.harper@ibm.com', techRepPhone: '737-587-7126', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'WI': { name: 'Wisconsin', rep: "Bill D'Arcy", repEmail: 'Bill.DArcy@ibm.com', repPhone: '215-965-6271', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Annika Harper', techRepEmail: 'Annika.harper@ibm.com', techRepPhone: '737-587-7126', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'MN': { name: 'Minnesota', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'IA': { name: 'Iowa', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'MO': { name: 'Missouri', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'ND': { name: 'North Dakota', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'SD': { name: 'South Dakota', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'NE': { name: 'Nebraska', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'KS': { name: 'Kansas', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Kory Kirby', telcoEmail: 'Kory.Kirby@ibm.com', telcoPhone: '512-831-2699', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'AR': { name: 'Arkansas', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'LA': { name: 'Louisiana', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'OK': { name: 'Oklahoma', rep: 'Erin Flynn', repEmail: 'Erin.Flynn@ibm.com', repPhone: '215-883-6324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Alina Kim', techRepEmail: 'alina.kim@ibm.com', techRepPhone: '737-376-4239', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'TX': { name: 'Texas', rep: 'Jad Rusnol', repEmail: 'Jad.Rusnol@ibm.com', repPhone: '726-248-3529', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Duane Wright', techRepEmail: 'wduane@us.ibm.com', techRepPhone: '215-528-3117', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'CO': { name: 'Colorado', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'WY': { name: 'Wyoming', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'MT': { name: 'Montana', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'ID': { name: 'Idaho', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Nicole Matel', telcoEmail: 'Nicole.Matel@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'UT': { name: 'Utah', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'NV': { name: 'Nevada', rep: 'Joe Clark', repEmail: 'Joseph.Clark1@ibm.com', repPhone: '', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Lina Corredor', techRepEmail: 'lmcorred@us.ibm.com', techRepPhone: '727-810-6713', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'AZ': { name: 'Arizona', rep: 'Joe Clark', repEmail: 'Joseph.Clark1@ibm.com', repPhone: '', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Lina Corredor', techRepEmail: 'lmcorred@us.ibm.com', techRepPhone: '727-810-6713', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'NM': { name: 'New Mexico', rep: 'Joe Clark', repEmail: 'Joseph.Clark1@ibm.com', repPhone: '', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Lina Corredor', techRepEmail: 'lmcorred@us.ibm.com', techRepPhone: '727-810-6713', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'CA': { name: 'California', rep: 'Zach Tarver', repEmail: 'Zach.Tarver@ibm.com', repPhone: '945-324-0588', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Ruby Ramsay', techRepEmail: 'rubyramsay@ibm.com', techRepPhone: '512-937-5814', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'OR': { name: 'Oregon', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'WA': { name: 'Washington', rep: 'Allie Pitts', repEmail: 'Allie.Pitts@ibm.com', repPhone: '214-707-3324', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'AK': { name: 'Alaska', rep: 'Joe Clark', repEmail: 'Joseph.Clark1@ibm.com', repPhone: '', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' },
+    'HI': { name: 'Hawaii', rep: 'Joe Clark', repEmail: 'Joseph.Clark1@ibm.com', repPhone: '', telcoSpecialist: 'Lesley Hazen', telcoEmail: 'Lesley.Hazen@ibm.com', techRep: 'Brian Collier', techRepEmail: 'brian.collier@ibm.com', techRepPhone: '717-826-3650', manager: 'Kellin Johnson', managerTitle: 'Senior Manager', managerEmail: 'kellinj@us.ibm.com', managerPhone: '972-841-0826', techManager: 'Colin Shenk', techManagerEmail: 'Colin.Shenk@ibm.com', techManagerPhone: '(717) 368-2766', attSpecialist: 'Hemali Patel', attEmail: 'H.Patel@ibm.com', attPhone: '828-507-6563', tmobileSpecialist: 'Eric Szewczyk', tmobileEmail: 'eric.s@ibm.com', tmobilePhone: '512-987-4769' }
+  };
+
+  // Field order for the table columns (matches STATES keys)
+  const FIELDS = [
+    'name', 'rep', 'repEmail', 'repPhone',
+    'telcoSpecialist', 'telcoEmail', 'telcoPhone',
+    'techRep', 'techRepEmail', 'techRepPhone',
+    'manager', 'managerTitle', 'managerEmail', 'managerPhone',
+    'techManager', 'techManagerEmail', 'techManagerPhone',
+    'attSpecialist', 'attEmail', 'attPhone',
+    'tmobileSpecialist', 'tmobileEmail', 'tmobilePhone'
+  ];
+
+  // Live data model (edits go here)
+  const data = JSON.parse(JSON.stringify(STATES));
+
+  function buildTable(filter) {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    const q = (filter || '').toLowerCase();
+
+    Object.keys(data).forEach(stateCode => {
+      const s = data[stateCode];
+      const orig = STATES[stateCode];
+
+      // Filter: check if any field or the state code contains the query
+      if (q) {
+        const haystack = (stateCode + ' ' + FIELDS.map(f => s[f] || '').join(' ')).toLowerCase();
+        if (!haystack.includes(q)) return;
+      }
+
+      const tr = document.createElement('tr');
+
+      // State code cell (read-only label)
+      const tdCode = document.createElement('td');
+      tdCode.className = 'state-cell';
+      tdCode.textContent = stateCode;
+      tr.appendChild(tdCode);
+
+      // Editable fields
+      FIELDS.forEach(field => {
+        const td = document.createElement('td');
+        const inp = document.createElement('input');
+        inp.type = 'text';
+        inp.value = s[field] || '';
+        inp.dataset.state = stateCode;
+        inp.dataset.field = field;
+
+        // Highlight if changed from original
+        if ((s[field] || '') !== (orig[field] || '')) inp.classList.add('changed');
+
+        inp.addEventListener('input', e => {
+          data[stateCode][field] = e.target.value;
+          if ((e.target.value || '') !== (orig[field] || '')) {
+            e.target.classList.add('changed');
+          } else {
+            e.target.classList.remove('changed');
+          }
+        });
+
+        td.appendChild(inp);
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  function clearFilter() {
+    document.getElementById('filterInput').value = '';
+    buildTable('');
+  }
+
+  document.getElementById('filterInput').addEventListener('input', e => {
+    buildTable(e.target.value);
+  });
+
+  function esc(str) {
+    // Escape single quotes for JS string output
+    return (str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  }
+
+  function generateExport() {
+    const lines = ["// Complete State representative data for all US states", "const stateRepData = {"];
+
+    const keys = Object.keys(data);
+    keys.forEach((code, i) => {
+      const s = data[code];
+      const comma = i < keys.length - 1 ? ',' : '';
+      const parts = FIELDS.map(f => `${f}: '${esc(s[f] || '')}'`);
+      lines.push(`    '${code}': { ${parts.join(', ')} }${comma}`);
+    });
+
+    lines.push("};");
+
+    const output = lines.join('\n');
+    document.getElementById('exportOutput').value = output;
+    document.getElementById('exportArea').style.display = 'block';
+    document.getElementById('exportArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyOutput() {
+    const ta = document.getElementById('exportOutput');
+    if (!ta.value) { generateExport(); }
+    ta.select();
+    document.execCommand('copy');
+    const status = document.getElementById('copyStatus');
+    status.classList.add('show');
+    setTimeout(() => status.classList.remove('show'), 2200);
+  }
+
+  // Initial render
+  buildTable('');
+  </script>
+</body>
+</html>
